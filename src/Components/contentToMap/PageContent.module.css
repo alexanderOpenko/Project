@@ -1,0 +1,64 @@
+.pageContent {
+    margin-top: 90px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.content {  
+   text-align: center;
+    width: 100%;
+    transition: all 1s;
+    max-width: 1400px;   
+}
+
+ .btn{
+    width: 100px;
+    height: 45px;
+    border: 1px solid black;
+	background-color: transparent;
+	padding: 5px;
+	font-size: 15px;
+	color: black;
+	border-radius: 8px;
+	cursor:pointer;
+}
+
+
+.button{
+    margin-top: 75px;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+
+.filter { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 13;
+     display: flex;
+     flex-direction: column;
+    align-items: center;
+     width: 450px;
+ }
+ 
+ .filterDefault {  
+     display: none;
+ }
+
+@media (max-width: 768px){
+
+.btn{
+    width: 65px;
+    font-size: 13px;
+    height: 35px;
+}
+
+
+.filter { 
+    width:92%;
+   
+    }
+}

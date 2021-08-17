@@ -1,0 +1,168 @@
+
+
+.img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin: 20px 0;
+    z-index: 1;
+}
+
+
+
+.basket {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    width: 45px;
+    height: 45px;
+    z-index: 2;
+   cursor: pointer
+}
+
+.basketSize {
+    background-color: rgb(6, 252, 129);
+    width: 20px;
+    height: 20px;
+    z-index: 13;
+    border-radius: 100%;
+    position: absolute;
+    right: 28px;
+    top: 40px;
+    opacity: 0.9;
+    color: white;
+    font-weight: 650;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BasketPage {
+    position: absolute;
+    width: 100%;
+    height: 100% ;
+    background-color: rgba(39, 54, 54, 0.65) ;
+    opacity: 1;
+    z-index: 14 ;
+     display: flex;
+    flex-direction: row-reverse;
+    
+}
+
+.bag {
+    display: none;
+}
+
+.basketContent {
+    margin: 10px 10px 10px 0;
+   position: relative;
+    width: 380px;
+    height: auto;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.basketContent::-webkit-scrollbar {
+    width: 2px;
+  }
+
+.basketContent::-webkit-scrollbar-thumb {
+   background-color: rgb(75, 70, 70);
+  }
+
+
+.basketHeader {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: .7px;
+    line-height: 24px; 
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid silver;
+}
+
+.basketClose {
+    position: absolute;
+    right: 0;
+    padding: 0 15px  0 15px;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid silver;
+    cursor: pointer;
+}
+
+.basketImg {
+    display: flex;
+    flex-direction: column; 
+
+}
+
+.basketImg img {
+    width: 100px;
+    height: auto;
+    margin: 0px 10px 0px 0;
+}
+
+
+.basketImg div {
+ margin: 10px 0 -5px 0;
+ 
+}
+
+.basketImg span {
+ position: absolute;
+ 
+}
+
+.basketImg {
+    margin: 0 0 0 15px
+}
+
+.toBuy{
+    text-align: center;
+    width: 100%;
+    background-color: white;
+}
+
+.toBuy button {
+    background-color: #6fd5a4;
+    border: none; 
+    width: 100px;
+    height: 50px;
+    width: 92%  ;
+    color: black;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+@media  (max-width: 768px) {
+    .img img{
+        width: 180px;
+        height: auto;
+      }
+      
+      .basket { 
+        top: 13px;  
+    }
+    
+    .basketSize {
+       
+        top: 30px;
+        
+    }
+    .basketContent{
+        margin: 15px;
+        width: 100%;
+        height: auto;
+    }
+    
+}
