@@ -80,7 +80,7 @@ export let clothesPhotoArray = [
         slidePhoto:image4,
         urlPhoto1:image0401,
         urlPhoto2:image0402,
-        color: ['whiteblue'],       
+        color: ['#39d1ff'],       
         price:[532],
         info: ['Базові джинси'], 
         size: ['36','38','42'] },

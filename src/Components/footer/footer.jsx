@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
     </div>
      <div className={s.footerFooter}>
-         
+         <a href='https://github.com/alexanderOpenko/Project/tree/master'>https://github.com/alexanderOpenko/Project/tree/master</a>
     </div>
      </>
 }
