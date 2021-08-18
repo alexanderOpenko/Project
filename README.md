@@ -94,6 +94,16 @@ export const addElementToBasket = (prop) => (dispatch) => {
         let general = localStorage.getItem('totalCount')
         dispatch(addBaskeTotalPriceAction(general))
     } 
+    let requestTwo = items.getAll()
+
+    requestTwo.onsuccess = function () {
+        elementsBasket  = requestTwo.result
+        dispatch(addElementBasketAction(elementsBasket))
+      //длинна масива с объектами в корзине это количество товара
+        localStorage.setItem('lengthItems', elementsBasket.length)
+        let lengthItems =  Number(localStorage.getItem('lengthItems'))
+        dispatch(addElementBaskeSizeAction(lengthItems))
+      }   
 ```
 В этом примере создаеться хранилище в indexedDB с объектом 'items' для хранения данных корзины. Добавление и удаление объектов из базы данных осуществляется по ключу 'keys'.
 addElementToBasket - функция Redux-Thunk которая в зависимости от входящих пропсов диспатчит нужный экшн. В объект из пропсов прибавится свойство keys с сгенерированным уникальным ключом по которому осуществится удаление объекта из корзины.
@@ -143,6 +153,77 @@ if(prop.deleteElem){
 }
 ```
 Так осуществится удаление элемента корзины по ключу
+```javascript
+const Header = (props) => {
+ 
+let setElementsBsket = () =>  {
+ let lengthItems =  Number(localStorage.getItem('lengthItems'))
+ props.addElementBaskeSizeAction(lengthItems)
+}
+
+  useEffect ( () => {
+    //после того как страница отрендерится сработает юз ефект 
+    //чтобы получить из localStorage даные которые несут значение длинны массива с объектами 
+    //из корзины(количество товара). Когда число получено, оно диспатчится экшеном в стейт и страница заново
+    //рендерится чтобы отобразилось актуальное количество товара в корзине.
+    setElementsBsket()}, []
+  )
+  
+  let showBasketPage = () => {   
+  
+    let bulean
+    
+    props.basket ? bulean = false : bulean = true
+    props.showBasketAction(bulean)
+
+    //экшн который запустит функцию которая получит объекты из IndexedDB 
+    //и задиспатчит объекты в редакс стор и отобразит корзину
+    props.addElementToBasket({showBasket: true})
+  }
+    
+    return <>
+      <div className={s.img}> 
+        <NavLink to="/" >
+          <img src = {image}/> 
+       </NavLink>
+      </div> 
+
+      <span onClick={showBasketPage}>
+         <img className={s.basket} src={basketPicture}/>
+        {//если размер страници = число и > 0 то отобразится размер корзины
+        (typeof(props.basketSize) == 'number' && props.basketSize > 0) ?
+        <div className={s.basketSize}>
+          {props.basketSize}
+        </div>:''}
+      </span>
+
+        <span className = {s.bag}>
+          {document.body.style.overflowY = `auto`}
+        </span>
+    
+    
+    {//если баскет true то отрисуется корзина
+    props.basket && <Basket totalCount={props.totalCount} basketElements={props.basketElements}
+    showBasketPage={showBasketPage}
+    addElementToBasket={props.addElementToBasket}
+   />}
+</>
+} 
+
+let mapStateToProps = (state) => {
+    return(
+        {
+         basket: state.basket.show,   
+         basketElements: state.basket.basketElements,
+         basketSize: state.basket.basketSize,
+         totalCount: state.basket.totalCount
+        }
+    )
+}
+
+export default connect(mapStateToProps, {showBasketAction, addElementToBasket, addElementBaskeSizeAction}) (Header);
+```
+Когда отрисуется компонента Header сработает useEffect() чтобы получить актуальное количество елементов в корзине. Когда количество получено сработает экшн addElementBaskeSizeAction чтобы изменить в стейт количество товара. После того как стейт изменится в Header в иконке корзины отрисуется актуальное количество товара.
 ``` javascript
 class Clothes extends React.Component {
 

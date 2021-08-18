@@ -1,13 +1,8 @@
 
 
 .frontPagePosition {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     max-width: 1900px; 
     height: auto;
-    height:auto;
     margin: 0 auto;
     width: 100%;
     z-index: 0;
