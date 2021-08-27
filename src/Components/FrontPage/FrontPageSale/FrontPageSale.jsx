@@ -308,7 +308,7 @@ return this.coordinates[this.state.next];
         <div className={s.slider} ref={this.slider} >      
             <div  className={s.stage} ref={this.stage}>
                 {this.props.jeansPhotos.map( p => { return <div > 
-                <NavLink to={'/sale/saleJeans/' + p.id}>
+                <NavLink to={'/sale/saleJeans/' + Number(this.props.jeansPhotos.indexOf(p)+1)}>
                     <img src={p.slidePhoto}/>
                     <button>купить</button>
                 </NavLink>

@@ -1,8 +1,9 @@
 import { clothesPhotoArray } from "../Components/clothes/clothes";
 import { jeansPhoto } from "../Components/FrontPage/FrontPageSale/FrontPageSale"
 import { hoodyPhoto } from "../Components/Hoody/hoody";
+import { newItemsPhoto } from "../Components/News/News";
 import { tshirtPhoto } from "../Components/Tshirts/Tshirts";
-import { clothesCreator, jeansCreator } from "./contentReducer";
+import { clothesCreator, jeansCreator, newItemsCreator } from "./contentReducer";
 import { hoodyCreator } from "./contentReducer";
 import { tshirtsCreator } from "./contentReducer";
 
@@ -16,7 +17,8 @@ export const filterContent = ( prop ) => (dispatch) => {
     if(prop.filterType == 'jeans') {contentTofilter = jeansPhoto } else if
     (prop.filterType == 'hoody') {contentTofilter = hoodyPhoto } else if
     (prop.filterType == 'tshirt') {contentTofilter = tshirtPhoto } else if
-    (prop.filterType == 'clothes') {contentTofilter = clothesPhotoArray }
+    (prop.filterType == 'clothes') {contentTofilter = clothesPhotoArray } else if
+    (prop.filterType == 'new') {contentTofilter = newItemsPhoto }
     
      filter =  contentTofilter.filter(elem =>{
     return elem.info == prop.info && elem.color == prop.color && elem.size.some(el => el === prop.size )
@@ -35,5 +37,7 @@ export const filterContent = ( prop ) => (dispatch) => {
     if(prop.filterType == 'jeans'){dispatch(jeansCreator(argumentFilter))} else if
     (prop.filterType == 'hoody') {dispatch(hoodyCreator(argumentFilter))} else if
     (prop.filterType == 'tshirt') {dispatch(tshirtsCreator(argumentFilter))} else if
-    (prop.filterType == 'clothes'){dispatch(clothesCreator(argumentFilter))}
+    (prop.filterType == 'clothes'){dispatch(clothesCreator(argumentFilter))} else if
+    (prop.filterType == 'new'){dispatch(newItemsCreator(argumentFilter))}
+    
     }

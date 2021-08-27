@@ -11,14 +11,14 @@ export let accessoriesPhoto = [
         slidePhoto:image1,
          price:[1],
          size: ['A4','A3','A2'], 
-         info: ['Human in Winter']},
+         info: ['Human at Winter']},
         
 
         {id:165236,
         slidePhoto:image2,
         price:[1],
         size: ['A4','A3','A2'],
-        info: ['Human in Winter'] },        
+        info: ['Winter'] },        
 ]
 
 class Accessories extends React.Component {
