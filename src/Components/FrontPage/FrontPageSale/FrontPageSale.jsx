@@ -34,7 +34,6 @@ import image6 from '../../../Pictures/Sale/img_06.jpg'
 import image0601 from '../../../Pictures/Sale/img_0601.jpg'
 import image0602 from '../../../Pictures/Sale/img_0602.jpg'
 
-
 export let jeansPhoto = [
 
 { id: 1111,
