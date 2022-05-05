@@ -6,17 +6,16 @@ import PagesContent from '../contentToMap/PagesContent'
 
 class Jeans extends React.Component {
 
-
-componentDidMount(){
+  componentDidMount() {
     this.props.jeansCreator(jeansPhoto)
-}
+  }
 
-   render(){
-    return <PagesContent 
-        elementsObject={this.props.elementsObject}
-        filterType={'jeans'} 
-        url={'/sale/saleJeans/'}/>
-       }   
+  render() {
+    return <PagesContent
+      elementsObject={this.props.elementsObject}
+      filterType={'jeans'}
+      url={'/sale/saleJeans/'}/>
+  }
 }
      
 let mapStateToProps = (state) => { 

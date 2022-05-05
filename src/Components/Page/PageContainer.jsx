@@ -10,8 +10,9 @@ class PageContainer extends React.Component {
   componentDidMount() {
 //в этом методе ЖЦ имитируется запрос на сервер
 //в пропсах приходит масив this.props.photos и id элемента которого нужно отобразить
-//экшн updatePhotoPageCreator диспатчит в стор этот масив 
-    this.props.updatePhotoPageCreator(this.props.photos[this.props.match.params.id - 1])
+//экшн updatePhotoPageCreator диспатчит в стор этот масив
+    console.log(this.props.match.params.id, 'this.props.match.params.id')
+    this.props.updatePhotoPageCreator(this.props.photos[this.props.match.params.id])
   }
 
   render() {

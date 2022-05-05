@@ -1,0 +1,151 @@
+.filter {
+  background: rgba(211,211,211, 0.9);
+}
+
+.filter__parametersWrapper {
+  background-color: white;
+  margin-bottom: 7px;
+  padding: 10px 20px 0 20px;
+}
+
+.color-option {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 212, 212, 0.5)
+}
+
+.red {background-color: red;}
+.white {background-color: white;}
+.blue {background-color: rgb(92, 92, 255);}
+.white-blue {background-color: rgb(96, 205, 255);}
+.black {background-color: rgb(0, 0, 0);}
+.yellow {background-color: yellow;}
+.silver {background-color: rgb(172, 173, 172);}
+
+.hidden-input {
+  clip: rect(0,0,0,0);
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
+.option-input {
+  background-color: inherit;
+  border: none;
+}
+
+.filter__option-color span {
+  cursor: pointer;
+}
+
+.filter__option-color span:hover {
+  border-color: black;
+}
+
+.filter__option-color input[type=radio]:checked+span {
+  border: 2px solid orange;
+}
+
+.filterContainers div {
+  margin-top: 5px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: auto;
+}
+
+.filter__submit {
+  background-color: rgb(251, 196, 78);
+  border: none;
+  height: 50px;
+  width: 100%;
+  color: black;
+  cursor: pointer;
+}
+
+.filter__submit:hover {
+  background-color: rgb(255, 186, 38);
+}
+
+.filter__optionsTitle {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0 0 10px 0;
+}
+
+.filter__head {
+  font-size: 18px;
+  font-weight: 500;
+  width: 100%;
+  height: 63px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7px;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  padding: 0 15px 0 15px;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid silver;
+  cursor: pointer;
+}
+
+.filter__options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filter__option {
+  margin: 0 10px 10px 0;
+}
+
+.filter__option-size input[type=radio]:checked + span{
+  border: 1px solid orange;
+}
+
+.filter__option:not(.filter__option-color) span{
+  border: 1px solid rgb(189, 189, 189);
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter__option:not(.filter__option-color):hover span{
+  border: 1px solid rgb(0, 0, 0)
+}
+
+.filter__option-info input[type=radio]:checked + span {
+  color: white;
+  background-color: black;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.filterError {
+  height: 400px;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .color-option {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px solid rgba(212, 212, 212, 0.5)
+  }
+}

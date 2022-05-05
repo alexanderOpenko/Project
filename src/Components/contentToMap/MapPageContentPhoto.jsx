@@ -1,21 +1,24 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import style from './MapPageContentPhoto.module.css'
+import s from './MapPageContentPhoto.module.css'
 
 const MapPageContentPhoto = (props) => {
   return <>
+    <div className={s.collection}>
     {props.elementsObject.map(elem => {
-      return <div className={style.saleElement}>
-        <NavLink to={props.url + Number(props.elementsObject.indexOf(elem) + 1)}>
+      return <div className={s.saleElement} data-element='sale-element'>
+        <NavLink to={props.url + Number(props.elementsObject.indexOf(elem))}>
           <img src={elem.slidePhoto}/>
+
           <div>
-            <span className={style.saleContentInfo}>{elem.info}</span>
+            <span className={s.saleContentInfo}>{elem.info}</span>
             <br/>
-            <span className={style.saleContentPrice}>{elem.price} </span>грн
+            <span className={s.saleContentPrice}>{elem.price} </span>грн
           </div>
         </NavLink>
       </div>
     })}
+    </div>
   </>
 }
 

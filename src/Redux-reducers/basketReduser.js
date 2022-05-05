@@ -22,7 +22,6 @@ const basketReducer = (state = initialState, action) => {
           return {...state, totalCount: action.totalCount }
         default: return state
     }
-
 } 
 
 export const showBasketAction = (bulean) => ({type: UPDATE_BASKET, bulean});

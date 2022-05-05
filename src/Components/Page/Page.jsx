@@ -33,16 +33,16 @@ const Page = (props) => {
 
   let show = (e) => {
     //создал независимый клон, копию объекта из пропсов
-//если изменить объект из пропсов то перерисуется компонента
-//в этот объект добавиться свойство buySize и объект отправится в корзину
+    //если изменить объект из пропсов то перерисуется компонента
+    //в этот объект добавиться свойство buySize и объект отправится в корзину
     new Promise((resolve) => {
       let clone = Object.assign({}, dataObject)
       clone.buySize = e.size
       resolve(clone)
     }).then((data) => props.addElement({data})).then(() => {
-      let bulean
-      props.basket ? bulean = false : bulean = true
-      props.showBasketAction(bulean)
+      let boolean
+      props.basket ? boolean = false : boolean = true
+      props.showBasketAction(boolean)
     })
   }
 
