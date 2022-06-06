@@ -6,25 +6,63 @@
   <component name="ChangeListManager">
     <list default="true" id="9ecf12bf-aca8-4746-9140-62b6440b66e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Filters/Filter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Filters/Filter.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Filters/filter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Filters/filter.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Filters/filter.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Filters/filter.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/FrontPage/FrontPageSale/FrontPageSale.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/FrontPage/FrontPageSale/FrontPageSale.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Jeans/JeansContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Jeans/JeansContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Page/Page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Page/Page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Page/PageContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Page/PageContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Tshirts/Tshirts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tshirts/Tshirts.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Menu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/collection/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/collection/Collection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/contentToMap/MapPageContentPhoto.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/contentToMap/MapPageContentPhoto.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/contentToMap/MapPageContentPhoto.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/contentToMap/MapPageContentPhoto.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/contentToMap/PageContent.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/contentToMap/PageContent.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/contentToMap/PagesContent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/contentToMap/PagesContent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/Screenshot_20200926-193535_Instagram.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0101.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0102.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0201.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0202.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0203.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_03.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0301.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0301.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0302.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0302.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0303.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0303.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_04021.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0501.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0501.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0502.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0502.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0503.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0503.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0601.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0601.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0602.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0602.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_08.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0801.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0802.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0803.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_09.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_16.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/hoody/9a04ce892c84a3176c3a80f490359319.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pictures/hoody/b6fe89b58773401b436ae926682d6d13.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux-reducers/FilterContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/FilterContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/basketReduser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/basketReduser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/PageReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/PageReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/Redux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/Redux.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/contentReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/contentReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/navigationReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/navigationReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/products/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/products/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -34,23 +72,30 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1zRengnAXFTmIeNyMsH2OWpsrBA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="vue.rearranger.settings.migration" value="true" />
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/alexanderopenko/Documents/Projects/new-clothes&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -73,11 +118,27 @@
       <workItem from="1651699059399" duration="1248000" />
       <workItem from="1651700316431" duration="6000" />
       <workItem from="1651744166477" duration="2437000" />
-      <workItem from="1651748527206" duration="7315000" />
+      <workItem from="1651748527206" duration="18027000" />
+      <workItem from="1651942293691" duration="126000" />
+      <workItem from="1652895237613" duration="17542000" />
+      <workItem from="1654165965083" duration="14372000" />
+      <workItem from="1654350248133" duration="171000" />
+      <workItem from="1654363997303" duration="19610000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

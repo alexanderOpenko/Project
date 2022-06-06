@@ -4,11 +4,13 @@ import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from "redux-thunk";
 import basketReducer from './basketReduser';
 import PageReducer from './PageReducer';
+import navigationReducer from "./navigationReducer";
 
 let reducer = combineReducers ({
     PageReducer: PageReducer,
     contentReducer: contentReducer,
     basket: basketReducer,
+    navigation: navigationReducer,
     form: formReducer
 });
 

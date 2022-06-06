@@ -3,121 +3,6 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import s from './FrontPageSale.module.css'
-import {updateNewPhotoSaleGalleryCreator} from '../../../Redux-reducers/contentReducer'
-
-
-import image1 from '../../../Pictures/Sale/img_01.jpg'
-import image0101 from '../../../Pictures/Sale/img_0101.jpg'
-import image0102 from '../../../Pictures/Sale/img_0102.jpg'
-
-import image2 from '../../../Pictures/Sale/img_02.jpg'
-import image0201 from '../../../Pictures/Sale/img_0201.jpg'
-import image0202 from '../../../Pictures/Sale/img_0202.jpg'
-import image0203 from '../../../Pictures/Sale/img_0203.jpg'
-
-import image3 from '../../../Pictures/Sale/img_03.jpg'
-import image0301 from '../../../Pictures/Sale/img_0301.jpg'
-import image0302 from '../../../Pictures/Sale/img_0302.jpg'
-import image0303 from '../../../Pictures/Sale/img_0303.jpg'
-
-import image4 from '../../../Pictures/Sale/img_04.jpg'
-import image0401 from '../../../Pictures/Sale/img_0401.jpg'
-import image0402 from '../../../Pictures/Sale/img_0402.jpg'
-import image04021 from '../../../Pictures/Sale/img_04021.jpg'
-
-import image5 from '../../../Pictures/Sale/img_05.jpg'
-import image0501 from '../../../Pictures/Sale/img_0501.jpg'
-import image0502 from '../../../Pictures/Sale/img_0502.jpg'
-import image0503 from '../../../Pictures/Sale/img_0503.jpg'
-
-import image6 from '../../../Pictures/Sale/img_06.jpg'
-import image0601 from '../../../Pictures/Sale/img_0601.jpg'
-import image0602 from '../../../Pictures/Sale/img_0602.jpg'
-
-export let jeansPhoto = [
-
-    {
-        id: 1111,
-        slidePhoto: image1,
-        urlPhoto1: image0101,
-        urlPhoto2: image0102,
-        parameters: [
-            {title: 'color', options: ['black']},
-            {title: 'size', options: [42]},
-            {title: 'info', options: ['Straight']}
-        ],
-        price: [42],
-    },
-
-    {
-        id: 2222,
-        slidePhoto: image2,
-        urlPhoto1: image0201,
-        urlPhoto2: image0202,
-        urlPhoto3: image0203,
-        parameters: [
-            {title: 'color', options: ['silver']},
-            {title: 'size', options: ['36', '38', '42']},
-            {title: 'info', options: ['Basic']}
-        ],
-        price: [40],
-    },
-
-    {
-        id: 3333,
-        slidePhoto: image3,
-        urlPhoto1: image0301,
-        urlPhoto2: image0302,
-        urlPhoto3: image0303,
-        parameters: [
-            {title: 'color', options: ['blue']},
-            {title: 'size', options: ['36', '38', '42', '54']},
-            {title: 'info', options: ['Basic']}
-        ],
-        price: [40],
-    },
-
-    {
-        id: 44444,
-        slidePhoto: image4,
-        urlPhoto1: image0401,
-        urlPhoto2: image0402,
-        parameters: [
-            {title: 'color', options: ['white-blue']},
-            {title: 'size', options: ['8', '36', '38', '42']},
-            {title: 'info', options: ['Basic']}
-        ],
-        price: [32]
-    },
-
-    {
-        id: 55555,
-        slidePhoto: image5,
-        urlPhoto1: image0501,
-        urlPhoto2: image0502,
-        urlPhoto3: image0503,
-        parameters: [
-            {title: 'color', options: ['black']},
-            {title: 'size', options: ['36', '38', '42']},
-            {title: 'info', options: ['Wide']}
-        ],
-        price: [44]
-    },
-
-    {
-        id: 67777,
-        slidePhoto: image6,
-        urlPhoto1: image0601,
-        urlPhoto2: image0602,
-        parameters: [
-            {title: 'color', options: ['blue']},
-            {title: 'size', options: ['36', '38', '42']},
-            {title: 'info', options: ['Wide']}
-        ],
-        price: [45]
-    },
-
-]
 
 class FrontPageSale extends React.Component {
 
@@ -143,7 +28,7 @@ class FrontPageSale extends React.Component {
 
 
     componentDidMount() {
-        this.props.updateNewPhotoSaleGalleryCreator(jeansPhoto)
+        // this.props.updateNewPhotoSaleGalleryCreator(jeansPhoto)
         this.show()//изменяю стейт чтобы сработал componentDidUpdate
     }
 
@@ -319,7 +204,7 @@ class FrontPageSale extends React.Component {
         return (
             <>
                 <div className={s.sale}>
-                    <img src={image04021}/>
+                    {/*<img src={image04021}/>*/}
                     <div className={s.gallery} ref={this.gallery}>
                         <h1>Джинси</h1>
                         <NavLink to='jeans/'>
@@ -363,4 +248,4 @@ let mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {updateNewPhotoSaleGalleryCreator})(FrontPageSale);
+export default connect(mapStateToProps, {})(FrontPageSale);

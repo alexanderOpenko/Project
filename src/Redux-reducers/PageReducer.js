@@ -1,7 +1,7 @@
-const UPDATE_PHOTO_PAGE = 'UPDATE_PHOTO_PAGE'
+const UPDATE_PHOTO_PAGE = 'UPDATE_PHOTO_PAGE';
 
 let defaultState = {
-    page: [],
+    page: []
 }
 
 const PageReducer = (state = defaultState, action) => {
@@ -11,8 +11,7 @@ const PageReducer = (state = defaultState, action) => {
             ...state, page: action.photo
         }
     } 
-   
-          
+
     default: return state;
     }
 }

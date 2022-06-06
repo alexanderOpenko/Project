@@ -8,7 +8,7 @@ const MapPageContentPhoto = (props) => {
     {props.elementsObject.map(elem => {
       return <div className={s.saleElement} data-element='sale-element'>
         <NavLink to={props.url + Number(props.elementsObject.indexOf(elem))}>
-          <img src={elem.slidePhoto}/>
+          <img src={elem.mainPhoto}/>
 
           <div>
             <span className={s.saleContentInfo}>{elem.info}</span>

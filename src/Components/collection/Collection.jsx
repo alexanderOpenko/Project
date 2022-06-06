@@ -1,30 +1,52 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { hoodyObject, tshirtObject, newItemsObject, jeansObject } from '../../products/products'
-import { collectionCreator } from '../../Redux-reducers/contentReducer'
+import {connect} from 'react-redux'
+import {hoodyObject, tshirtObject, newItemsObject, jeansObject} from '../../products/products'
+import {collectionCreator} from '../../Redux-reducers/contentReducer'
 import PagesContent from '../contentToMap/PagesContent'
 
 class Collection extends React.Component {
 
-  componentDidMount() {
-      console.log(this.props, 'this.props')
-      //const collection = this.props.match.params.id
-    this.props.collectionCreator(jeansObject)
-  }
+    collectionRequest = () => {
+        let collection = {}
+        const collectionPath = this.props.match.path
 
-  render() {
-    return <PagesContent
-      elementsObject={this.props.elementsObject}
-      filterType={'jeans'}
-      url={'/sale/saleJeans/'}/>
-  }
+        if (collectionPath === '/jeans') {
+            collection = jeansObject
+        } else if (collectionPath === '/tshirt') {
+            collection = tshirtObject
+        } else if (collectionPath === '/hoody') {
+            collection = hoodyObject
+        } else if (collectionPath === '/new') {
+            collection = newItemsObject
+        }
+
+        this.props.collectionCreator(collection)
+    }
+
+    componentDidMount() {
+        this.collectionRequest()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.path !== this.props.match.path) {
+            this.collectionRequest()
+        }
+    }
+
+    render() {
+
+        return <PagesContent
+            elementsObject={this.props.elementsObject}
+            filterType={'jeans'}
+            url={'/sale/saleJeans/'}/>
+    }
 }
-     
-let mapStateToProps = (state) => { 
+
+let mapStateToProps = (state) => {
     return ({
         elementsObject: state.contentReducer.collectionContent,
     })
 }
 
-export default connect(mapStateToProps,{ collectionCreator }) (Collection)
+export default connect(mapStateToProps, {collectionCreator})(Collection)
 

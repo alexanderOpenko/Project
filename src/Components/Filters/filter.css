@@ -63,6 +63,16 @@
   width: 100%;
   color: black;
   cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.filter__reset {
+  background: unset;
+  border: none;
+  display: block;
+  margin: 0 auto 10px auto;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .filter__submit:hover {

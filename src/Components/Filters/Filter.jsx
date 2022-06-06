@@ -81,11 +81,11 @@ class Filter extends React.Component {
         </div>
 
         <button type='button' className='filter__submit' onClick={this.toFilter}>
-          Переглянути
+          Apply
         </button>
 
-        <button type='reset' className='filter__submit'>
-          reset
+        <button type='reset' className='filter__reset'>
+          Reset
         </button>
       </form>
     </>
