@@ -5,56 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ecf12bf-aca8-4746-9140-62b6440b66e8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Filters/Filter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Filters/Filter.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Filters/filter.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Filters/filter.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/FrontPage/FrontPageSale/FrontPageSale.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/FrontPage/FrontPageSale/FrontPageSale.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Menu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/collection/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/collection/Collection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/contentToMap/MapPageContentPhoto.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/contentToMap/MapPageContentPhoto.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/Screenshot_20200926-193535_Instagram.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0101.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0102.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0201.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0202.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0203.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0301.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0301.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0302.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0302.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0303.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0303.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_04021.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0501.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0501.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0502.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0502.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0503.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0503.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0601.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0601.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0602.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pictures/Sale/img_0602.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0801.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0802.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_0803.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_09.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_12.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_13.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_14.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_15.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/Sale/img_16.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/hoody/9a04ce892c84a3176c3a80f490359319.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pictures/hoody/b6fe89b58773401b436ae926682d6d13.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/FilterContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/FilterContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/PageReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/PageReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/Redux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/Redux.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/contentReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/contentReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux-reducers/navigationReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux-reducers/navigationReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/products/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/products/products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
