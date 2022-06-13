@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 
 const Option = (props) => {
     return <div className={'optionField'} key={props.key}>
@@ -8,17 +9,11 @@ const Option = (props) => {
         <div className={'optionsValues'}>
             <span>Option values</span>
 
-            <input data-option={props.key} className={'optionsValue'}/>
+            <div className={'optionsValuesWrapper'}>
+                <input data-option={props.key} onChange={props.checkOptForEmptiness} className={'optionsValue'}/>
+                <button type='button' data-option={props.key} onClick={props.deleteOptValue} className='deleteOptValue'>-</button>
+            </div>
         </div>
-    </div>
-}
-
-const Variant = (props) => {
-    return <div className={'variantField'}>
-        <input type="hidden" value={props.title}/>
-        <span>{props.title}</span>
-        <input name='price'/>
-        <input name='qty'/>
     </div>
 }
 
@@ -26,6 +21,9 @@ class ProductCreate extends React.Component {
     opt1 = []
     opt2 = []
     opt3 = []
+    singleOptVariantsDeleted = false
+    twoOptVariantsDeleted = false
+    variantsFields = []
 
     constructor(props) {
         super(props);
@@ -34,75 +32,216 @@ class ProductCreate extends React.Component {
         }
     }
 
-    createVariant = (value, firstOptions, secondOptions) => {
-        console.log('createvariant')
-        var variants = []
+    handleButtonClick = (e) => {
+        e.preventDefault()
 
-        // function createVariant() {
-        //     const variantsParent = document.querySelector('.productVariants')
-        //
-        //     variantsParent.append()
-        // }
+        const form = document.querySelector('#addProduct');
+        const data = new FormData(form);
 
-        if (!firstOptions.length && !secondOptions.length) {
-            variants.push(value)
-            //createVariant()
-            console.log(variants)
-            return
+        let obj = {};
+        for (let [key, value] of data) {
+            if (obj[key] !== undefined) {
+                if (!Array.isArray(obj[key])) {
+                    obj[key] = [obj[key]];
+                }
+                obj[key].push(value);
+            } else {
+                obj[key] = value;
+            }
         }
 
-        if (this.opt1.length === 1 && this.opt2.length === 1 && this.opt3.length === 1) {
-            const singleVariant = this.opt1.concat(this.opt2, this.opt3).join('/')
-            variants.push(singleVariant)
-            //createVariant(singleVariant)
-            return;
-        }
+    }
 
-        if (firstOptions.length) {
-           firstOptions.map(el => {
-                return variants.push(value + '/' + el) //not push, send to create 2opt variant
+    createVariantField = (variantTitle) => {
+        const variantsParent = document.querySelector('.productVariants')
+        const fields = variantsParent.querySelectorAll('.variantField')
+
+        if (this.opt2.length && !this.singleOptVariantsDeleted) {
+            fields.forEach(el => {
+                el.remove()
             })
+            this.singleOptVariantsDeleted = true
         }
 
-        if (secondOptions.length) {
-           for (let i = 0, length = variants.length; i < length; i++) {
-               secondOptions.map(el => {
-                 return variants.push(variants[i] + '/' + el) //create 3opt variant, and remove 2opt variant
-               })
-           }
+        if (this.opt3.length && !this.twoOptVariantsDeleted) {
+            fields.forEach(el => {
+                el.remove()
+            })
+            this.twoOptVariantsDeleted = true
         }
-       console.log(variants)
+
+        const variantField = document.createElement('div')
+        const hiddenInput = document.createElement('input')
+        const spanTitle = document.createElement('span')
+        const priceInput = document.createElement('input')
+        const qtyInput = document.createElement('input')
+
+        variantField.classList.add('variantField')
+        hiddenInput.setAttribute('type', 'hidden')
+        hiddenInput.setAttribute('value', variantTitle)
+        hiddenInput.setAttribute('name', 'modification[]')
+        spanTitle.classList.add('variantTitle')
+        spanTitle.innerHTML = variantTitle
+        priceInput.setAttribute('name', 'price')
+        priceInput.setAttribute('type', 'number')
+        qtyInput.setAttribute('name', 'qty')
+        qtyInput.setAttribute('type', 'number')
+
+        variantField.append(hiddenInput, spanTitle, priceInput, qtyInput)
+
+        variantsParent.append(variantField)
+    }
+
+    createVariant = () => {
+        for (let firstEl of this.opt1) {
+            if (this.opt2.length) {
+                for (let secondEl of this.opt2) {
+                    if (this.opt3.length) {
+                        for (let thirdEl of this.opt3) {
+                            const variantTitle = firstEl + '/' + secondEl + '/' + thirdEl
+
+                            if (!this.variantsFields.includes(variantTitle)) {
+                                this.variantsFields.push(variantTitle)
+                                this.createVariantField(variantTitle)
+                            }
+                        }
+                    } else {
+                        const variantTitle = firstEl + '/' + secondEl
+
+                        if (!this.variantsFields.includes(variantTitle)) {
+                            this.variantsFields.push(variantTitle)
+                            this.createVariantField(variantTitle)
+                        }
+                    }
+                }
+            } else {
+                const variantTitle = firstEl
+
+                if (!this.variantsFields.includes(variantTitle)) {
+                    this.variantsFields.push(variantTitle)
+                    this.createVariantField(variantTitle)
+                }
+            }
+
+        }
+    }
+
+    deleteOptValue = (e) => {
+        const element = e.currentTarget
+        const valuesArrayIndex = element.dataset.option
+        const parent = element.closest('.optionsValuesWrapper')
+        const deleteArg = parent.querySelector('button').dataset.value
+
+        parent.remove()
+        this.deleteVariant(deleteArg)
+        this.deleteArrayOpt(deleteArg, valuesArrayIndex)
+    }
+
+    checkOptForEmptiness = (e) => {
+        if (!e.currentTarget.value) {
+            this.deleteOptValue(e)
+        }
+    }
+
+    deleteArrayOpt = (deleteArg, index) => {
+        const variantsToDelete = []
+        var valuesArray = ''
+
+        if (index === '1') {
+            valuesArray = this.opt1
+        } else if (index === '2') {
+            valuesArray = this.opt2
+        } else if (index === '3') {
+            valuesArray = this.opt3
+        }
+
+        const deleteIndex = valuesArray.indexOf(deleteArg)
+
+        valuesArray.splice(deleteIndex, 1)
+
+        this.variantsFields.forEach(el => {
+            if (el.includes(deleteArg)) {
+                variantsToDelete.push(el)
+            }
+        })
+
+        for(let i = 0; i < variantsToDelete.length; i++) {
+            const value = variantsToDelete[i]
+            const deleteIndex = this.variantsFields.indexOf(value)
+
+            this.variantsFields.splice(deleteIndex, 1)
+        }
+    }
+
+    deleteVariant = (deleteArg) => {
+        const fields = document.querySelectorAll('.variantField')
+
+        fields.forEach(el => {
+           const title = el.querySelector('.variantTitle').innerHTML
+
+           if (title.includes(deleteArg)) {
+               el.remove()
+           }
+        })
     }
 
     addOptValue = (e) => {
         const currentInput = e.currentTarget
+        const inputValue = e.currentTarget.value
         const dataOpt = e.currentTarget.dataset.option
-
         const parent = currentInput.closest('.optionsValues')
-        const input = document.createElement("input")
+        const inputParent = currentInput.closest('.optionsValuesWrapper')
 
+        const inputWrapper = document.createElement("div")
+        const button = document.createElement("button")
+        const input = document.createElement("input")
+        var valuesArray = ''
+
+        inputWrapper.classList.add('optionsValuesWrapper')
+        button.classList.add('deleteOptValue')
+        button.setAttribute('type', 'button')
+        button.dataset.option = dataOpt
+        button.innerHTML = '-'
+        button.addEventListener('click', this.deleteOptValue)
+        inputWrapper.append(input)
+        inputWrapper.append(button)
         input.classList.add('optionsValue')
         input.dataset.option = dataOpt
         input.addEventListener('change', this.addOptValue)
+        input.addEventListener('input', this.checkOptForEmptiness)
 
-        //add or remove input
-        if (currentInput.value) {
-            parent.append(input)
-        } else {
-            currentInput.remove()
+        const buttonPerInput = inputParent.querySelector('button')
+
+       if (buttonPerInput.dataset.value) {
+        if (inputValue !== buttonPerInput.dataset.value) {
+            const deleteArg = buttonPerInput.dataset.value
+
+            this.deleteVariant(deleteArg)
+            this.deleteArrayOpt(deleteArg, dataOpt)
         }
+       }
 
-        //set values in arrays
         if (dataOpt === '1') {
-            this.opt1.push(currentInput.value)
-            this.createVariant(currentInput.value,  this.opt2, this.opt3)
+            valuesArray = this.opt1
         } else if (dataOpt === '2') {
-            this.opt2.push(currentInput.value)
-            this.createVariant(currentInput.value,  this.opt1, this.opt3)
+            valuesArray = this.opt2
         } else if (dataOpt === '3') {
-            this.opt3.push(currentInput.value)
-            this.createVariant(currentInput.value,  this.opt1, this.opt2)
+            valuesArray = this.opt3
         }
+
+        buttonPerInput.dataset.value = inputValue
+
+
+        if (parent.lastChild.querySelector('.optionsValue').value) {
+            parent.append(inputWrapper)
+        }
+
+        if (!inputValue) {
+            return
+        }
+
+        valuesArray.push(inputValue)
+        this.createVariant()
     }
 
     check = () => {
@@ -134,7 +273,7 @@ class ProductCreate extends React.Component {
 
     render() {
         return <div className={'createProduct'}>
-            <form>
+            <form id='addProduct'>
                 <span>Product name</span>
                 <input type={'text'} name={'product_name'}/>
 
@@ -147,8 +286,8 @@ class ProductCreate extends React.Component {
                     </button>
 
                     <div className={'optionFields'}>
-                        {Array.apply(0, Array(this.state.options)).map(function (u, i) {
-                            return Option({key: i + 1});
+                        {Array.apply(0, Array(this.state.options)).map( (u, i) => {
+                            return Option({key: i + 1, checkOptForEmptiness: this.checkOptForEmptiness});
                         })}
                     </div>
                 </div>
@@ -156,6 +295,10 @@ class ProductCreate extends React.Component {
                 <div className={"productVariants"}>
 
                 </div>
+
+                <button onClick={this.handleButtonClick} className='productSubmit'>
+                    submit
+                </button>
             </form>
         </div>
     }
