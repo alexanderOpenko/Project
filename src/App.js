@@ -16,7 +16,7 @@ class App extends React.Component {
 
         const promise1 = new Promise((resolve, reject) => $.ajax({
             type: "GET",
-            url: "http://localhost:8888/collection.php",
+            url: "http://localhost:8888/store/collection.php",
             data: "collection",
             header: 'Content-Type: application/json',
             success (data) {
