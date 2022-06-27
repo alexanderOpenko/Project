@@ -12,8 +12,192 @@ code {
     monospace;
 }
 
+.hidden {
+  display: none;
+}
+
+.btn {
+  position: relative;
+  border-radius: 99px;
+  border: 1px solid #000000;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  font-weight: 700;
+  outline: none;
+  background: #fff;
+  transition: all 0.22s;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.stripBtn {
+  background: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/*icons*/
+.trashIcon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/*create product form*/
+
 .createProduct {
-  height: 100vh;
+  position: relative;
   padding: 100px 60px 60px 60px;
 }
 
+.createProduct-Background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.createProduct-formContent {
+  position: relative;
+}
+
+.productField {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.optionField .productField {
+  margin-bottom: 15px;
+}
+
+.fieldTitle {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.fieldInput {
+  padding: 0 15px;
+  width: 220px;
+  border-radius: 20px;
+  height: 30px;
+  border: none;
+}
+
+.addOption {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.addOption-btn {
+  font-size: 24px;
+}
+
+.productOptions {
+
+}
+
+.optionsValuesWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.deleteOptValue {
+  margin-left: 10px;
+}
+
+.variantField {
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.hiddenInputWithOptions {
+  display: none;
+}
+
+.variantTitle {
+  margin-right: 10px;
+}
+
+.fieldInput.varField {
+  width: 100px;
+}
+
+.priceInput {
+  margin-right: 20px;
+}
+
+.variantField {
+  margin-bottom: 30px;
+}
+
+.variantField:last-child {
+  margin-bottom: 0
+}
+
+.varField {
+  width: 100px;
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+.variantTitles {
+  padding-left: 250px;
+}
+
+.variantTitles-price {
+  margin-right: 50px;
+}
+
+.variantImage {
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  height: 100%;
+}
+
+.productVariants {
+margin-bottom: 40px;
+}
+
+.addVariantImage {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  border: 1.5px dashed silver;
+  margin-right: 25px;
+  position: relative;
+}
+
+.removeVariantImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  opacity: .8;
+  display: none;
+  background: silver;
+}
+
+.addVariantImage.varField {
+  width: 80px;
+}
+
+.fieldInput:focus{
+  outline: none;
+}
