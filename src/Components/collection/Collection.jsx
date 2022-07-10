@@ -1,26 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {hoodyObject, tshirtObject, newItemsObject, jeansObject} from '../../products/products'
 import {collectionCreator} from '../../Redux-reducers/contentReducer'
-import PagesContent from '../contentToMap/PagesContent'
+import CollectionContent from '../contentToMap/collectionContent'
+import $ from "jquery";
 
 class Collection extends React.Component {
 
     collectionRequest = () => {
-        let collection = {}
-        const collectionPath = this.props.match.path
+        const collectionPath = this.props.match.path.slice(12)
 
-        if (collectionPath === '/jeans') {
-            collection = jeansObject
-        } else if (collectionPath === '/tshirt') {
-            collection = tshirtObject
-        } else if (collectionPath === '/hoody') {
-            collection = hoodyObject
-        } else if (collectionPath === '/new') {
-            collection = newItemsObject
-        }
+        const promise1 = new Promise((resolve, reject) => $.ajax({
+                type: 'GET',
+                url: "http://localhost:8888/store/collection.php?",
+                data: {collection: collectionPath},
+                header: 'Content-Type: application/json',
+                success: function(data) {
+                    resolve(data)
+                }
+            })
+        )
 
-        this.props.collectionCreator(collection)
+        promise1.then((value) => {
+            const data = JSON.parse(value)
+            console.log(data)
+            this.props.collectionCreator(data)
+        });
     }
 
     componentDidMount() {
@@ -34,8 +38,7 @@ class Collection extends React.Component {
     }
 
     render() {
-
-        return <PagesContent
+        return <CollectionContent
             elementsObject={this.props.elementsObject}
             filterType={'jeans'}
             url={'/sale/saleJeans/'}/>

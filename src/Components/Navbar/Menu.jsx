@@ -23,8 +23,9 @@ const Menu = (props) => {
                 <ul>
                     <li className={s.active} onClick={showMenu}>одяг</li>
                     <li onClick={menuAppear}><NavLink to='/admin' className={s.active}>admin</NavLink></li>
-                    <li onClick={menuAppear}><NavLink to='/new' className={s.active}>новинки</NavLink></li>
+                    <li onClick={menuAppear}><NavLink to={'/new'} className={s.active}>новинки</NavLink></li>/collection/t-shirt
                     <li onClick={menuAppear}><NavLink to='/Accessories' className={s.active}>аксесуари</NavLink></li>
+                    <li onClick={menuAppear}><NavLink to='/collection/t-shirt' className={s.active}>t-shirt</NavLink></li>
                 </ul>
             </div>
             {clothesList && <div className={s.clothesList}>

@@ -36,13 +36,13 @@ render() {
     return(<>
     <div ref={this.widthDisplay} className = {s.navbar} >
     {this.widthContent > 768 ?
-    <button  onMouseEnter ={this.menuAppear} >
+    <button  onMouseEnter ={this.menuAppear}>
             <div className={s.bar}></div>
             <div className={s.barmiddle}></div>
             <div className={s.bar}></div>
     </button> 
     : 
-    <button onClick ={this.menuAppear} >
+    <button onClick ={this.menuAppear}>
             <div className={s.bar}></div>
             <div className={s.barmiddle}></div>
             <div className={s.bar}></div>

@@ -1,4 +1,4 @@
-import {jeansObject} from "../products/products";
+import {jeansObject} from "../products/products_json";
 import {collectionCreator} from "./contentReducer";
 
 export const filterContent = ( prop ) => (dispatch) => {

@@ -1,5 +1,6 @@
-import React, {useEffect} from "react";
-import icons from "../Pictures/icons";
+import React from "react";
+import $ from "jquery";
+import icons from "../../Pictures/icons";
 
 const Option = (props) => {
     return <div className='optionField' key={props.key}>
@@ -12,7 +13,7 @@ const Option = (props) => {
             <span className='fieldTitle'>Option values</span>
 
             <div className='optionsValuesWrapper'>
-                <input data-option={props.key} onChange={props.checkOptForEmptiness} className='optionsValue fieldInput'/>
+                <input data-option={props.key} name={'option-' + props.key + '[]'} onChange={props.checkOptForEmptiness} className='optionsValue fieldInput'/>
 
                 <div data-option={props.key} onClick={props.deleteOptValue}
                      className='deleteOptValue'
@@ -24,7 +25,7 @@ const Option = (props) => {
     </div>
 }
 
-class ProductCreate extends React.Component {
+class Products extends React.Component {
     opt1 = []
     opt2 = []
     opt3 = []
@@ -41,34 +42,19 @@ class ProductCreate extends React.Component {
 
     handleButtonClick = (e) => {
         e.preventDefault()
-        const form = document.querySelector('#addProduct');
-        const dataForm = new FormData(form);
+        const form = document.querySelector('#addProduct')
+        const dataForm = new FormData(form)
 
-        let data = {};
-
-        for (let [key, value] of dataForm) {
-            if (data[key] !== undefined) {
-                if (!Array.isArray(data[key])) {
-                    data[key] = [data[key]];
-                }
-                data[key].push(value);
-            } else {
-                data[key] = value;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8888/store/create_product.php",
+            data: dataForm,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                console.log(JSON.parse(data))
             }
-        }
-
-        fetch("http://localhost:8888/store/create_product.php", {
-            method: "POST",
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(data)
-        }).then((response) => response.json())
-            .then((result) => {
-                console.log(result, 'result')
-            })
+        })
     }
 
     element = (tag, classes = [], attr = [], content) => {
@@ -91,44 +77,107 @@ class ProductCreate extends React.Component {
         return node
     }
 
-    changeHandler = (e) => {
+    InputImageChangeHandler = (e) => {
         const elem = e.target
         const variant = elem.closest('.variantField')
-        const variantImage = variant.querySelector('.variantImage')
-        const file = elem.files[0]
-        const imageField = variant.querySelector('.addVariantImage')
-        const removeVarImage = variant.querySelector('.removeVariantImage')
-        const reader = new FileReader()
+        const imagesContainer = variant.querySelector('.variantImagesContainer')
+        const variantFiles = Array.from(elem.files)
 
-        imageField.style.paddingTop = '11%'
-        removeVarImage.style.display = 'block'
-        variantImage.style.opacity = '1'
+        variantFiles.forEach( el => {
+            const reader = new FileReader()
+            const variantImage = this.element('img', ['variantImage'])
+            const imageContainer = this.element('div', ['variantImageContainer'])
+            const removeImage = this.element('span', ['removeVariantImage'], {}, '&times;')
+            removeImage.addEventListener('click',  this.removeVariantImage)
 
-        reader.onload = ev => {
-            const src = ev.target.result
-            variantImage.setAttribute('src', `${src}`)
+            reader.onload = ev => {
+                const src = ev.target.result
+                variantImage.setAttribute('src', `${src}`)
+                removeImage.dataset.file = el.name
+                imageContainer.append(variantImage, removeImage)
+                imagesContainer.append(imageContainer)
+            }
+
+            reader.readAsDataURL(el)
+        })
+    }
+
+    addProductImage = (e) => {
+        const input = document.querySelector('.productImageInput')
+        input.click()
+    }
+
+    removeProdImage = (e) => {
+        const elem = e.target
+        const imgWrapper = elem.closest('.prodImageWrap')
+        const fileName = elem.dataset.file
+        const dt = new DataTransfer()
+        const input = document.querySelector('.productImageInput')
+        const { files } = input
+
+        imgWrapper.remove()
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i]
+            if (fileName !== file.name)
+                dt.items.add(file)
         }
 
-        reader.readAsDataURL(file)
+        input.files = dt.files
+    }
+
+    productImagesChangeHandler = (e) => {
+        const prodPhotosContainer = document.querySelector('.productPhotos_container')
+        const input = document.querySelector('.productImageInput')
+        const files = Array.from(input.files)
+
+        if (files.length > 5) {
+            alert("Only 5 files accepted.")
+            return
+        }
+
+        files.forEach( el => {
+            const reader = new FileReader()
+            const prodImageWrap = this.element('div', ['prodImageWrap'])
+            const prodImage = this.element('img', ['prodImage'], {src:'', alt: ''})
+            const removeImage = this.element('span', ['removeProdImage'], {}, '&times;')
+            removeImage.addEventListener('click', this.removeProdImage)
+
+            reader.onload = ev => {
+                const src = ev.target.result
+                prodImage.setAttribute('src', `${src}`)
+                removeImage.dataset.file = el.name
+                prodImageWrap.append(prodImage, removeImage)
+            }
+
+            reader.readAsDataURL(el)
+            prodPhotosContainer.append(prodImageWrap)
+        })
     }
 
     removeVariantImage = (e) => {
         e.stopPropagation();
         const elem = e.target
-        const variant = elem.closest('.variantField')
-        const variantImage = variant.querySelector('.variantImage')
-        const imageField = variant.querySelector('.addVariantImage')
-        const fileInput = variant.querySelector('.variantImages')
+        const imgWrapper = elem.closest('.variantImageContainer')
+        const fileName = elem.dataset.file
 
-        variantImage.removeAttribute('src', )
-        fileInput.value = ''
-        //new DataTransfer
-        imageField.style.paddingTop = '10px'
-        elem.style.display = 'none'
-        variantImage.style.opacity = '0'
+        const dt = new DataTransfer()
+        const input = document.querySelector('.variantImages')
+        const { files } = input
+
+        imgWrapper.remove()
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i]
+            if (fileName !== file.name)
+                dt.items.add(file)
+        }
+
+        input.files = dt.files
     }
 
-    createVariantField = (variantTitle, variantOptions) => {
+    createVariantField = (variantTitle, variantOptions, variantsLength) => {
+        const variantsContainer = document.querySelector('.productVariants')
         const variantsParent = document.querySelector('.productVariants')
         const fields = variantsParent.querySelectorAll('.variantField')
 
@@ -148,33 +197,33 @@ class ProductCreate extends React.Component {
             this.twoOptVariantsDeleted = true
         }
 
-        const variantField = this.element('fieldset', ['variantField'], {name: 'variant_field'})
+        const variantField = this.element('div', ['variantField'], {name: 'variant_field'})
         const hiddenInput = this.element('input', [], {type: 'hidden', value: variantTitle, name: 'modification[]'})
         const hiddenOptionsInput = this.element('input', ['hiddenInputWithOptions'], {
-            name: 'options',
-            value: variantOptions,
-            multiple: 'multiple'
+            name: 'options[]',
+            value: variantOptions
         })
         const spanTitle = this.element('span', ['variantTitle', 'varField'], {}, variantTitle)
-        const priceInput = this.element('input', ['fieldInput', 'priceInput', 'varField'], {name: 'price', type: 'number'})
-        const qtyInput = this.element('input', ['fieldInput', 'varField'], {name: 'qty', type: 'number'})
-        const fileInput = this.element('input', ['hidden', 'variantImages'], {name: 'variant_images', type: 'file', accept: '.png, .jpg, .jpeg, .gif'})
-        const variantImage = this.element('img', ['variantImage'])
-        const addImage = this.element('span', ['addVariantImage', 'varField'], {}, 'Add image')
-        const removeImage = this.element('span', ['removeVariantImage'], {}, '&times;')
+        const priceInput = this.element('input', ['fieldInput', 'priceInput', 'varField'], {name: 'price[]', type: 'number'})
+        const priceTitle = this.element('span', [], {}, 'price')
+        const qtyInput = this.element('input', ['fieldInput', 'qtyInput', 'varField'], {name: 'qty[]', type: 'number'})
+        const qtyTitle = this.element('span', [], {}, 'quantity')
+        const fileInput = this.element('input', ['hidden', 'variantImages'], {name: `variant-images-${variantsLength}[]`, type: 'file', multiple: 'multiple', accept: '.png, .jpg, .jpeg, .webp, .gif'})
+        const addImage = this.element('span', ['addVariantImage'], {}, '<p>Add image</p>')
+        const imagesContainer = this.element('div', ['variantImagesContainer'])
 
         function triggerInputFile() {
             fileInput.click()
         }
 
-       fileInput.addEventListener('change', this.changeHandler)
-       addImage.addEventListener('click', triggerInputFile)
-       addImage.append(variantImage, removeImage)
-       removeImage.addEventListener('click', this.removeVariantImage)
+        fileInput.addEventListener('change', this.InputImageChangeHandler)
+        addImage.querySelector('p').addEventListener('click', triggerInputFile)
+        addImage.append(imagesContainer)
 
-        variantField.append(hiddenInput, spanTitle, addImage, fileInput, priceInput, qtyInput, hiddenOptionsInput)
+        variantField.append(hiddenInput, spanTitle, addImage, fileInput, priceTitle, priceInput, qtyTitle, qtyInput, hiddenOptionsInput)
 
         variantsParent.append(variantField)
+        variantsContainer.classList.remove('hidden')
     }
 
     createVariant = () => {
@@ -234,7 +283,7 @@ class ProductCreate extends React.Component {
         const deleteArg = parent.querySelector('.deleteOptValue').dataset.value
 
         if (optionsParent.querySelectorAll('.optionsValuesWrapper').length === 2) {
-          optionsParent.append(this.inputWrapper(option))
+            optionsParent.append(this.inputWrapper(option))
         }
 
         parent.remove()
@@ -261,6 +310,7 @@ class ProductCreate extends React.Component {
     }
 
     deleteVariant = (deleteArg) => {
+        const variantConntainer = document.querySelector('.productVariants')
         const fields = document.querySelectorAll('.variantField')
 
         fields.forEach(el => {
@@ -270,6 +320,10 @@ class ProductCreate extends React.Component {
                 el.remove()
             }
         })
+
+        if(!fields.length) {
+            variantConntainer.classList.add('hidden')
+        }
     }
 
     checkOptForEmptiness = (e) => {
@@ -283,7 +337,7 @@ class ProductCreate extends React.Component {
 
         const inputWrapper = this.element('div', ['optionsValuesWrapper'])
         const deleteOptIcon = this.element('div', ['deleteOptValue'], {'data-option': dataOpt}, icon)
-        const input = this.element('input', ['optionsValue', 'fieldInput'], {'data-option': dataOpt})
+        const input = this.element('input', ['optionsValue', 'fieldInput'], {'data-option': dataOpt, name:`option-${dataOpt}[]`})
 
         deleteOptIcon.addEventListener('click', this.deleteOptValue)
         input.addEventListener('change', this.addOptValue)
@@ -367,23 +421,41 @@ class ProductCreate extends React.Component {
 
     render() {
         return <div className={'createProduct'}>
-            <img className='createProduct-Background' src={require('../Pictures/bg_admin.png')} alt=""/>
+            <img className='createProduct-Background' src={require('../../Pictures/bg_admin.png')} alt=""/>
 
             <div className='createProduct-formContent'>
                 <form id='addProduct'>
-                    <div className="productField">
-                        <span className='fieldTitle'>Product name</span>
-                        <input className='fieldInput' type='text' name='product_name'/>
-                    </div>
+                    <div className="productDescription">
+                        <div className="basicProductFields">
+                            <div className="productField">
+                                <span className='fieldTitle'>Product name</span>
+                                <input className='fieldInput' type='text' name='product_name'/>
+                            </div>
 
-                    <div className="productField">
-                        <span className='fieldTitle'>Collection</span>
-                        <input className='fieldInput' type='text' name='colletion'/>
-                    </div>
+                            <div className="productField">
+                                <span className='fieldTitle'>Collection</span>
+                                <input className='fieldInput' type='text' name='collection'/>
+                            </div>
 
-                    <div className="productField">
-                        <span className='fieldTitle'>Price</span>
-                        <input className='fieldInput' type='text' name='prod_price'/>
+                            <div className="productField">
+                                <span className='fieldTitle'>Price</span>
+                                <input className='fieldInput' type='text' name='prod_price'/>
+                            </div>
+                        </div>
+
+                        <div className="productPhotos">
+                            <input type="file" onChange={this.productImagesChangeHandler} name="productImages[]" multiple className="hidden productImageInput" accept=".png, .jpg, .jpeg, .gif"/>
+
+                            <h2>Add product images</h2>
+
+                            <div className="productPhotos_plus" onClick={this.addProductImage}>
+                                +
+                            </div>
+
+                            <div className="productPhotos_container">
+
+                            </div>
+                        </div>
                     </div>
 
                     <div className={'productOptions'}>
@@ -404,13 +476,8 @@ class ProductCreate extends React.Component {
                         </div>
                     </div>
 
-                    <div className={"productVariants"}>
+                    <div className='productVariants hidden'>
                         <h2>Variants</h2>
-
-                        <div className='variantTitles'>
-                            <div className='variantTitles-price varField'>Price</div>
-                            <div className='varField'>Quantity</div>
-                        </div>
                     </div>
 
                     <button onClick={this.handleButtonClick} className='productSubmit btn'>
@@ -422,5 +489,4 @@ class ProductCreate extends React.Component {
     }
 }
 
-export default ProductCreate;
-
+export default Products

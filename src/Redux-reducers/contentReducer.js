@@ -1,7 +1,7 @@
 const UPDATE_COLLECTION_CONTENT = 'UPDATE_COLLECTION_CONTENT'
 
 let defaultState = {
-    collection: [],
+    collectionContent: [],
 }
 
 const contentReducer = (state = defaultState, action) => {

@@ -1,0 +1,114 @@
+.collection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productName {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.productPrice {
+    font-weight: 700;
+}
+
+.productColorOptions_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.titleColor_border {
+    padding: 1px;
+    border: 1px solid silver;
+}
+
+.titleColor {
+    position: relative;
+}
+
+.titleColor_info {
+    position: absolute;
+    white-space: nowrap;
+    display: none;
+    background-color: #fff;
+    top: 28px;
+    padding: 5px;
+    border: 1px solid #999;
+}
+
+.rotateArrow {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 34px;
+    left: -7px;
+    display: none;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    transform: rotate(45deg);
+    margin-top: -11px;
+    background: #fff;
+    z-index: 1;
+}
+
+.titleColor:hover .titleColor_info, .titleColor:hover .rotateArrow  {
+    display: block;
+}
+
+.optionColorField {
+    margin-right: 15px;
+}
+
+.titleColor_background {
+    width: 13px;
+    height: 13px;
+}
+
+.collectionElement {
+    width: calc(25% - 15px);
+    padding: 0 10px;
+}
+
+.collectionElement:first-child {
+    padding-left: 0;
+}
+
+.collectionElement:nth-child(4n) {
+    padding-right: 0;
+}
+
+.collectionElement:nth-child(5n) {
+    padding-left: 0;
+}
+
+.collectionElement img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.collectionElement div {
+  text-align: center;
+}
+
+.collectionElement a {
+    text-decoration: none;
+    color: black
+}
+
+@media (max-width: 998px) {
+    .collectionElement {
+        width: calc(50% - 15px);
+    }
+
+    .collectionElement:nth-child(4n) {
+        padding-right: 10px;
+    }
+
+    .collectionElement:nth-child(2n) {
+        padding-right: 0;
+    }
+
+    .collectionElement:nth-child(3n) {
+        padding-left: 0;
+    }
+}

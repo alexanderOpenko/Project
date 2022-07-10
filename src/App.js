@@ -8,35 +8,32 @@ import Footer from './Components/footer/footer';
 import Collection from "./Components/collection/Collection";
 import {connect} from "react-redux";
 import {routesCreator} from './Redux-reducers/navigationReducer';
-import ProductCreate from "./Components/ProductCreate";
+import Admin from "./Components/Admin/Admin";
 
 class App extends React.Component {
+    routes = ['t-shirt']
     componentDidMount() {
         document.body.style.cssText = `font-family: "Graphik Cond Web"; overflow-x: hidden`
 
-        const promise1 = new Promise((resolve, reject) => $.ajax({
-            type: "GET",
-            url: "http://localhost:8888/store/collection.php",
-            data: "collection",
-            header: 'Content-Type: application/json',
-            success (data) {
-                resolve(data)
-            },
-        })
-        )
-
-        promise1.then((value) => {
-           const data = JSON.parse(value);
-           //this.props.routesCreator(data);
-           console.log(data, 'data')
-           // console.log(value, 'value')
-        });
+        // const promise1 = new Promise((resolve, reject) => $.ajax({
+        //         type: 'GET',
+        //         url: "http://localhost:8888/store/routes",
+        //         header: 'Content-Type: application/json',
+        //         success: function(data) {
+        //             resolve(data)
+        //         }
+        //     })
+        // )
+        //
+        // promise1.then((value) => {
+        //     const data = JSON.parse(value);
+        //     //this.props.routesCreator(data);
+        // });
     }
 
     render() {
         return (
             <div className='wrapper-content'>
-
                 <Header/>
 
                 <div className='frontpage-content'>
@@ -52,15 +49,17 @@ class App extends React.Component {
                         {/*<Route path={'/Accessories/:id'} render={(props) => (<PageContainer photos={accessoriesPhoto} {...props}/>)}/>*/}
 
                         {
-                            this.props.routes.map(el => {
-                            return <Route path={"/" + el} render={(props) => <Collection {...props}/>}/>
+                            this.routes.map((el, i) => {
+                            return <Route key={i} path={'/collection/' + el} render={(props) => <Collection {...props}/>}/>
                         })
                         }
 
-                        <Route path={'/admin'} render={(props) => <ProductCreate {...props}/>}/>
+
+                        <Route path={'/admin'} render={(props) => <Admin {...props}/>}/>
                     </Switch>
 
                 </div>
+
                 <div className='footer'>
                     <Footer/>
                 </div>

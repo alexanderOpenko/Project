@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PagesContent from '../contentToMap/PagesContent'
+import CollectionContent from '../contentToMap/collectionContent'
 import {accessoriesCreator} from '../../Redux-reducers/contentReducer'
 
 import image1 from '../../Pictures/winterGirl.jpg' 
@@ -28,7 +28,7 @@ componentDidMount(){
 }
 
    render(){
-    return <PagesContent 
+    return <CollectionContent
         elementsObject={this.props.elementsObject}
         filterType={'accessories'} 
         url={'/accessories/'}/>
