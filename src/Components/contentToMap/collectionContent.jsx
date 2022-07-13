@@ -1,7 +1,7 @@
 import React from 'react'
 import Filter from '../Filters/Filter'
 import './PageContent.css'
-import MapPageContent from './MapPageContent'
+import MapCollectionContent from './MapCollectionContent'
 
 class CollectionContent extends React.Component {
 
@@ -26,7 +26,7 @@ class CollectionContent extends React.Component {
                     Фільтр
                 </button>
 
-                <MapPageContent
+                <MapCollectionContent
                     elementsObject={this.props.elementsObject}
                     url={this.props.url}
                 />

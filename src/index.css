@@ -18,6 +18,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hidden-input {
+  clip: rect(0,0,0,0);
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
 input[type="radio"] {
   margin: 0;
 }
