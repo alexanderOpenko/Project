@@ -1,27 +1,38 @@
-import React, {useEffect} from "react"
-import {Field, reduxForm} from "redux-form"
+import React, {useEffect, useState} from "react"
+import {connect} from 'react-redux'
+import {Field, reduxForm, change} from "redux-form"
 import {NavLink} from "react-router-dom";
 
 const CollectionForm = (props) => {
+    const sizeSelectPlaceholder = document.querySelector('.sizeFieldsTitle')
+    const [ActiveStateSizeOptions, setActiveStateSizeOptions] = useState('')
+    const [defaultColorOption, setDefaultColorOption] = useState('')
+    const [changedSizeOption, setChangedSizeOption] = useState('')
+
     const product = props.prod
 
     const variantChange = (e) => {
+        console.log(e.target.value, 'varChange')
         const value = e.target.value
-        setSizeOptionsStatus(value)
+
+        setDefaultColorOption(value)
+        props.change('size-' + product.id, '')
+
+        setChangedSizeOption('')
+        sizeSelectPlaceholder.innerHTML = 'Sizes'
+        document.querySelector('.sizeFields').style.borderColor = 'black'
     }
 
-    const setSizeOptionsStatus = (colorValue) => {
-        const sizeInputs = document.querySelectorAll('.sizeInput')
-        sizeInputs.forEach(el => {
-            el.classList.remove('inactiveOption')
-            el.removeAttribute('disabled', 'disabled')
-        })
+    const setSizeOptionsStatus = () => {
+        const thisProduct = document.getElementById(`${product.id}`)
+        const sizeInputs = thisProduct.querySelectorAll('.sizeInput')
 
-        const defaultColorOptValue = colorValue ? colorValue : document.querySelector('.colorInput[checked]').value
-
-        const mods = product.modifications.filter(mod => {
-            return mod.mod_title.includes(defaultColorOptValue)
-        })
+        const mods = defaultColorOption ?
+            product.modifications.filter(mod => {
+                return mod.mod_title.includes(defaultColorOption + "/")
+            })
+        :
+            product.modifications
 
         mods.forEach(mod => {
             sizeInputs.forEach(el => {
@@ -33,34 +44,61 @@ const CollectionForm = (props) => {
         })
     }
 
-    useEffect(() => {
-        setSizeOptionsStatus()
-    })
-
-
-    const require = (v) => {
-        if (!v) {
-            return true
-        } else {
-            document.querySelector('.sizeFields').style.borderColor = 'black'
+    const setDefaultColor = () => {
+        props.change('product-' + product.id, product.id)
+        if (!defaultColorOption) {
+            product.options[props.colorIndex].map(el => {
+                if (props.varTitle.includes(el)) {
+                    setDefaultColorOption(el)
+                    props.change('color-' + product.id, el)
+                }
+            })
         }
     }
 
-    const inputRadio = (field) => {
-        const hasError = field.meta.touched && field.meta.error
-
-        if (hasError) {
-            document.querySelector('.sizeFields').style.borderColor = 'red'
+    useEffect(() => {
+        if (props.colorIndex !== -1) {
+            setDefaultColor()
         }
+        setSizeOptionsStatus()
+    })
+
+    const sizeButtonAction = (e) => {
+        const radioButtonSizeValue = e.target.value
+
+        sizeSelectPlaceholder.innerHTML = radioButtonSizeValue
+        setChangedSizeOption(radioButtonSizeValue)
+
+        inactiveSizeOptions()
+        document.querySelector('.sizeFields').style.borderColor = 'black'
+    }
+
+    const activeSizeOptions = () => {
+        setActiveStateSizeOptions('activeSizeOptions')
+    }
+
+    const inactiveSizeOptions = () => {
+        setActiveStateSizeOptions('')
+    }
+
+    const inputRadio = (field) => {
 
         return <input {...field.input}
-                      checked={field.val === field.input.value}
+                      checked={field.val === changedSizeOption}
                       className='sizeInput hidden-input'
                       type='radio'
                       value={field.val}/>
     }
 
-    return <form id='1' onSubmit={props.handleSubmit}>
+    const input = (field) => {
+            return <input {...field.input}
+                          checked={field.input.value === field.val}
+                          className='colorInput hidden-input'
+                          type='radio'
+                          value={field.val}/>
+    }
+
+    return <form id={product.id} onSubmit={props.handleSubmit} >
         <NavLink to={'/rfr'}>
         </NavLink>
         <div className='ImageWrapper'>
@@ -68,19 +106,21 @@ const CollectionForm = (props) => {
 
             <div className="productSizesAndSubmit">
                 {props.sizeIndex !== -1 ?
-                    <div className="productSizeOptions">
+                    <div className={"productSizeOptions " + ActiveStateSizeOptions} onMouseEnter={activeSizeOptions}
+                         onMouseLeave={inactiveSizeOptions}>
                         <div className="sizeFields">
+                            <div className="sizeFieldsTitle">Sizes</div>
+
                             {product.options[props.sizeIndex].map((el, i) => {
                                 return <label key={i} className='optionSizeField'>
                                     <Field component={inputRadio}
-                                           validate={[require]}
                                            name={'size-' + product.id}
-                                           val={el}/>
+                                           val={el}
+                                           onChange={sizeButtonAction}/>
 
                                     <div>{el}</div>
                                 </label>
                             })}
-                            <span className="sizeFieldsTitle">Sizes</span>
                         </div>
                     </div>
                     : false}
@@ -96,21 +136,19 @@ const CollectionForm = (props) => {
             <div className='productPrice'>{props.price} $</div>
 
             <div className="productOptions">
-                {props.colorIndex !== -1 ?
+                {props.colorIndex !== -1 && product.options[props.colorIndex].length > 1 ?
+
                     <div className='productColorOptions'>
+                        <Field component='input' className='hidden-input' name={'product-' + product.id}/>
+
                         <div className="productColorOptions_wrapper">
                             {product.options[props.colorIndex].map((el, i) => {
 
                                 return <label key={i} className='optionColorField'>
-                                    {props.varTitle.includes(el) ?
-
-                                        <input type='radio' defaultChecked className='colorInput hidden-input'
+                                        <Field component={input}
                                                name={'color-' + product.id}
-                                               value={el} onChange={variantChange}/>
-                                        :
-                                        <input type='radio' className='hidden-input' name={'color-' + product.id}
-                                               value={el} onChange={variantChange}/>
-                                    }
+                                               val={el}
+                                               onChange={variantChange}/>
 
                                     <div className="titleColor">
                                         <div className="titleColor_border">
@@ -126,11 +164,17 @@ const CollectionForm = (props) => {
                             })}
                         </div>
                     </div>
-                    : false
+                    :
+                    <Field component='input' name={'color-' + product.id}/> // if only one color for variants
                 }
             </div>
         </div>
     </form>
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {change: (name, value) => dispatch(change('collection-form', name, value))}
+}
+
 export default reduxForm({form: 'collection-form'})(CollectionForm)
+connect(mapDispatchToProps)(CollectionForm)

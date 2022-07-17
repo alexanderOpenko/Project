@@ -117,18 +117,33 @@
 }
 
 .sizeFields {
-    border: 1px solid black;
+    border: 1px solid;
+    overflow: hidden;
 }
 
 .optionSizeField {
     height: 0;
     display: block;
     opacity: 0;
-    transition: height 350ms, opacity .1s ease-in;
+    transition: height 400ms, opacity .1s ease-in;
+    cursor: pointer;
 }
 
-.sizeFields:hover .optionSizeField {
-    height: 23px;
+.optionSizeField:hover {
+    background-color: silver;
+}
+
+.sizeFieldsTitle {
+    transition: height 500ms, opacity .2s ease-in;
+}
+
+.productSizeOptions.activeSizeOptions .sizeFieldsTitle {
+    opacity: 0;
+    height: 0;
+}
+
+.productSizeOptions.activeSizeOptions .optionSizeField {
+    height: 22px;
     opacity: 1;
 }
 

@@ -14,6 +14,9 @@ class Collection extends React.Component {
                 url: "http://localhost:8888/store/collection.php?",
                 data: {collection: collectionPath},
                 header: 'Content-Type: application/json',
+                xhrFields: {
+                    withCredentials: true
+                },
                 success: function(data) {
                     resolve(data)
                 }
@@ -46,6 +49,7 @@ class Collection extends React.Component {
 }
 
 let mapStateToProps = (state) => {
+    //console.log(state, 'state')
     return ({
         elementsObject: state.contentReducer.collectionContent,
     })

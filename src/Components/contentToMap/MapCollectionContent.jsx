@@ -1,11 +1,32 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
 import './MapCollectionContent.css'
 import CollectionForm from "./CollectionForm";
 
 const MapCollectionContent = (props) => {
-    const form = (e) => {
-        console.log(e, 'formSubmit')
+    const form = (v) => {
+        const onlySizeOptionProduct = false
+
+        const id = v[Object.keys(v)[0]]
+        const currentProduct = props.elementsObject.filter(el => { return el.id === id})
+        const currentProdCart = document.getElementById(id)
+        const sizeOpt = 'size-' + id
+
+        if (!v[sizeOpt]) {
+            currentProdCart.querySelector('.sizeFields').style.borderColor = 'red'
+            return
+        }
+
+        const titleArray = Object.values(v)
+        titleArray.shift()
+        const varTitle = titleArray.join('/')
+
+        const variant = currentProduct.map(el => {
+           return  el.modifications.find(mod => {
+             return  mod.mod_title === varTitle
+            })
+        })
+
+        console.log(variant[0].mod_id, 'varId')
     }
 
     return <>
@@ -15,9 +36,7 @@ const MapCollectionContent = (props) => {
                 const sizeOptionsIndex = elem.params.indexOf('size')
 
                 const firstAvailableVariant = elem.modifications.length ? elem.modifications.find(el => {
-                    if (el.qty > 0) {
-                        return el
-                    }
+                    return el.qty > 0
                 }) : false
 
                 const firstVariantTitle = firstAvailableVariant.mod_title
