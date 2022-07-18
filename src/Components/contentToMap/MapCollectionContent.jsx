@@ -7,7 +7,8 @@ const MapCollectionContent = (props) => {
         const onlySizeOptionProduct = false
 
         const id = v[Object.keys(v)[0]]
-        const currentProduct = props.elementsObject.filter(el => { return el.id === id})
+        const currentProduct = props.elementsObject.find(el => { return el.id === id})
+
         const currentProdCart = document.getElementById(id)
         const sizeOpt = 'size-' + id
 
@@ -20,13 +21,11 @@ const MapCollectionContent = (props) => {
         titleArray.shift()
         const varTitle = titleArray.join('/')
 
-        const variant = currentProduct.map(el => {
-           return  el.modifications.find(mod => {
+        const variant = currentProduct.modifications.find(mod => {
              return  mod.mod_title === varTitle
             })
-        })
 
-        console.log(variant[0].mod_id, 'varId')
+        console.log(variant.mod_id, 'varId')
     }
 
     return <>

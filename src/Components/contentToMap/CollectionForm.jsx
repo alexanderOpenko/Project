@@ -6,15 +6,17 @@ import {NavLink} from "react-router-dom";
 const CollectionForm = (props) => {
     const sizeSelectPlaceholder = document.querySelector('.sizeFieldsTitle')
     const [ActiveStateSizeOptions, setActiveStateSizeOptions] = useState('')
+    const [variantImage, setVariantImage] = useState(props.main_photo)
     const [defaultColorOption, setDefaultColorOption] = useState('')
     const [changedSizeOption, setChangedSizeOption] = useState('')
 
     const product = props.prod
 
     const variantChange = (e) => {
-        console.log(e.target.value, 'varChange')
         const value = e.target.value
-
+        const firstVariantByChangedColorOption = product.modifications.find(el => {return el.mod_title.includes(value)})
+        const variantImage = firstVariantByChangedColorOption.mod_images[0]
+        setVariantImage(variantImage)
         setDefaultColorOption(value)
         props.change('size-' + product.id, '')
 
@@ -102,7 +104,7 @@ const CollectionForm = (props) => {
         <NavLink to={'/rfr'}>
         </NavLink>
         <div className='ImageWrapper'>
-            <img src={props.main_photo}/>
+            <img src={variantImage}/>
 
             <div className="productSizesAndSubmit">
                 {props.sizeIndex !== -1 ?
