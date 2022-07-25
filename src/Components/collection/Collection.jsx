@@ -2,32 +2,17 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {collectionCreator} from '../../Redux-reducers/contentReducer'
 import CollectionContent from '../contentToMap/collectionContent'
-import $ from "jquery";
+import request from "../../Api/api";
 
 class Collection extends React.Component {
-
-    collectionRequest = () => {
+    collectionRequest = async () => {
         const collectionPath = this.props.match.path.slice(12)
 
-        const promise1 = new Promise((resolve, reject) => $.ajax({
-                type: 'GET',
-                url: "http://localhost:8888/store/collection.php?",
-                data: {collection: collectionPath},
-                header: 'Content-Type: application/json',
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(data) {
-                    resolve(data)
-                }
+        await request('collection.php', 'collection', collectionPath, 'GET')
+            .then((res) => {
+                console.log('Success:', res)
+                this.props.collectionCreator(res)
             })
-        )
-
-        promise1.then((value) => {
-            const data = JSON.parse(value)
-            console.log(data)
-            this.props.collectionCreator(data)
-        });
     }
 
     componentDidMount() {

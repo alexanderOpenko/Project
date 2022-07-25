@@ -1,6 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import icons from "../../Pictures/icons";
+import request from "../../Api/api";
 
 const Option = (props) => {
     return <div className='optionField' key={props.key}>
@@ -45,16 +46,7 @@ class Products extends React.Component {
         const form = document.querySelector('#addProduct')
         const dataForm = new FormData(form)
 
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8888/store/create_product.php",
-            data: dataForm,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                console.log(JSON.parse(data))
-            }
-        })
+        request('create_product.php', false, false, 'POST', dataForm)
     }
 
     element = (tag, classes = [], attr = [], content) => {
