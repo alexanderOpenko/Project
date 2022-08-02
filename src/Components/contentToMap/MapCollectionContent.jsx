@@ -2,12 +2,11 @@ import React from 'react'
 import './MapCollectionContent.css'
 import CollectionForm from "./CollectionForm";
 import $ from "jquery";
-import request from "../../Api/api";
+import request from "../../API/api";
 
 const MapCollectionContent = (props) => {
 
     const form = (v) => {
-        const onlySizeOptionProduct = false
         const id = v[Object.keys(v)[0]]
         const currentProdCart = document.getElementById(id)
         const sizeOpt = 'size-' + id
@@ -30,7 +29,7 @@ const MapCollectionContent = (props) => {
         formData.append('variant_id', variant.mod_id)
         formData.append('quantity', 1)
 
-        request( 'cart.php', false, false, 'POST',  formData)
+        request({path: 'cart', method: 'POST',  dataForm: formData})
             .then((result) => {
                 console.log('Success:', result) })
     }

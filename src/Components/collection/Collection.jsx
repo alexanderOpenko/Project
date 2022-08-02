@@ -2,17 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {collectionCreator} from '../../Redux-reducers/contentReducer'
 import CollectionContent from '../contentToMap/collectionContent'
-import request from "../../Api/api";
+import request from "../../API/api";
 
 class Collection extends React.Component {
-    collectionRequest = async () => {
-        const collectionPath = this.props.match.path.slice(12)
+    collectionRequest = () => {
+        const collectionPath = this.props.match.params.collection
 
-        await request('collection.php', 'collection', collectionPath, 'GET')
-            .then((res) => {
-                console.log('Success:', res)
-                this.props.collectionCreator(res)
-            })
+          request({path: 'collection', params: {'collection': collectionPath}, method: 'GET'}).then(res => {
+              this.props.collectionCreator(res)
+          })
     }
 
     componentDidMount() {

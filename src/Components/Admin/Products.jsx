@@ -1,7 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import icons from "../../Pictures/icons";
-import request from "../../Api/api";
+import request from "../../API/api";
 
 const Option = (props) => {
     return <div className='optionField' key={props.key}>
@@ -46,7 +46,9 @@ class Products extends React.Component {
         const form = document.querySelector('#addProduct')
         const dataForm = new FormData(form)
 
-        request('create_product.php', false, false, 'POST', dataForm)
+        request({path: 'create_product', method: 'POST', dataForm: dataForm}).then((r) => {
+            console.log(r,'r')
+        })
     }
 
     element = (tag, classes = [], attr = [], content) => {

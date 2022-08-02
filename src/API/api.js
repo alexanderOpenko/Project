@@ -1,5 +1,13 @@
-export default function request (path, q, option, method, dataForm = null) {
-    return fetch(`http://localhost:8888/store/${path}?` + (q ? `${q}=${option}` : ''),{
+export default function request ({path, params = {}, method, dataForm = null}) {
+    let url = `http://localhost:8888/${path}?`
+
+    if (Object.keys(params).length) {
+        for (let key in params) {
+            url = url + `${key}=${params[key]}&`
+        }
+    }
+
+    return fetch(url,{
         method: method,
         credentials: 'include',
         body: dataForm
