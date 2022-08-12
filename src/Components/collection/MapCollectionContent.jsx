@@ -31,6 +31,7 @@ const MapCollectionContent = (props) => {
 
         request({path: 'cart', method: 'POST',  dataForm: formData})
             .then((result) => {
+
                 console.log('Success:', result) })
     }
 

@@ -1,0 +1,28 @@
+.cart__item-opts-color {
+    width: 30px;
+    height: auto;
+    margin-left: 10px;
+}
+
+.cart__item-row {
+    display: flex;
+}
+
+.cart {
+    position: absolute;
+    right: 15px;
+    width: 100%;
+    max-width: 275px;
+    height: 100vh;
+    z-index: 1;
+    background-color: #fbfffd;
+}
+
+.cart__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart__title {
+    margin: 0 auto;
+}

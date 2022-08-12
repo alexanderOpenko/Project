@@ -13,8 +13,10 @@ const CollectionForm = (props) => {
     const product = props.prod
 
     const variantChange = (e) => {
+        const thisProduct = document.getElementById(`${product.id}`)
         const value = e.target.value
-        const firstVariantByChangedColorOption = product.modifications.find(el => {return el.mod_title.includes(value)})
+        const colorOpt = 'opt' + (props.colorIndex + 1)
+        const firstVariantByChangedColorOption = product.modifications.find(el => {return el[colorOpt] === value})
         const variantImage = firstVariantByChangedColorOption.mod_images[0]
         setVariantImage(variantImage)
         setDefaultColorOption(value)
@@ -22,7 +24,7 @@ const CollectionForm = (props) => {
 
         setChangedSizeOption('')
         sizeSelectPlaceholder.innerHTML = 'Sizes'
-        document.querySelector('.sizeFields').style.borderColor = 'black'
+        thisProduct.querySelector('.sizeFields').style.borderColor = 'black'
     }
 
     const setSizeOptionsStatus = () => {
@@ -48,6 +50,7 @@ const CollectionForm = (props) => {
 
     const setDefaultColor = () => {
         props.change('product-' + product.id, product.id)
+
         if (!defaultColorOption) {
             product.options[props.colorIndex].map(el => {
                 if (props.varTitle.includes(el)) {
@@ -59,11 +62,15 @@ const CollectionForm = (props) => {
     }
 
     useEffect(() => {
+        setDefaultColorOption('')
+    }, [props.prod])
+
+    useEffect(() => {
         if (props.colorIndex !== -1) {
             setDefaultColor()
         }
         setSizeOptionsStatus()
-    })
+    }, )
 
     const sizeButtonAction = (e) => {
         const radioButtonSizeValue = e.target.value

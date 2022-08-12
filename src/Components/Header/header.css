@@ -1,5 +1,3 @@
-
-
 .img {
     position: absolute;
     top: 0;
@@ -10,9 +8,7 @@
     z-index: 1;
 }
 
-
-
-.basket {
+.cartIcon_img {
     position: absolute;
     right: 25px;
     top: 25px;

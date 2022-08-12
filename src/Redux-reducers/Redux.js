@@ -2,14 +2,14 @@ import{applyMiddleware,combineReducers, createStore} from 'redux'
 import contentReducer from './contentReducer'
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from "redux-thunk";
-import basketReducer from './basketReduser';
+import cartReducer from './cartReduser';
 import PageReducer from './PageReducer';
 import navigationReducer from "./navigationReducer";
 
 let reducer = combineReducers ({
     PageReducer: PageReducer,
     contentReducer: contentReducer,
-    basket: basketReducer,
+    cart: cartReducer,
     navigation: navigationReducer,
     form: formReducer
 });
