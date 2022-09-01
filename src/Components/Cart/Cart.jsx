@@ -3,40 +3,24 @@ import {connect} from 'react-redux'
 import icons from '../../Pictures/icons'
 import './cart.css'
 import request from "../../API/api"
-import {updateCartItemsAction} from "../../Redux-reducers/cartReduser"
+import {updateCartItemsAction, showBasketAction} from "../../Redux-reducers/cartReduser"
 
 const Cart = (props) => {
-    // function decreaseItemQty (id) {
-    //     const {var_id, prod_id} = id
-    //     const data = {}
-    //
-    //     if (var_id) {
-    //         data.variant_id = var_id
-    //     } else {
-    //         data.product_id = prod_id
-    //     }
-    //
-    //     request({path: 'cart', method: 'DELETE',  dataForm: JSON.stringify(data)})
-    //         .then((data) => {
-    //             console.log(data, 'data')
-    //         // props.updateCartItemsAction(data)
-    //     })
-    // }
+    console.log(props.cart, 'show')
+    function updateItemQty (id) {
+        const {var_id, prod_id, action} = id
+        const data = {}
 
-    function increaseItemQty (id) {
-        const {var_id, prod_id} = id
-        const formData = new FormData()
+        data.variant_id = var_id
+        data.product_id = prod_id
+        data.action = action
 
-        formData.append('variant_id', var_id)
-        formData.append('product_id', prod_id)
-        formData.append('quantity', 1)
-
-        request({path: 'cart', method: 'POST',  dataForm: formData})
-            .then(() => {
-                request({path: 'cart', method: 'GET'})
-                    .then((data) => {
-                       props.updateCartItemsAction(data)
-                        console.log('cart:', data) })
+        request({path: 'cart', method: 'PUT',  dataForm: JSON.stringify(data)})
+            .then((data) => {
+                if(data.code !== 5) {
+                    props.updateCartItemsAction(data.body)
+                }
+                console.log('cart:', data)
             })
     }
 
@@ -44,25 +28,43 @@ const Cart = (props) => {
     const sizeOptionsValues = ['size', 'розмір', 'размер']
     const closeIcon = icons('close')
 
-    return <div className={props.cart ? 'hidden' : 'cart'}>
+    return <div className={props.cart ? 'cart' : 'hidden'}>
         <div className='cart__header'>
             <div className="cart__title">
                 Cart
             </div>
-            <div className="cart__close">
+            <div className="cart__close" onClick={() => {
+                props.showBasketAction(false)
+            }}>
                 {closeIcon}
             </div>
         </div>
 
+        <div className="cart__header-announce">
+        </div>
+
         <div className="cart__content">
             {props.items.map((el, i) => {
+                const warningIcon = icons('warning')
+                const warning = (el.warning ? Object.keys(el.warning)[0] : null)
+                const warningValue = (warning ? el.warning[warning] : '')
+                const itemImage = (el.mod_id ? el.mod_images[0] : el.main_photo)
+                const isDisabledIncreaseBtn = !!warning
+                // !el.available ? available = 'not-available' : available = ''
+                const warningImageClass = (warning ? ` cart__item-image-warning--${warning}` : '')
+                const cartItemWarning = (warning ? ` cart__item-warning--${warning}` : '')
+
                 return <div key={i} className='cart__item'>
-                <div className="cart__item-image">
-                    <img src="" alt=""/>
+                <div className={'cart__item-image'}>
+                    <div className={'cart__item-image-warning' + warningImageClass}>
+                        {warningIcon}
+                    </div>
+
+                    <img className='item-image' src={itemImage} alt=""/>
                 </div>
 
                 <div className="cart__item-description">
-                    <div className="cart__item-name body1">
+                    <div className="cart__item-name body3">
                         {el.name}
                     </div>
 
@@ -74,10 +76,6 @@ const Cart = (props) => {
 
                                 if (colorOptionsValues.includes(optName)) {
                                     return <div key={i} className='cart__item-row'>
-                                        <div className="cart__item-color-label">
-                                            {optName}: {value}
-                                        </div>
-
                                         <div className={'cart__item-opts-color cart__item-opts-color--' + value}>
                                         </div>
                                     </div>
@@ -86,7 +84,7 @@ const Cart = (props) => {
                                 if (sizeOptionsValues.includes(optName)) {
                                     return <div key={i} className='cart__item-row'>
                                         <div className="cart__item-opts-size">
-                                            {optName}: {value}
+                                            <span>{optName}: {value}</span>
                                         </div>
                                     </div>
                                 }
@@ -96,7 +94,7 @@ const Cart = (props) => {
 
                     <div className="cart__item-qty-dispatcher">
                         <button className="cart__item-qty-decrease stripBtn"
-                                // onClick={() => decreaseItemQty({'var_id': el.mod_id, 'prod_id': el.prod_id})}
+                                onClick={() => updateItemQty({var_id: el.mod_id, prod_id: el.prod_id, action: 'decrease'})}
                         >
                             -
                         </button>
@@ -107,10 +105,19 @@ const Cart = (props) => {
 
                         <button className="cart__item-qty-increase stripBtn"
                                 data-prod-id={el.prod_id}
-                                onClick={() => increaseItemQty({'var_id': el.mod_id, 'prod_id': el.prod_id})}
+                                onClick={() => updateItemQty({var_id: el.mod_id, prod_id: el.prod_id, action: 'increase'})}
+                                disabled={isDisabledIncreaseBtn}
                         >
                             +
                         </button>
+
+                        <div className="cart__item-price">
+                            {el.price} $
+                        </div>
+                    </div>
+
+                    <div className={'cart-item-warning' + cartItemWarning}>
+                        {warningValue}
                     </div>
                 </div>
                 </div>
@@ -128,6 +135,6 @@ const mapStateToProps = (state) => {
     )
 }
 
-export default connect(mapStateToProps, {updateCartItemsAction})(Cart);
+export default connect(mapStateToProps, {updateCartItemsAction, showBasketAction})(Cart);
 
 

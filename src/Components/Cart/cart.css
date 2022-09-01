@@ -1,28 +1,112 @@
+.cart {
+    position: absolute;
+    right: 15px;
+    width: 100%;
+    max-width: 315px;
+    height: 100vh;
+    z-index: 3;
+    background-color: #f0eee7;
+}
+
+.cart__content {
+    padding: 10px 15px;
+}
+
 .cart__item-opts-color {
-    width: 30px;
-    height: auto;
-    margin-left: 10px;
+    width: 100px;
+    height: 8px;
+}
+
+.cart__item-image {
+    position: relative;
+    width: 100px;
+    min-height: 140px;
+}
+
+.cart__item-image .cart__item-image-warning--cart circle {
+    fill: orange;
+}
+
+.cart__item-image .cart__item-image-warning--qty circle {
+    fill: #FF4B41;
+}
+
+.cart__item-image .cart__item-image-warning--qty,
+.cart__item-image .cart__item-image-warning--cart,
+.cart__item-image .cart__item-image-warning--unavailable{
+    opacity: 1;
+}
+
+.cart__item-image-warning {
+    opacity: 0;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.cart__item-warning--cart {
+    color: #e39a1a;
+}
+
+.cart__item-warning--unavailable, .cart__item-warning--qty {
+    color: #FF4B41
+}
+
+.item-image {
+    width: 100%;
+    min-width: 100px;
+    height: 100%;
+}
+
+.cart__item-name {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.cart__item-row {
+    margin-bottom: 5px;
+}
+
+.cart__item {
+    display: flex;
+    margin-bottom: 20px;
 }
 
 .cart__item-row {
     display: flex;
 }
 
-.cart {
-    position: absolute;
-    right: 15px;
+.cart__item-description {
+    margin-left: 20px;
     width: 100%;
-    max-width: 275px;
-    height: 100vh;
-    z-index: 1;
-    background-color: #fbfffd;
 }
 
 .cart__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px 5px;
 }
 
-.cart__title {
-    margin: 0 auto;
+.cart__header-announce {
+    height: 30px;
+    background: #a2a2a2;
+}
+
+.cart__item-qty-dispatcher button {
+    padding: 0 5px;
+}
+
+.cart__item-qty-dispatcher {
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.cart__item-price {
+    margin: 0 0 0 auto;
+}
+
+.cart__item-qty-decrease {
+    padding-bottom: 2px;
 }

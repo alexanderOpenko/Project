@@ -9,9 +9,7 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOGGLE_CART:
-            let toggle
-            state.show === true ? toggle = false : toggle = true
-            return {...state, show: toggle}
+            return {...state, show: action.toggle}
         case UPDATE_CART_ITEMS:
             return {...state, items: action.items}
         default:
@@ -19,7 +17,7 @@ const cartReducer = (state = initialState, action) => {
     }
 }
 
-export const showBasketAction = (cartToggle) => ({type: TOGGLE_CART, cartToggle})
+export const showBasketAction = (toggle) => ({type: TOGGLE_CART, toggle})
 export const updateCartItemsAction = (items) => ({type: UPDATE_CART_ITEMS, items})
 
 export default cartReducer
