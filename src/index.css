@@ -1,13 +1,15 @@
-.red {background-color: red;}
-.dark-blue {background-color: rgba(24,24,83,0.8)}
-.dark-silver {background-color: rgba(64,66,67,0.81)}
-.dust-green {background-color: rgba(70,74,29,0.8)}
-.white {background-color: white;}
-.blue {background-color: rgb(92, 92, 255);}
-.white-blue {background-color: rgb(96, 205, 255);}
-.black {background-color: rgb(0, 0, 0);}
-.yellow {background-color: yellow;}
-.silver {background-color: rgb(172, 173, 172);}
+.cart__item-opts-color--red, .red {background-color: red;}
+.cart__item-opts-color--dark-blue, .dark-blue {background-color: rgba(24,24,83,0.8)}
+.cart__item-opts-color--dark-silver, .dark-silver {background-color: rgba(64,66,67,0.81)}
+.cart__item-opts-color--dust-green, .dust-green {background-color: rgba(70,74,29,0.8)}
+.cart__item-opts-color--white, .white {background-color: white;}
+.cart__item-opts-color--blue, .blue {background-color: rgb(92, 92, 255);}
+.cart__item-opts-color--white-blue, .white-blue {background-color: rgb(96, 205, 255);}
+.cart__item-opts-color--black, .black {background-color: rgb(0, 0, 0);}
+.cart__item-opts-color--yellow, .yellow {background-color: yellow;}
+.cart__item-opts-color--silver, .silver {background-color: rgb(172, 173, 172);}
+.olive {background-color: olive}
+.cream {background-color: bisque}
 
 body {
   margin: 0;
@@ -16,6 +18,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "Questrial";
+  src: url("Assets/Questrial-Regular.ttf");
+}
+
+svg {
+  display: block;
 }
 
 .hidden-input {
@@ -50,7 +61,7 @@ code {
   background: #fff;
   transition: all 0.22s;
   cursor: pointer;
-  margin-right: 1rem;
+  margin: 0;
 }
 
 .stripBtn {

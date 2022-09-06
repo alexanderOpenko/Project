@@ -1,81 +1,79 @@
-import React from 'react'
-import { NavLink, Redirect } from 'react-router-dom'
-import image from '../../Pictures/headerLogo.png'
-import s from './header.module.css'
-import basketPicture from '../../Pictures/shoppingCart.png'
-import { connect } from 'react-redux'
-import {showBasketAction, addElementToBasket,
-  addElementBaskeSizeAction} from '../../Redux-reducers/basketReduser'
-import { autofill } from 'redux-form'
-import { useEffect } from 'react'
-import Basket from './basket'
-  
+import React, {useEffect, useState} from 'react'
+import {NavLink} from 'react-router-dom'
+import './header.css'
+import {showBasketAction} from '../../Redux-reducers/cartReduser'
+import icons from "../../Assets/icons";
 
 const Header = (props) => {
- 
-let setElementsBsket = () =>  {
- let lengthItems =  Number(localStorage.getItem('lengthItems'))
- props.addElementBaskeSizeAction(lengthItems)
-}
+    const [mobileMenuState, setMobileMenuState] = useState('')
+    const cartIcon = icons('cart')
+    const burgerIcon = icons('burger-menu')
+    const closeIcon = icons('close')
 
-  useEffect ( () => {
-    //после того как страница отрендерится сработает юз ефект 
-    //чтобы получить из localStorage даные которые несут значение длинны массива с объектами 
-    //из корзины(количество товара). Когда число получено, оно диспатчится экшеном в стейт и страница заново
-    //рендерится чтобы отобразилось актуальное количество товара в корзине.
-    setElementsBsket()}, []
-  )
-  
-  let showBasketPage = () => {   
-  
-    let bulean
-    
-    props.basket ? bulean = false : bulean = true
-    props.showBasketAction(bulean)
+    useEffect(() => {
+        window.addEventListener('resize', checkSize)
 
-    //экшн который запустит функцию которая получит объекты из IndexedDB 
-    //и задиспатчит объекты в редакс стор и отобразит корзину
-    props.addElementToBasket({showBasket: true})
-  }
-    
-    return <>
-      <div className={s.img}> 
-        <NavLink to="/" >
-          <img src = {image}/> 
-       </NavLink>
-      </div> 
+        function checkSize () {
+            const windowWidth = window.innerWidth
 
-      <span onClick={showBasketPage}>
-         <img className={s.basket} src={basketPicture}/>
-        {//если размер страници = число и > 0 то отобразится размер корзины
-        (typeof(props.basketSize) == 'number' && props.basketSize > 0) ?
-        <div className={s.basketSize}>
-          {props.basketSize}
-        </div>:''}
-      </span>
-
-        <span className = {s.bag}>
-          {document.body.style.overflowY = `auto`}
-        </span>
-    
-    
-    {//если баскет true то отрисуется корзина
-    props.basket && <Basket totalCount={props.totalCount} basketElements={props.basketElements}
-    showBasketPage={showBasketPage}
-    addElementToBasket={props.addElementToBasket}
-   />}
-</>
-} 
-
-let mapStateToProps = (state) => {
-    return(
-        {
-         basket: state.basket.show,   
-         basketElements: state.basket.basketElements,
-         basketSize: state.basket.basketSize,
-         totalCount: state.basket.totalCount
+            if (windowWidth > 998) {
+                setMobileMenuState('')
+                return window.removeEventListener('resize', checkSize)
+            }
         }
-    )
+    })
+
+    function basketToggle () {
+        props.store.dispatch(showBasketAction(true))
+    }
+
+    return <div className={'header' + mobileMenuState}>
+        <div className='header_base'>
+            <div className='header_burger-icon hidden'
+                 onClick={() => setMobileMenuState(' active-mobile-menu')}
+            >
+                {burgerIcon}
+            </div>
+
+            <div className='header_close-icon hidden'
+                 onClick={() => setMobileMenuState('')}
+            >
+                {closeIcon}
+            </div>
+
+            <div className='logo'>
+                <NavLink to='/'>
+                    <div className='logo_body'>
+                        streeter
+                    </div>
+                </NavLink>
+            </div>
+
+            <div className="header_nav">
+                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>T-shirts</NavLink></div>
+                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>Jeans</NavLink></div>
+                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>Hoodies</NavLink></div>
+                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>About</NavLink></div>
+            </div>
+
+            <div className='header_cart-icon' onClick={basketToggle}>
+                {cartIcon}
+                <div className='header_cart-icon-size'>
+                </div>
+            </div>
+        </div>
+
+        <div className="header_mobile-menu hidden">
+            <div className="header_mobile-nav-wrapper">
+                <div className="header_mobile-nav">
+                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>T-shirts</NavLink></div>
+                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>Jeans</NavLink></div>
+                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>Hoodies</NavLink></div>
+                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>About</NavLink></div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
-export default connect(mapStateToProps, {showBasketAction, addElementToBasket, addElementBaskeSizeAction}) (Header);
+export default Header;
