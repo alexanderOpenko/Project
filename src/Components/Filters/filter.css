@@ -2,6 +2,10 @@
   background: rgba(211,211,211, 0.9);
 }
 
+.filter__parameters {
+  width: 100%;
+}
+
 .filter__parametersWrapper {
   background-color: white;
   margin-bottom: 7px;
@@ -37,7 +41,7 @@
   border-color: black;
 }
 
-.filter__option-color input[type=radio]:checked+span {
+.filter__option-color input[type=checkbox]:checked+span {
   border: 2px solid orange;
 }
 
@@ -111,7 +115,7 @@
   margin: 0 10px 10px 0;
 }
 
-.filter__option-size input[type=radio]:checked + span{
+.filter__option-size input[type=checkbox]:checked + span{
   border: 1px solid orange;
 }
 

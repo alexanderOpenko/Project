@@ -1,34 +1,28 @@
 import React from 'react'
-import ReactDom from 'react-dom'
 import './filter.css'
-import {filterContent} from '../../Redux-reducers/FilterContent'
-import {connect} from 'react-redux'
+import { filterContent } from '../../Redux-reducers/FilterContent'
+import { connect } from 'react-redux'
 
 class Filter extends React.Component {
-
   constructor(props) {
     super(props)
-
-    this.parameters = [
-      {title: 'color', options: ['white-blue', 'blue', 'black', 'yellow', 'silver', 'red', 'white']},
-      {title: 'size', options: [8, 32, 36, 38, 42, 46, 49, 54, 'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']},
-      {title: 'info', options: ['Basic', 'Straight', 'Wide', 'Narrow', 'Vintage']}
-    ]
+    console.log(this.props.parameters, 'this.props.parameters');
   }
 
   toFilter = () => {
     const form = document.querySelector('#filter__form');
-    const data = new FormData(form);
-
-    const formData = {
-      filterType: this.props.filterType
-    };
-
-    for (let [key, value] of data) {
-      formData[key] = value;
+    const data = new FormData(form)
+    const parsedFormData = {
+      collectionPath: this.props.collectionPath,
+      params: {}
     }
 
-    this.props.filterContent(formData)
+    for (const key of data.keys()) {
+      const topics = data.getAll(key)
+      parsedFormData.params[key] = topics
+    }
+
+    this.props.filterContent(parsedFormData)
     this.props.showFilter()
   }
 
@@ -39,12 +33,12 @@ class Filter extends React.Component {
           <span>Фільтр</span>
 
           <span onClick={this.props.showFilter} className='close'>
-              &#10006;
-            </span>
+            &#10006;
+          </span>
         </div>
 
         <div className='filter__parameters'>
-          {this.parameters.map(el => {
+          {this.props.parameters.map(el => {
             return <div className='filter__parametersWrapper'>
               <h2 className='filter__optionsTitle'>
                 {el.title}
@@ -57,19 +51,19 @@ class Filter extends React.Component {
                       className={'filter__option filter__option-' + el.title}
                     >
                       <input
-                        type='radio'
+                        type='checkbox'
                         name={el.title}
                         className='hidden-input'
                         value={opt}
                       />
 
                       <span className={
-                          el.title === 'color' ? 'color-option ' + opt
-                          : el.title === 'size' ? 'size-option'
-                          : el.title === 'info' ? 'info-option'
-                          : false
+                        el.title === 'color' ? 'color-option ' + opt
+                          : el.title === 'size' ? 'filter-size-option'
+                            : el.title === 'info' ? 'info-option'
+                              : false
                       }>
-                        { el.title !== 'color' ? opt : false }
+                        {el.title !== 'color' ? opt : false}
                       </span>
                     </label>
                   })
@@ -99,4 +93,4 @@ let mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {filterContent})(Filter);
+export default connect(mapStateToProps, { filterContent })(Filter);
