@@ -1,16 +1,46 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {collectionCreator} from '../../Redux-reducers/contentReducer'
-import CollectionContent from '../contentToMap/collectionContent'
+import { connect } from 'react-redux'
+import { collectionCreator, addCollectionFilterParameters } from '../../Redux-reducers/contentReducer'
+import CollectionContent from './collectionContent'
 import request from "../../API/api";
 
 class Collection extends React.Component {
+
     collectionRequest = () => {
         const collectionPath = this.props.match.params.collection
+        request({ path: 'collection', params: { 'collection': collectionPath }, method: 'GET' })
+            .then(collection => {
+                this.props.collectionCreator(collection)
 
-          request({path: 'collection', params: {'collection': collectionPath}, method: 'GET'}).then(res => {
-              this.props.collectionCreator(res)
-          })
+                const parameters = []
+
+                collection.forEach(prod => {
+                    prod.params.forEach((param, i) => {
+                        if (!parameters.some((el) => { return el.title === param })) {
+                            const characteristics = {
+                                title: param,
+                                options: prod.options[i]
+                            }
+
+                            parameters.push(characteristics)
+                        } else {
+                            parameters.forEach((el, index) => {
+                                if (el.title === param) {
+                                    const concatOptions = prod.options[i].concat(el.options)
+
+                                    const updatedOptions = concatOptions.filter((item, pos) => {
+                                        return concatOptions.indexOf(item) === pos
+                                    })
+
+                                    el.options = updatedOptions
+                                }
+                            })
+                        }
+                    })
+                })
+
+                this.props.addCollectionFilterParameters(parameters)
+            })
     }
 
     componentDidMount() {
@@ -18,25 +48,29 @@ class Collection extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.match.path !== this.props.match.path) {
+        if (prevProps.match.params.collection !== this.props.match.params.collection) {
             this.collectionRequest()
         }
     }
 
     render() {
         return <CollectionContent
+            parameters={this.props.parameters}
+            store={this.props.store}
             elementsObject={this.props.elementsObject}
             filterType={'jeans'}
-            url={'/sale/saleJeans/'}/>
+            url={'/sale/saleJeans/'}
+            collectionPath={this.props.match.params.collection}
+        />
     }
 }
 
-let mapStateToProps = (state) => {
-    //console.log(state, 'state')
+const mapStateToProps = (state) => {
     return ({
         elementsObject: state.contentReducer.collectionContent,
+        parameters: state.contentReducer.collectionFilterParameters
     })
 }
 
-export default connect(mapStateToProps, {collectionCreator})(Collection)
+export default connect(mapStateToProps, { collectionCreator, addCollectionFilterParameters })(Collection)
 

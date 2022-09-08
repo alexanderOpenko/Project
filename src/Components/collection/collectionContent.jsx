@@ -1,20 +1,21 @@
 import React from 'react'
-import Filter from '../Filters/Filter'
 import './PageContent.css'
 import MapCollectionContent from './MapCollectionContent'
+import Filter from "../Filters/Filter";
 
 class CollectionContent extends React.Component {
-
     constructor(props) {
         super(props)
         this.state = {
             showFilter: false,
         }
+
+        console.log(this.props.parameters, 'CollectionContentParams');
     }
 
     showFilter = () => {
-        this.state.showFilter ? this.setState({showFilter: false}) :
-            this.setState({showFilter: true})
+        this.state.showFilter ? this.setState({ showFilter: false }) :
+            this.setState({ showFilter: true })
     }
 
     render() {
@@ -27,15 +28,21 @@ class CollectionContent extends React.Component {
                 </button>
 
                 <MapCollectionContent
+                    store={this.props.store}
                     elementsObject={this.props.elementsObject}
                     url={this.props.url}
+                    collectionPath={this.props.collectionPath}
                 />
             </div>
 
-            {/*<div className={this.state.showFilter ? 'filter' : 'filterDefault'}>*/}
-            {/*    {this.props.filterType !== 'accessories' &&*/}
-            {/*    <Filter showFilter={this.showFilter} filterType={this.props.filterType}/>}*/}
-            {/*</div>*/}
+            <div className={!this.state.showFilter ? 'hidden' : ''}>
+                <Filter
+                    showFilter={this.showFilter}
+                    filterType={this.props.filterType}
+                    parameters={this.props.parameters}
+                    collectionPath={this.props.collectionPath}
+                />
+            </div>
         </div>
     }
 }
