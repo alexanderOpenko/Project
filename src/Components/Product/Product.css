@@ -1,7 +1,12 @@
 .product__image {
     width: 100%;
     max-width: 500px;
-    cursor: col-resize;
+    cursor: cell;
+    margin-bottom: 15px;
+}
+
+.product__image:last-child {
+    margin: 0;
 }
 
 .product__image img{
@@ -15,7 +20,7 @@
 
 /*product form*/
 .product {
-    padding: 0 25px;
+    padding: 50px 25px;
 }
 
 .product__form {

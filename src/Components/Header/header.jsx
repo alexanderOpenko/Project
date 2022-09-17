@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {NavLink} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import './header.css'
-import {showBasketAction} from '../../Redux-reducers/cartReduser'
+import { showBasketAction } from '../../Redux-reducers/cartReduser'
 import icons from "../../Assets/icons";
 
 const Header = (props) => {
@@ -9,11 +9,12 @@ const Header = (props) => {
     const cartIcon = icons('cart')
     const burgerIcon = icons('burger-menu')
     const closeIcon = icons('close')
+    const navlincs = ['T-shirts', 'Jeans', 'Hoodies', 'About']
 
     useEffect(() => {
         window.addEventListener('resize', checkSize)
 
-        function checkSize () {
+        function checkSize() {
             const windowWidth = window.innerWidth
 
             if (windowWidth > 998) {
@@ -23,20 +24,21 @@ const Header = (props) => {
         }
     })
 
-    function basketToggle () {
+    function basketToggle() {
         props.store.dispatch(showBasketAction(true))
+        document.querySelector('body').classList.add('body_lock')
     }
 
     return <div className={'header' + mobileMenuState}>
         <div className='header_base'>
             <div className='header_burger-icon hidden'
-                 onClick={() => setMobileMenuState(' active-mobile-menu')}
+                onClick={() => setMobileMenuState(' active-mobile-menu')}
             >
                 {burgerIcon}
             </div>
 
             <div className='header_close-icon hidden'
-                 onClick={() => setMobileMenuState('')}
+                onClick={() => setMobileMenuState('')}
             >
                 {closeIcon}
             </div>
@@ -50,10 +52,11 @@ const Header = (props) => {
             </div>
 
             <div className="header_nav">
-                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>T-shirts</NavLink></div>
-                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>Jeans</NavLink></div>
-                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>Hoodies</NavLink></div>
-                <div className="header_nav-item"><NavLink to='/collection/t-shirt'>About</NavLink></div>
+                {navlincs.map((el, i) => {
+                    return <div key={i} className="header_nav-item">
+                        <NavLink to={'/collection/' + el}>{el}</NavLink>
+                    </div>
+                })}
             </div>
 
             <div className='header_cart-icon' onClick={basketToggle}>
@@ -66,10 +69,13 @@ const Header = (props) => {
         <div className="header_mobile-menu hidden">
             <div className="header_mobile-nav-wrapper">
                 <div className="header_mobile-nav">
-                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>T-shirts</NavLink></div>
-                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>Jeans</NavLink></div>
-                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>Hoodies</NavLink></div>
-                    <div className="header_mobile-nav-item"><NavLink to='/collection/t-shirt'>About</NavLink></div>
+                    {navlincs.map((el, i) => {
+                        return <div key={i} className="header_mobile-nav-item"
+                                onClick={() => setMobileMenuState('')}
+                        >
+                            <NavLink to={'/collection/' + el}>{el}</NavLink>
+                        </div>
+                    })}
                 </div>
             </div>
         </div>

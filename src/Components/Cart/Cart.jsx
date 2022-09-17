@@ -42,9 +42,10 @@ const Cart = (props) => {
         </div>
 
         <div className="cart__header-announce">
+        {props.totalPrice > 0 &&
             <div className="cart_total-price">
                 Total price: {props.totalPrice}$
-            </div>
+            </div>}
         </div>
 
         <div className="cart__content">

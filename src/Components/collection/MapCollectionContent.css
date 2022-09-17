@@ -3,11 +3,8 @@
     flex-wrap: wrap;
 }
 
-.collectionElement {
-    position: relative;
-}
-
 .collectionElement a {
+    z-index: 1;
     position: absolute;
     top: 0;
     right: 0;
@@ -45,6 +42,15 @@
     position: absolute;
 }
 
+.productCartSubmit {
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 10px 15px 10px;
+    position: absolute;
+}
+
 .productSizeOptions {
     z-index: 3;
     background-color: white;
@@ -58,7 +64,7 @@
     height: 21px;
 }
 
-.productSizesAndSubmit button {
+.productCartSubmitButton {
     position: absolute;
     background-color: #232323;
     color: white;
@@ -66,6 +72,10 @@
     right: 10px;
     left: 49%;
     bottom: 15px;
+}
+
+.productCartSubmit .productCartSubmitButton {
+    left: 10px;
 }
 
 .productColorOptions_wrapper, .submit {
@@ -91,6 +101,7 @@
     top: 28px;
     padding: 5px;
     border: 1px solid #999;
+    z-index: 2;
 }
 
 .rotateArrow {
@@ -105,7 +116,7 @@
     transform: rotate(45deg);
     margin-top: -11px;
     background: #fff;
-    z-index: 1;
+    z-index: 3;
 }
 
 .titleColor:hover .titleColor_info, .titleColor:hover .rotateArrow  {
@@ -123,8 +134,8 @@
 }
 
 .optionSizeField {
-    height: 0;
     display: block;
+    height: 0;
     opacity: 0;
     transition: height 400ms, opacity .1s ease-in;
     cursor: pointer;
@@ -158,8 +169,10 @@
 }
 
 .collectionElement {
+    position: relative;
     width: calc(25% - 15px);
     padding: 0 10px;
+    margin-bottom: 20px;
 }
 
 .collectionElement:first-child {
@@ -189,7 +202,7 @@
 
 @media (max-width: 998px) {
     .collectionElement {
-        width: calc(50% - 15px);
+        width: calc(50% - 10px);
     }
 
     .collectionElement:nth-child(4n) {

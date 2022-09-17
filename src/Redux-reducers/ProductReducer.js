@@ -30,22 +30,34 @@ const ProductReducer = (state = defaultState, action) => {
 }
 
 export default ProductReducer;
-export const updateProductPageContent = (product) => ({type: 'UPDATE_PRODUCT_PAGE', product})
-const firstAvailableVariant = (variant) => ({type: 'SET_FIRST_PRODUCT_VARIANT', variant})
-export const setVariantImages = (images) => ({type: 'SET_VARIANT_IMAGES', images})
+export const updateProductPageContent = (product) => ({ type: 'UPDATE_PRODUCT_PAGE', product })
+const firstAvailableVariant = (variant) => ({ type: 'SET_FIRST_PRODUCT_VARIANT', variant })
+export const setVariantImages = (images) => ({ type: 'SET_VARIANT_IMAGES', images })
 
-export const productRequest = (id) => (dispatch) => {
-    request({path: 'collection', params: {'product_id': id}, method: 'GET'})
+export const productRequest = (prodId, varId = null) => (dispatch) => {
+    request({ path: 'collection', params: { 'product_id': prodId }, method: 'GET' })
         .then(prod => {
-            const firstVariant = prod[0].modifications.find(el => {return el.qty > 0})
-            const variantImages = []
+            if (prod[0].modifications.length) {
+                var firstVariant = prod[0].modifications.find(el => {
+                    if (varId) {
+                        return el.mod_id == varId
+                    } else {
+                        return el.qty > 0
+                    }
+                })
+                var images = []
 
-            firstVariant.mod_images.map(el => {
-                return variantImages.push(el)
-            })
+                firstVariant.mod_images.map(el => {
+                    return images.push(el)
+                })
+            } else {
+                var images = prod[0].images
+            }
 
-            dispatch(setVariantImages(variantImages))
+            dispatch(setVariantImages(images))
+            if (firstVariant) {
             dispatch(firstAvailableVariant(firstVariant))
+            }
             dispatch(updateProductPageContent(prod[0]))
         })
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import s from './frontpage.module.css'
-import image from '../../Pictures/styleMan2.jpg'
+import image from '../../Assets/styleMan2.jpg'
 import {NavLink, Redirect} from 'react-router-dom'
 import FrontPageSale from './FrontPageSale/FrontPageSale'
-import picture from '../../Pictures/frontPageNew.jpg'
+import picture from '../../Assets/frontPageNew.jpg'
 
 
 const FrontPage = () => {

@@ -38,16 +38,19 @@ class Filter extends React.Component {
         </div>
 
         <div className='filter__parameters'>
-          {this.props.parameters.map(el => {
-            return <div className='filter__parametersWrapper'>
+          {this.props.parameters.map((el, i) => {
+            return <div className='filter__parametersWrapper'
+              key={i}
+            >
               <h2 className='filter__optionsTitle'>
                 {el.title}
               </h2>
 
               <div className={'filter__options filter__options-' + el.title}>
                 {
-                  el.options.map(opt => {
+                  el.options.map((opt, i) => {
                     return <label
+                      key={i}
                       className={'filter__option filter__option-' + el.title}
                     >
                       <input

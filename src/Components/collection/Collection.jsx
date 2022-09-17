@@ -10,11 +10,16 @@ class Collection extends React.Component {
         const collectionPath = this.props.match.params.collection
         request({ path: 'collection', params: { 'collection': collectionPath }, method: 'GET' })
             .then(collection => {
-                this.props.collectionCreator(collection)
 
+                this.props.collectionCreator(collection)
+                console.log(collection, 'collection');
                 const parameters = []
 
                 collection.forEach(prod => {
+                    if (!prod.params) {
+                        return
+                    }
+                    
                     prod.params.forEach((param, i) => {
                         if (!parameters.some((el) => { return el.title === param })) {
                             const characteristics = {
@@ -41,6 +46,7 @@ class Collection extends React.Component {
 
                 this.props.addCollectionFilterParameters(parameters)
             })
+
     }
 
     componentDidMount() {

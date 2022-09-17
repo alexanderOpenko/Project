@@ -2,7 +2,6 @@ import request from "../API/api"
 import { collectionCreator } from "./contentReducer"
 
 export const filterContent = (props) => (dispatch) => {
-    console.log(props, 'filteredProps');
     const filteredVariants = []
     const filteredProducts = []
     var collection = []
@@ -19,8 +18,8 @@ export const filterContent = (props) => (dispatch) => {
     .then(res => {
         collection = res
         getVariantsByFilterOptions()
+        console.log(filteredVariants, 'filteredVariants');
         getProductOfVariants()
-        console.log(filteredProducts, 'filteredVariants')
         dispatch(collectionCreator(filteredProducts))
     })
 
@@ -59,7 +58,7 @@ export const filterContent = (props) => (dispatch) => {
         for (const product of collection) {
             for (const variant of filteredVariants) {
                 product.modifications.forEach(el => {
-                    if (el.mod_title === variant.mod_title) {
+                    if (el.mod_title === variant.mod_title && el.qty > 0) {
 
                         const isFound = filteredProducts.some(prod => {
                             return prod.id === product.id

@@ -1,6 +1,6 @@
 import React from "react";
 import $ from "jquery";
-import icons from "../../Pictures/icons";
+import icons from "../../Assets/icons";
 import request from "../../API/api";
 
 const Option = (props) => {
@@ -174,6 +174,7 @@ class Products extends React.Component {
         const variantsContainer = document.querySelector('.productVariants')
         const variantsParent = document.querySelector('.productVariants')
         const fields = variantsParent.querySelectorAll('.variantField')
+        var fieldsLength = variantsParent.querySelectorAll('.variantField').length
 
         if (this.opt2.length && !this.singleOptVariantsDeleted) {
             fields.forEach(el => {
@@ -181,6 +182,7 @@ class Products extends React.Component {
             })
 
             this.singleOptVariantsDeleted = true
+            fieldsLength = variantsParent.querySelectorAll('.variantField').length
         }
 
         if (this.opt3.length && !this.twoOptVariantsDeleted) {
@@ -189,7 +191,9 @@ class Products extends React.Component {
             })
 
             this.twoOptVariantsDeleted = true
+            fieldsLength = variantsParent.querySelectorAll('.variantField').length
         }
+
 
         const variantField = this.element('div', ['variantField'], {name: 'variant_field'})
         const hiddenInput = this.element('input', [], {type: 'hidden', value: variantTitle, name: 'modification[]'})
@@ -202,7 +206,7 @@ class Products extends React.Component {
         const priceTitle = this.element('span', [], {}, 'price')
         const qtyInput = this.element('input', ['fieldInput', 'qtyInput', 'varField'], {name: 'qty[]', type: 'number'})
         const qtyTitle = this.element('span', [], {}, 'quantity')
-        const fileInput = this.element('input', ['hidden', 'variantImages'], {name: `variant-images-${variantsLength}[]`, type: 'file', multiple: 'multiple', accept: '.png, .jpg, .jpeg, .webp, .gif'})
+        const fileInput = this.element('input', ['hidden', 'variantImages'], {name: `variant-images-${fieldsLength+1}[]`, type: 'file', multiple: 'multiple', accept: '.png, .jpg, .jpeg, .webp, .gif'})
         const addImage = this.element('span', ['addVariantImage'], {}, '<p>Add image</p>')
         const imagesContainer = this.element('div', ['variantImagesContainer'])
 
@@ -330,7 +334,7 @@ class Products extends React.Component {
         const icon = icons('trash')
 
         const inputWrapper = this.element('div', ['optionsValuesWrapper'])
-        const deleteOptIcon = this.element('div', ['deleteOptValue'], {'data-option': dataOpt}, icon)
+        const deleteOptIcon = this.element('div', ['deleteOptValue'], {'data-option': dataOpt}, '<svg viewBox="0 0 20 20" class="trashIcon" focusable="false" aria-hidden="true"> <path d="M8 3.994c0-1.101.895-1.994 2-1.994s2 .893 2 1.994h4c.552 0 1 .446 1 .997a1 1 0 0 1-1 .997h-12c-.552 0-1-.447-1-.997s.448-.997 1-.997h4zm-3 10.514v-6.508h2v6.508a.5.5 0 0 0 .5.498h1.5v-7.006h2v7.006h1.5a.5.5 0 0 0 .5-.498v-6.508h2v6.508a2.496 2.496 0 0 1-2.5 2.492h-5c-1.38 0-2.5-1.116-2.5-2.492z"></path> </svg>')
         const input = this.element('input', ['optionsValue', 'fieldInput'], {'data-option': dataOpt, name:`option-${dataOpt}[]`})
 
         deleteOptIcon.addEventListener('click', this.deleteOptValue)
@@ -415,7 +419,7 @@ class Products extends React.Component {
 
     render() {
         return <div className={'createProduct'}>
-            <img className='createProduct-Background' src={require('../../Pictures/bg_admin.png')} alt=""/>
+            <img className='createProduct-Background' src={require('../../Assets/bg_admin.png')} alt=""/>
 
             <div className='createProduct-formContent'>
                 <form id='addProduct'>

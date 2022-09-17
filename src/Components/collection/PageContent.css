@@ -1,0 +1,45 @@
+.pageContent {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.content {
+  padding: 40px 20px 0 20px;
+  text-align: center;
+}
+
+.btn {
+  width: 100px;
+  height: 45px;
+  border: 1px solid black;
+  background-color: transparent;
+  padding: 5px;
+  font-size: 15px;
+  color: black;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 0 20px auto;
+  display: block;
+}
+
+.filter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 13;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+}
+
+.filterDefault {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .filter {
+    width: 92%;
+  }
+}

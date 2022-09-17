@@ -1,4 +1,4 @@
-export default function request ({path, params = {}, method, dataForm = null}) {
+export default async function request ({path, params = {}, method, dataForm = null}) {
     let url = `http://localhost:8888/${path}?`
 
     if (Object.keys(params).length) {
@@ -7,9 +7,11 @@ export default function request ({path, params = {}, method, dataForm = null}) {
         }
     }
 
-    return fetch(url,{
+    const response = await fetch(url, {
         method: method,
         credentials: 'include',
         body: dataForm
-    }).then((response) => response.json())
+    })
+    
+    return await response.json()
 }

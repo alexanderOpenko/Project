@@ -3,11 +3,11 @@ import contentReducer from './contentReducer'
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from "redux-thunk";
 import cartReducer from './cartReduser';
-import PageReducer from './PageReducer';
+import ProductReducer from './ProductReducer';
 import navigationReducer from "./navigationReducer";
 
 let reducer = combineReducers ({
-    PageReducer: PageReducer,
+    productReducer: ProductReducer,
     contentReducer: contentReducer,
     cart: cartReducer,
     navigation: navigationReducer,

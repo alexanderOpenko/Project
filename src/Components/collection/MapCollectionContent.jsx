@@ -1,65 +1,87 @@
 import React from 'react'
 import './MapCollectionContent.css'
-import CollectionForm from "./CollectionForm";
-import $ from "jquery";
-import request from "../../API/api";
+import CollectionFormVariants from "./CollectionFormVariants"
+import CollectionFormProduct from "./CollectionFormProduct"
+import request from "../../API/api"
+import { updateCartItemsAction, showBasketAction, updateCartItemsTotalPriceAction } from "../../Redux-reducers/cartReduser"
 
 const MapCollectionContent = (props) => {
-
-    const form = (v) => {
-        const id = v[Object.keys(v)[0]]
-        const currentProdCart = document.getElementById(id)
-        const sizeOpt = 'size-' + id
-
-        if (!v[sizeOpt]) {
-            currentProdCart.querySelector('.sizeFields').style.borderColor = 'red'
-            return
-        }
-
-        const titleArray = Object.values(v)
-        titleArray.shift()
-        const varTitle = titleArray.join('/')
-        const currentProduct = props.elementsObject.find(el => { return el.id === id})
-        const variant = currentProduct.modifications.find(mod => {
-             return  mod.mod_title === varTitle
-            })
-
+    const submitCollectionProductCart = (data) => {
         const formData = new FormData
-        formData.append('product_id', id)
-        formData.append('variant_id', variant.mod_id)
+        
+        formData.append('product_id', data.product_id)
+        if (data.variant_id) {
+            formData.append('variant_id', data.variant_id)
+        }
         formData.append('quantity', 1)
 
-        request({path: 'cart', method: 'POST',  dataForm: formData})
-            .then((result) => {
+        request({ path: 'cart', method: 'POST', dataForm: formData })
+            .then((data) => {
+                if (data.code !== 5 && data.code !== 0) {
+                    console.log(data, 'data');
+                    props.store.dispatch(updateCartItemsAction(data.body.cart_items))
+                    props.store.dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
+                    props.store.dispatch(showBasketAction(true))
+                    document.querySelector('body').classList.add('body_lock')
+                } else {
+                    const warning = Object.keys(data.message)[0]
 
-                console.log('Success:', result) })
+                    alert(data.message[warning])
+                }
+            })
     }
 
     return <>
         <div className='collection'>
             {props.elementsObject.map((elem, i) => {
-                const colorOptionsIndex = elem.params.indexOf('color')
-                const sizeOptionsIndex = elem.params.indexOf('size')
+                if (elem.params) {
+                    if (elem.params.includes('color')) {
+                        var colorOptionsIndex = elem.params.indexOf('color')
+                    }
 
-                const firstAvailableVariant = elem.modifications.length ? elem.modifications.find(el => {
-                    return el.qty > 0
-                }) : false
+                    if (elem.params.includes('size')) {
+                        var sizeOptionsIndex = elem.params.indexOf('size')
+                    }
+                }
 
-                const firstVariantTitle = firstAvailableVariant.mod_title
-                {console.log(firstVariantTitle, 'firstVariantTitle')}
-                const main_photo = firstAvailableVariant.mod_images[0] || elem.main_photo
-                const price = firstAvailableVariant.price || elem.price
+                var firstVariant = ''
+
+                if (elem.modifications.length) {
+                    var firstAvailableVariant = elem.modifications.find(el => {
+                        return el.qty > 0
+                    })
+
+                    firstVariant = firstAvailableVariant || elem.modifications[0]
+
+                    var firstVariantTitle = firstVariant.mod_title
+                    var main_photo = firstVariant.mod_images[0]
+                    var price = firstVariant.price
+                }
 
                 return <div key={i} className='collectionElement' data-element='sale-element'>
-                    <CollectionForm
-                        onSubmit={form}
-                        main_photo={main_photo}
-                        colorIndex={colorOptionsIndex}
-                        sizeIndex={sizeOptionsIndex}
-                        prod={elem}
-                        price={price}
-                        varTitle={firstVariantTitle}
-                    />
+                    {
+                        (firstVariant && (colorOptionsIndex != undefined|| sizeOptionsIndex != undefined)) ?
+                            <CollectionFormVariants
+                                submit={submitCollectionProductCart}
+                                main_photo={main_photo}
+                                colorIndex={colorOptionsIndex }
+                                sizeIndex={sizeOptionsIndex }
+                                prod={elem}
+                                price={price}
+                                varTitle={firstVariantTitle}
+                                firstVariant={firstVariant}
+                                collectionPath={props.collectionPath}
+                            />
+                            :
+                            <CollectionFormProduct
+                                submit={submitCollectionProductCart}
+                                main_photo={elem.main_photo}
+                                price={elem.price}
+                                collectionPath={props.collectionPath}
+                                productId={elem.id}
+                                name={elem.name}
+                            />
+                    }
                 </div>
             })}
         </div>

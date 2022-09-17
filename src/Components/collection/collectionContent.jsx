@@ -9,8 +9,6 @@ class CollectionContent extends React.Component {
         this.state = {
             showFilter: false,
         }
-
-        console.log(this.props.parameters, 'CollectionContentParams');
     }
 
     showFilter = () => {
