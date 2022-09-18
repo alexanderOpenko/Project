@@ -33,7 +33,7 @@ class CollectionContent extends React.Component {
                 />
             </div>
 
-            <div className={!this.state.showFilter ? 'hidden' : ''}>
+            <div className={!this.state.showFilter ? 'collectio_filter hidden' : 'collectio_filter'}>
                 <Filter
                     collectionRequest={this.props.collectionRequest}
                     showFilter={this.showFilter}

@@ -53,6 +53,42 @@ code {
   display: none;
 }
 
+.no-result {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.no-result img {
+  width: 100%;
+}
+
+.titleColor_info {
+  position: absolute;
+  white-space: nowrap;
+  left: -7px;
+  display: none;
+  background-color: #fff;
+  top: 28px;
+  padding: 5px;
+  border: 1px solid #999;
+  z-index: 2;
+}
+
+.rotateArrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 34px;
+  left: 3px;
+  display: none;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  transform: rotate(45deg);
+  margin-top: -11px;
+  background: #fff;
+  z-index: 3;
+}
+
 .btn {
   position: relative;
   border-radius: 99px;

@@ -109,6 +109,11 @@ class Filter extends React.Component {
                       >
                         {el.title !== 'color' ? opt : false}
                       </span>
+                        <div className="rotateArrow">
+                        </div>
+                        <div className="titleColor_info">
+                          {opt}
+                        </div>                     
                     </label>
                   })
                 }
@@ -123,7 +128,7 @@ class Filter extends React.Component {
         </button>
 
         <button type='reset' disabled={!this.props.isFiltered} className='filter__reset stripBtn'
-        onClick={this.resetFilter}
+          onClick={this.resetFilter}
         >
           Reset
         </button>

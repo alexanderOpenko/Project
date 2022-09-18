@@ -23,23 +23,3 @@
   display: block;
 }
 
-.filter {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 13;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 450px;
-}
-
-.filterDefault {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .filter {
-    width: 92%;
-  }
-}

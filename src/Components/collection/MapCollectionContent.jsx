@@ -33,7 +33,7 @@ const MapCollectionContent = (props) => {
 
     return <>
         <div className='collection'>
-            {props.elementsObject.map((elem, i) => {
+            {props.elementsObject.length ? props.elementsObject.map((elem, i) => {
                 if (elem.params) {
                     if (elem.params.includes('color')) {
                         var colorOptionsIndex = elem.params.indexOf('color')
@@ -83,7 +83,13 @@ const MapCollectionContent = (props) => {
                             />
                     }
                 </div>
-            })}
+            })
+        :
+        <div className='no-result'> 
+            <img src={require('../../Assets/no-result-found.png')}/>
+            <h2>No result found</h2>
+        </div>
+        }
         </div>
     </>
 }
