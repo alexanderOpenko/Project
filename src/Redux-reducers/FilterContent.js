@@ -1,6 +1,25 @@
 import request from "../API/api"
 import { collectionCreator } from "./contentReducer"
 
+const UPDATE_FILTER_STATE = 'UPDATE_FILTER_STATE'
+
+let defaultState = {
+    isFiltered: false
+}
+
+const filterReducer = (state = defaultState, action) => {
+    switch (action.type) {
+        case UPDATE_FILTER_STATE: return {
+            ...state, isFiltered: action.isFiltered
+        }
+        default: return state
+    }
+}
+
+const setFilterStateAction = (isFiltered) => ({type: 'UPDATE_FILTER_STATE', isFiltered})
+
+export default filterReducer
+
 export const filterContent = (props) => (dispatch) => {
     const filteredVariants = []
     const filteredProducts = []
@@ -18,12 +37,12 @@ export const filterContent = (props) => (dispatch) => {
     .then(res => {
         collection = res
         getVariantsByFilterOptions()
-        console.log(filteredVariants, 'filteredVariants');
         getProductOfVariants()
         dispatch(collectionCreator(filteredProducts))
+        dispatch(setFilterStateAction(true))
     })
 
-    function getVariantsByFilterOptions() {
+    function getVariantsByFilterOptions () {
         for (const product of collection) {
             loopV: for (let v = 0; v < product.modifications.length; v++) {
                 const variant = product.modifications[v]

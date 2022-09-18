@@ -8,6 +8,7 @@ class Collection extends React.Component {
 
     collectionRequest = () => {
         const collectionPath = this.props.match.params.collection
+
         request({ path: 'collection', params: { 'collection': collectionPath }, method: 'GET' })
             .then(collection => {
 
@@ -46,7 +47,6 @@ class Collection extends React.Component {
 
                 this.props.addCollectionFilterParameters(parameters)
             })
-
     }
 
     componentDidMount() {
@@ -61,6 +61,7 @@ class Collection extends React.Component {
 
     render() {
         return <CollectionContent
+            collectionRequest={this.collectionRequest}
             parameters={this.props.parameters}
             store={this.props.store}
             elementsObject={this.props.elementsObject}

@@ -52,26 +52,33 @@
   height: auto;
 }
 
+.filter__submit:disabled {
+  background-color: darkgray;
+  color: rgba(16, 16, 16, 0.3);
+}
+
 .filter__submit {
-  background-color: rgb(251, 196, 78);
-  border: none;
-  height: 50px;
-  width: 100%;
-  color: black;
-  cursor: pointer;
-  margin-bottom: 10px;
+  background-color: black;
+    border: none;
+    height: 50px;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .filter__reset {
-  background: unset;
-  border: none;
-  display: block;
-  margin: 0 auto 10px auto;
-  text-decoration: underline;
-  cursor: pointer;
+  width: 100%;
+  height: 50px;
 }
 
-.filter__submit:hover {
+.filter__reset:hover:not(:disabled) {
+  width: 100%;
+  height: 50px;
+  text-decoration: underline;
+}
+
+.filter__submit:hover:not(:disabled) {
   background-color: rgb(255, 186, 38);
 }
 

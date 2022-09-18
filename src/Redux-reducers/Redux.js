@@ -5,10 +5,12 @@ import thunkMiddleware from "redux-thunk";
 import cartReducer from './cartReduser';
 import ProductReducer from './ProductReducer';
 import navigationReducer from "./navigationReducer";
+import filterReducer from './FilterContent';
 
 let reducer = combineReducers ({
     productReducer: ProductReducer,
     contentReducer: contentReducer,
+    filterReducer: filterReducer,
     cart: cartReducer,
     navigation: navigationReducer,
     form: formReducer

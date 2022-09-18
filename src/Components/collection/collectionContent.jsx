@@ -22,7 +22,7 @@ class CollectionContent extends React.Component {
             <div data-content="content" className='content'>
 
                 <button onClick={this.showFilter} className='btn'>
-                    Фільтр
+                    Filter
                 </button>
 
                 <MapCollectionContent
@@ -35,6 +35,7 @@ class CollectionContent extends React.Component {
 
             <div className={!this.state.showFilter ? 'hidden' : ''}>
                 <Filter
+                    collectionRequest={this.props.collectionRequest}
                     showFilter={this.showFilter}
                     filterType={this.props.filterType}
                     parameters={this.props.parameters}
