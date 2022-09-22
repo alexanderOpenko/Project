@@ -6,8 +6,10 @@ import cartReducer from './cartReduser';
 import ProductReducer from './ProductReducer';
 import navigationReducer from "./navigationReducer";
 import filterReducer from './FilterContent';
+import variantsSlider from './slider_by_variants';
 
 let reducer = combineReducers ({
+    variantsSlider: variantsSlider,
     productReducer: ProductReducer,
     contentReducer: contentReducer,
     filterReducer: filterReducer,
