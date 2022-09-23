@@ -8,17 +8,17 @@ import { updateCartItemsAction, showBasketAction, updateCartItemsTotalPriceActio
 const MapCollectionContent = (props) => {
     const submitCollectionProductCart = (data) => {
         const formData = new FormData
-        
+
         formData.append('product_id', data.product_id)
         if (data.variant_id) {
             formData.append('variant_id', data.variant_id)
         }
         formData.append('quantity', 1)
+        formData.append('action', 'increase')
 
         request({ path: 'cart', method: 'POST', dataForm: formData })
             .then((data) => {
                 if (data.code !== 5 && data.code !== 0) {
-                    console.log(data, 'data');
                     props.store.dispatch(updateCartItemsAction(data.body.cart_items))
                     props.store.dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
                     props.store.dispatch(showBasketAction(true))
@@ -31,9 +31,9 @@ const MapCollectionContent = (props) => {
             })
     }
 
-    return <>
+    return <>       
         <div className='collection'>
-            {props.elementsObject.length ? props.elementsObject.map((elem, i) => {
+            {props.elementsObject.map((elem, i) => {
                 if (elem.params) {
                     if (elem.params.includes('color')) {
                         var colorOptionsIndex = elem.params.indexOf('color')
@@ -60,12 +60,12 @@ const MapCollectionContent = (props) => {
 
                 return <div key={i} className='collectionElement' data-element='sale-element'>
                     {
-                        (firstVariant && (colorOptionsIndex != undefined|| sizeOptionsIndex != undefined)) ?
+                        (firstVariant && (colorOptionsIndex != undefined || sizeOptionsIndex != undefined)) ?
                             <CollectionFormVariants
                                 submit={submitCollectionProductCart}
                                 main_photo={main_photo}
-                                colorIndex={colorOptionsIndex }
-                                sizeIndex={sizeOptionsIndex }
+                                colorIndex={colorOptionsIndex}
+                                sizeIndex={sizeOptionsIndex}
                                 prod={elem}
                                 price={price}
                                 varTitle={firstVariantTitle}
@@ -83,13 +83,7 @@ const MapCollectionContent = (props) => {
                             />
                     }
                 </div>
-            })
-        :
-        <div className='no-result'> 
-            <img src={require('../../Assets/no-result-found.png')}/>
-            <h2>No result found</h2>
-        </div>
-        }
+            })}
         </div>
     </>
 }

@@ -36,7 +36,7 @@ const ProductContent = (props) => {
     return <div className='product'>
         <div className='product__wrapper'>
             <div className='product__media'>
-                {props.variantImages.map(el => {
+                {props.prodImages.map(el => {
                         return <div className='product__image'>
                             <TransformWrapper>
                                 <TransformComponent>

@@ -25,7 +25,7 @@ class Product extends React.Component {
                 (Object.keys(this.props.product).length ?
                     <ProductContent
                     firstVariant={this.props.firstVariant}
-                    variantImages={this.props.variantImages}
+                    prodImages={this.props.prodImages}
                     store={this.props.store}
                     product={this.props.product}
                     id={this.props.match.params.id}
@@ -40,7 +40,7 @@ let mapStateToProps = (state) => {
     return ({
         product: state.productReducer.product,
         firstVariant: state.productReducer.firstVariant,
-        variantImages: state.productReducer.images
+        prodImages: state.productReducer.images
     })
 }
 

@@ -12,8 +12,8 @@ class Collection extends React.Component {
         request({ path: 'collection', params: { 'collection': collectionPath }, method: 'GET' })
             .then(collection => {
 
-                this.props.collectionCreator(collection)
                 console.log(collection, 'collection');
+                this.props.collectionCreator(collection)
                 const parameters = []
 
                 collection.forEach(prod => {

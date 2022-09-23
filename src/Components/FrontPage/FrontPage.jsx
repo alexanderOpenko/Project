@@ -1,11 +1,17 @@
 import React from 'react'
-import FrontPageSlider from "./frontPageSlider"
+import './frontpage.css'
+import FrontPageSlider from "../sections/sliderByVariants"
+import ImageWithText from '../sections/imageWithText'
+import Hero from '../sections/Hero'
 
 const FrontPage = () => {
-  return(<div className='frontpage-content'>
-    <FrontPageSlider />
-    
+  return(<>
+    <Hero />
+    <div className='frontpage-content'>
+    <FrontPageSlider collectionPath={'t-shirts'}/>
+    <ImageWithText />
     </div>
+    </>
   )
 }
 

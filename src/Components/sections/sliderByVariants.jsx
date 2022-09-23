@@ -1,10 +1,10 @@
 import React from 'react'
-import './frontpage.css'
 import Slider from "react-slick";
 import { useEffect } from 'react';
 import { assignSliderItemsWithVariants } from '../../Redux-reducers/slider_by_variants';
 import { connect } from 'react-redux';
 import icons from '../../Assets/icons';
+import { NavLink } from 'react-router-dom';
 
 class FrontPageSlider extends React.Component {
     constructor(props) {
@@ -13,10 +13,10 @@ class FrontPageSlider extends React.Component {
         this.sliderArrow = icons('slider_arrow')
 
         this.sliderRef = React.createRef()
-      }
+    }
 
     componentDidMount() {
-        this.props.assignSliderItemsWithVariants('t-shirts')
+        this.props.assignSliderItemsWithVariants(this.props.collectionPath)
     }
 
     next = () => {
@@ -34,6 +34,20 @@ class FrontPageSlider extends React.Component {
             speed: 500,
             slidesToShow: 3,
             slidesToScroll: 1,
+            responsive: [
+                {
+                  breakpoint: 767,
+                  settings: { 
+                    slidesToShow: 2,
+                  }
+                },
+                {
+                    breakpoint: 425,
+                    settings: { 
+                      slidesToShow: 1,
+                    }
+                  }
+            ]
         }
 
         return (<div className='frontPage_slider'>
@@ -42,19 +56,22 @@ class FrontPageSlider extends React.Component {
             >
                 {this.props.variantsSlides.map((el, i) => {
                     return <div key={i} className='frontPage_slider-element'>
-                        <img src={el.mod_images[0]} alt="" />
+                        <img className='frontPage_slider-element-image' src={el.mod_images[0]} alt="" />
+                        <NavLink to={{ pathname: `/collection/${this.props.collectionPath}/${el.prod_id}` }}>
+                            <h4>{el.prod_name}</h4>
+                        </NavLink>
                     </div>
                 })}
             </Slider>
 
-        <div className="frontPage_slider-arrow-nav">
-            <button className="stripBtn slider_arrow left_arrow" onClick={this.previous}>
-                {this.sliderArrow}
-            </button>
-            <button className="stripBtn slider_arrow rigt_arrow" onClick={this.next}>
-                {this.sliderArrow}
-            </button>
-        </div>
+            <div className="frontPage_slider-arrow-nav">
+                <button className="stripBtn slider_arrow left_arrow" onClick={this.previous}>
+                    {this.sliderArrow}
+                </button>
+                <button className="stripBtn slider_arrow rigt_arrow" onClick={this.next}>
+                    {this.sliderArrow}
+                </button>
+            </div>
         </div>
         )
     }

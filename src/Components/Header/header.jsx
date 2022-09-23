@@ -6,6 +6,7 @@ import icons from "../../Assets/icons";
 
 const Header = (props) => {
     const [mobileMenuState, setMobileMenuState] = useState('')
+    const [activeHeaderBackground, setActiveHeaderBackground] = useState('')
     const cartIcon = icons('cart')
     const burgerIcon = icons('burger-menu')
     const closeIcon = icons('close')
@@ -13,13 +14,21 @@ const Header = (props) => {
 
     useEffect(() => {
         window.addEventListener('resize', checkSize)
+        window.addEventListener('scroll', checkScroll)
 
-        function checkSize() {
+        function checkScroll () {
+            if (window.scrollY > 35) {
+                setActiveHeaderBackground(' active_header_background')
+            } else {
+                setActiveHeaderBackground('')
+            }
+        }
+
+        function checkSize () {
             const windowWidth = window.innerWidth
 
             if (windowWidth > 998) {
                 setMobileMenuState('')
-                return window.removeEventListener('resize', checkSize)
             }
         }
     })
@@ -29,9 +38,11 @@ const Header = (props) => {
         document.querySelector('body').classList.add('body_lock')
     }
 
-    return <div className={'header' + mobileMenuState}>
+    return <div className={'header' + mobileMenuState + activeHeaderBackground}
+            
+    >
         <div className='header_base'>
-            <div className='header_burger-icon hidden'
+            <div className='header_burger-icon large_hidden_medium_visible'
                 onClick={() => setMobileMenuState(' active-mobile-menu')}
             >
                 {burgerIcon}
@@ -45,16 +56,20 @@ const Header = (props) => {
 
             <div className='logo'>
                 <NavLink to='/'>
-                    <div className='logo_body'>
+                    <h4 className='logo_body'>
                         streeter
-                    </div>
+                    </h4>
                 </NavLink>
             </div>
 
             <div className="header_nav">
                 {navlincs.map((el, i) => {
                     return <div key={i} className="header_nav-item">
-                        <NavLink to={'/collection/' + el}>{el}</NavLink>
+                        <NavLink to={'/collection/' + el}>
+                            <div className="body3">
+                                {el}
+                            </div>
+                        </NavLink>
                     </div>
                 })}
             </div>
@@ -66,12 +81,12 @@ const Header = (props) => {
             </div>
         </div>
 
-        <div className="header_mobile-menu hidden">
+        <div className="header_mobile-menu invisible">
             <div className="header_mobile-nav-wrapper">
                 <div className="header_mobile-nav">
                     {navlincs.map((el, i) => {
                         return <div key={i} className="header_mobile-nav-item"
-                                onClick={() => setMobileMenuState('')}
+                            onClick={() => setMobileMenuState('')}
                         >
                             <NavLink to={'/collection/' + el}>{el}</NavLink>
                         </div>

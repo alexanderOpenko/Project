@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './filter.css'
-import { filterContent } from '../../Redux-reducers/FilterContent'
+import { filterContent, setFilterStateAction } from '../../Redux-reducers/FilterContent'
 import { connect } from 'react-redux'
 
 class Filter extends React.Component {
@@ -12,11 +12,13 @@ class Filter extends React.Component {
       formData: {}
     }
 
-    this.filterForm = React.createRef();
+    this.filterForm = React.createRef()
   }
 
   resetFilter = () => {
     this.props.collectionRequest()
+    this.props.setFilterStateAction(false)
+
     this.setState({
       isEnableFilter: false,
       formData: {}
@@ -144,4 +146,4 @@ let mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { filterContent })(Filter);
+export default connect(mapStateToProps, { filterContent, setFilterStateAction })(Filter);

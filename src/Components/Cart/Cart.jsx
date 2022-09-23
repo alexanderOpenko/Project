@@ -7,14 +7,17 @@ import { updateCartItemsAction, showBasketAction, updateCartItemsTotalPriceActio
 
 const Cart = (props) => {
     function updateItemQty(id) {
-        const { var_id, prod_id, method, action } = id
-        const data = {}
+        const { var_id, prod_id, action } = id
+        const data = new FormData()
 
-        data.variant_id = var_id
-        data.product_id = prod_id
-        data.action = action
+        if (var_id) {
+            data.append('variant_id', var_id)
+        }
+        data.append('product_id', prod_id)
+        data.append('action', action)
+        data.append('quantity', 1)
 
-        request({ path: 'cart', method: method, dataForm: JSON.stringify(data) })
+        request({ path: 'cart', method: 'POST', dataForm: data })
             .then((data) => {
                 if (data.code !== 5) {
                     props.updateCartItemsAction(data.body.cart_items)
@@ -42,10 +45,10 @@ const Cart = (props) => {
         </div>
 
         <div className="cart__header-announce">
-        {props.totalPrice > 0 &&
-            <div className="cart_total-price">
-                Total price: {props.totalPrice}$
-            </div>}
+            {props.totalPrice > 0 &&
+                <div className="cart_total-price">
+                    Total price: {props.totalPrice}$
+                </div>}
         </div>
 
         <div className="cart__content">
@@ -73,7 +76,7 @@ const Cart = (props) => {
                             {el.name}
 
                             <div className="cart__item-delete"
-                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, method: 'DELETE', action: 'delete' })}
+                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, action: 'delete' })}
                             >
                                 {deleteIcon}
                             </div>
@@ -105,7 +108,7 @@ const Cart = (props) => {
 
                         <div className="cart__item-qty-dispatcher">
                             <button className="cart__item-qty-decrease stripBtn"
-                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, method: 'PUT', action: 'decrease' })}
+                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, action: 'decrease' })}
                             >
                                 -
                             </button>
@@ -116,7 +119,7 @@ const Cart = (props) => {
 
                             <button className="cart__item-qty-increase stripBtn"
                                 data-prod-id={el.prod_id}
-                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, method: 'PUT', action: 'increase' })}
+                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, action: 'increase' })}
                                 disabled={isDisabledIncreaseBtn}
                             >
                                 +

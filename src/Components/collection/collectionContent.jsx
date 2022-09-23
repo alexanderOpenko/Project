@@ -21,9 +21,14 @@ class CollectionContent extends React.Component {
 
             <div data-content="content" className='content'>
 
-                <button onClick={this.showFilter} className='btn'>
+                <button onClick={this.showFilter} className='filter_btn btn'>
                     Filter
                 </button>
+
+                <div className={'no-result ' + (this.props.elementsObject.length && ' hidden')}>
+                    <img src={require('../../Assets/no-result-found.png')} />
+                    <h2>No result found</h2>
+                </div>
 
                 <MapCollectionContent
                     store={this.props.store}

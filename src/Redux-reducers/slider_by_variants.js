@@ -29,6 +29,8 @@ export const assignSliderItemsWithVariants = (collectionPath) => (dispatch) => {
                     return mod.qty > 0
                 })
 
+                firstAvailableVariant.prod_id = el.id
+                firstAvailableVariant.prod_name = el.name
                 variantsPerSlider.push(firstAvailableVariant)
             })
 

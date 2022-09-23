@@ -16,7 +16,7 @@ const filterReducer = (state = defaultState, action) => {
     }
 }
 
-const setFilterStateAction = (isFiltered) => ({type: 'UPDATE_FILTER_STATE', isFiltered})
+export const setFilterStateAction = (isFiltered) => ({type: 'UPDATE_FILTER_STATE', isFiltered})
 
 export default filterReducer
 

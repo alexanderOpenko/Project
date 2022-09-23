@@ -4,7 +4,7 @@
 
 .frontPage_slider {
     margin: 60px auto;
-    max-width: 700px;
+    max-width: 900px;
     overflow: hidden;
 }
 
@@ -16,11 +16,16 @@
     display: flex;
 }
 
-.frontPage_slider-element img {
-    border-radius: 10px;
+.frontPage_slider-element-image {
+    border-radius: 5px;
     width: 100%;
-} 
+    cursor: grab;
+}
 
 .left_arrow {
     transform: rotate(180deg);
+}
+
+.frontPage_slider-element h4 {
+    margin: 15px 0 0 5px;
 }
