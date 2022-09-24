@@ -36,21 +36,25 @@ class FrontPageSlider extends React.Component {
             slidesToScroll: 1,
             responsive: [
                 {
-                  breakpoint: 767,
-                  settings: { 
-                    slidesToShow: 2,
-                  }
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 2,
+                    }
                 },
                 {
                     breakpoint: 425,
-                    settings: { 
-                      slidesToShow: 1,
+                    settings: {
+                        slidesToShow: 1,
                     }
-                  }
+                }
             ]
         }
 
         return (<div className='frontPage_slider'>
+            <h1 className='frontPage_slider-title body1'>
+                Scroll & explore
+            </h1>
+
             <Slider {...settings}
                 ref={this.sliderRef}
             >

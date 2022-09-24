@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Field, reduxForm, change } from "redux-form"
+import { Field, reduxForm } from "redux-form"
 
 export const productSizeError = (sizeErrorText = 'Please select size') => {
     document.querySelector('.product__size-select-warning').innerHTML = sizeErrorText
@@ -11,7 +11,12 @@ const ProductForm = (props) => {
     // const [sizeOption, setSizeOption] = useState('')
 
     useEffect(() => {
+
         if (props.product.params) {
+            if (props.sizeIndex !== undefined) {
+                props.change('sizeRequire', true)
+            }
+
             setDefaultColor()
 
             document.addEventListener('click', (e) => {
@@ -96,6 +101,7 @@ const ProductForm = (props) => {
         <form onSubmit={props.handleSubmit}>
             <Field component='input' type="text" className='hidden-input' name='product_id' />
             <Field component='input' type="text" className='hidden-input' name='variant_id' />
+            <Field component='input' type="text" className='hidden-input' name='sizeRequired' />
 
             {props.colorIndex >= 0 &&
                 <div className="product__color-options">

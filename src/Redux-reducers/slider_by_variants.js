@@ -1,4 +1,4 @@
-import request from "../API/api"
+import { getCollection } from "./contentReducer"
 
 const SET_VARIANTS_SLIDER = 'SET_VARIANTS_SLIDER'
 
@@ -20,7 +20,7 @@ export default variantsSlider
 export const setVariantsPerSliderAction = (variants) => ({ type: 'SET_VARIANTS_SLIDER', variants })
 
 export const assignSliderItemsWithVariants = (collectionPath) => (dispatch) => {
-    request({ path: 'collection', params: { 'collection': collectionPath }, method: 'GET' })
+    getCollection(collectionPath)
         .then(collection => {
             const variantsPerSlider = []
 

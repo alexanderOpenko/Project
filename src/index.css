@@ -72,15 +72,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.body1 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
 .body2 {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.42;
 }
 
 .body3 {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 1.42;
 }
 
 h4 {
@@ -173,7 +179,12 @@ code {
   z-index: 3;
 }
 
+button:disabled {
+  color: silver!important
+} 
+
 .btn {
+  color: #000000;
   position: relative;
   border-radius: 99px;
   border: 1px solid #000000;
@@ -189,6 +200,7 @@ code {
 }
 
 .stripBtn {
+  color: black;
   padding: 0;
   background: inherit;
   border: none;
@@ -427,6 +439,7 @@ img.prodImage {
 .accordion {
   max-width: 385px;
   width: 100%;
+  margin: 0 0 auto 0;
 }
 
 .accordion_content {
@@ -457,22 +470,32 @@ img.prodImage {
   border-bottom: 1px solid black;
 }
 
-@media  screen and (max-width: 992px) {
+@media  screen and (max-width: 998px) {
   .large_hidden_medium_visible {
     display: block;
   }
 
   .medium_hidden_large_visible {
-    display: none;
+    display: none!important;
   }
 }
 
 @media  screen and (min-width: 998px) {
   .large_hidden_medium_visible {
-    display: none;
+    display: none!important;
   }
 
   .medium_hidden_large_visible {
-    display: block;
+    display: block!important;
+  }
+}
+
+@media screen and (max-width: 768px) { 
+  h1 {
+    font-size: 23px;
+  }
+
+  h5 {
+    font-size: 11px
   }
 }

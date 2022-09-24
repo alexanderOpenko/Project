@@ -130,7 +130,7 @@ class Filter extends React.Component {
         </button>
 
         <button type='reset' disabled={!this.props.isFiltered} className='filter__reset stripBtn'
-          onClick={this.resetFilter}
+          onClick={() => setTimeout(this.resetFilter, 0)}
         >
           Reset
         </button>

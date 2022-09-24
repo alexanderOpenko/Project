@@ -1,5 +1,4 @@
-import request from "../API/api"
-import { collectionCreator } from "./contentReducer"
+import { collectionCreator, getCollection } from "./contentReducer"
 
 const UPDATE_FILTER_STATE = 'UPDATE_FILTER_STATE'
 
@@ -20,7 +19,7 @@ export const setFilterStateAction = (isFiltered) => ({type: 'UPDATE_FILTER_STATE
 
 export default filterReducer
 
-export const filterContent = (props) => (dispatch) => {
+export const filterContent = (props) =>  (dispatch) => {
     const filteredVariants = []
     const filteredProducts = []
     var collection = []
@@ -33,8 +32,7 @@ export const filterContent = (props) => (dispatch) => {
         paramsValues.push(params[key])
     }
 
-    request({path: 'collection', params: {'collection': props.collectionPath}, method: 'GET'})
-    .then(res => {
+   getCollection(props.collectionPath).then((res) => {
         collection = res
         getVariantsByFilterOptions()
         getProductOfVariants()

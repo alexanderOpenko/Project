@@ -2,11 +2,24 @@
     padding: 20px;
 }
 
+/* slider */
+.frontPage_slider-title {
+    margin-bottom: 20px;
+}
+
 .frontPage_slider {
-    margin: 60px auto;
+    margin: 40px auto 60px auto;
     max-width: 900px;
     overflow: hidden;
 }
+
+@media screen and (max-width: 767px) { 
+    .frontPage_slider {
+        margin: 40px auto 40px auto;
+}
+}
+
+/* slider */
 
 .slick-slide {
     margin-right: 5px;

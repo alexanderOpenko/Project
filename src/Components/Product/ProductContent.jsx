@@ -1,36 +1,13 @@
 import React from "react"
 import {connect} from 'react-redux'
-import ProductForm, {productSizeError} from "./ProductForm";
-import request from "../../API/api";
-import {updateCartItemsAction, updateCartItemsTotalPriceAction, showBasketAction} from "../../Redux-reducers/cartReduser";
+import ProductForm from "./ProductForm";
+import {updateCart} from "../../Redux-reducers/cartReducer";
 import {setVariantImages} from "../../Redux-reducers/ProductReducer";
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
 
 const ProductContent = (props) => {
     const productSubmit = (e) => {
-        if (!e.product_size) {
-            productSizeError()
-            return
-        }
-
-        const formData = new FormData
-        formData.append('product_id', e.product_id)
-        formData.append('variant_id', e.variant_id)
-        formData.append('quantity', 1)
-
-        request({path: 'cart', method: 'POST', dataForm: formData})
-            .then((data) => {
-                if (data.code !== 5) {
-                    props.store.dispatch(updateCartItemsAction(data.body.cart_items))
-                    props.store.dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
-                    props.store.dispatch(showBasketAction(true))
-                    document.querySelector('body').classList.add('body_lock')
-                } else {
-                    const warning = Object.keys(data.message)[0]
-
-                    alert(data.message[warning])
-                }
-            }) 
+       props.updateCart(e)
     }
 
     return <div className='product'>
@@ -75,4 +52,4 @@ const mapStateToProps = () => {
 
 }
 
-export default connect(mapStateToProps(), {setVariantImages, updateCartItemsTotalPriceAction, showBasketAction})(ProductContent)
+export default connect(mapStateToProps(), {updateCart})(ProductContent)

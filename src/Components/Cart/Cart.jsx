@@ -2,28 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import icons from '../../Assets/icons'
 import './cart.css'
-import request from "../../API/api"
-import { updateCartItemsAction, showBasketAction, updateCartItemsTotalPriceAction } from "../../Redux-reducers/cartReduser"
+import { showBasketAction, updateCart } from "../../Redux-reducers/cartReducer"
 
 const Cart = (props) => {
-    function updateItemQty(id) {
-        const { var_id, prod_id, action } = id
-        const data = new FormData()
-
-        if (var_id) {
-            data.append('variant_id', var_id)
-        }
-        data.append('product_id', prod_id)
-        data.append('action', action)
-        data.append('quantity', 1)
-
-        request({ path: 'cart', method: 'POST', dataForm: data })
-            .then((data) => {
-                if (data.code !== 5) {
-                    props.updateCartItemsAction(data.body.cart_items)
-                    props.updateCartItemsTotalPriceAction(data.body.total_price)
-                }
-            })
+    function updateItemQty(data) {
+        props.updateCart(data)
     }
 
     const colorOptionsValues = ['color', 'колір', 'цвет']
@@ -76,7 +59,7 @@ const Cart = (props) => {
                             {el.name}
 
                             <div className="cart__item-delete"
-                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, action: 'delete' })}
+                                onClick={() => updateItemQty({ variant_id: el.mod_id, product_id: el.prod_id, action: 'delete' })}
                             >
                                 {deleteIcon}
                             </div>
@@ -108,7 +91,7 @@ const Cart = (props) => {
 
                         <div className="cart__item-qty-dispatcher">
                             <button className="cart__item-qty-decrease stripBtn"
-                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, action: 'decrease' })}
+                                onClick={() => updateItemQty({ variant_id: el.mod_id, product_id: el.prod_id, action: 'decrease' })}
                             >
                                 -
                             </button>
@@ -119,7 +102,7 @@ const Cart = (props) => {
 
                             <button className="cart__item-qty-increase stripBtn"
                                 data-prod-id={el.prod_id}
-                                onClick={() => updateItemQty({ var_id: el.mod_id, prod_id: el.prod_id, action: 'increase' })}
+                                onClick={() => updateItemQty({ variant_id: el.mod_id, product_id: el.prod_id, action: 'increase' })}
                                 disabled={isDisabledIncreaseBtn}
                             >
                                 +
@@ -150,6 +133,6 @@ const mapStateToProps = (state) => {
     )
 }
 
-export default connect(mapStateToProps, { updateCartItemsAction, showBasketAction, updateCartItemsTotalPriceAction })(Cart);
+export default connect(mapStateToProps, { showBasketAction, updateCart })(Cart);
 
 

@@ -2,33 +2,11 @@ import React from 'react'
 import './MapCollectionContent.css'
 import CollectionFormVariants from "./CollectionFormVariants"
 import CollectionFormProduct from "./CollectionFormProduct"
-import request from "../../API/api"
-import { updateCartItemsAction, showBasketAction, updateCartItemsTotalPriceAction } from "../../Redux-reducers/cartReduser"
+import { updateCart } from "../../Redux-reducers/cartReducer"
 
 const MapCollectionContent = (props) => {
     const submitCollectionProductCart = (data) => {
-        const formData = new FormData
-
-        formData.append('product_id', data.product_id)
-        if (data.variant_id) {
-            formData.append('variant_id', data.variant_id)
-        }
-        formData.append('quantity', 1)
-        formData.append('action', 'increase')
-
-        request({ path: 'cart', method: 'POST', dataForm: formData })
-            .then((data) => {
-                if (data.code !== 5 && data.code !== 0) {
-                    props.store.dispatch(updateCartItemsAction(data.body.cart_items))
-                    props.store.dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
-                    props.store.dispatch(showBasketAction(true))
-                    document.querySelector('body').classList.add('body_lock')
-                } else {
-                    const warning = Object.keys(data.message)[0]
-
-                    alert(data.message[warning])
-                }
-            })
+        props.store.dispatch(updateCart(data))
     }
 
     return <>       

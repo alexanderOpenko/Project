@@ -3,8 +3,16 @@ import Accordion from './accordion'
 import './imageWithText.css'
 
 const ImageWithText = () => {
-    return ( <div className='imageAndText'>        
+    return (<div className='imageAndText'>
         <div className='imageAndText-text'>
+            <h5 className='imageAndText_preheading body3'> 
+                Be unique
+            </h5>
+
+            <h1 className='imageAndText-title body1'>
+                 Make your look unmainstream.
+            </h1>
+
             <Accordion />
         </div>
 

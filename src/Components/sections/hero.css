@@ -2,6 +2,34 @@
     position: relative;
 }
 
+.hero-scrol_arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 69px;
+    height: 69px;
+    border-radius: 100%;
+    border: 1px solid white;
+    position: absolute;
+    bottom: 44px;
+    left: 50%; 
+}
+
+.hero-scrol_arrow svg {
+    height: 100%;
+    padding: 0 20px;
+    transform: rotate(90deg);
+    color: white;
+}
+
+.hero-scrol_arrow:hover {
+    background-color: white;
+}
+
+.hero-scrol_arrow svg:hover  {
+    color: black;
+}
+
 .hero-img {
     max-height: 100vh;
     overflow: hidden;
@@ -64,15 +92,31 @@
     text-align: center;
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 1200px) {
     .hero-img img {
         margin: 0;
+    }
+}
+
+@media screen and (max-width: 989px) {
+    .hero-text .btn {
+        background-color: white;
+    }
+
+    .hero-text {
+        width: 100%;
     }
 }
 
 @media screen and (max-width: 767px) {
     .hero-text_wrapper {
         height: 100%;
+        padding: 20% 20px 0;
+    }
+
+    .hero-text .btn {
+        padding: 12px 15px;
+        max-width: 167px;
     }
 
     .hero-text {

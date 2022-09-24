@@ -5,23 +5,14 @@ import Header from './Components/Header/header'
 import Cart from "./Components/Cart/Cart"
 import Footer from './Components/footer/footer'
 import Collection from "./Components/collection/Collection"
-import { connect } from "react-redux"
-import { routesCreator } from './Redux-reducers/navigationReducer'
-import { updateCartItemsAction, updateCartItemsTotalPriceAction } from './Redux-reducers/cartReduser'
 import Admin from "./Components/Admin/Admin"
-import request from "./API/api";
 import Product from "./Components/Product/Product";
 import FrontPage from './Components/FrontPage/FrontPage'
+import { getCartItems } from './Redux-reducers/cartReducer'
 
 class App extends React.Component {
     componentDidMount() {
-        request({ path: 'cart', method: 'GET' })
-            .then((data) => {
-                if (data.code !== 0) {
-                    this.props.store.dispatch(updateCartItemsAction(data.body.cart_items))
-                    this.props.store.dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
-                }
-            })
+        this.props.store.dispatch(getCartItems())
     }
 
     render() {
@@ -47,10 +38,4 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return ({
-        routes: state.navigation.routes
-    })
-}
-
-export default connect(mapStateToProps, { routesCreator, updateCartItemsAction })(App)
+export default App

@@ -30,8 +30,13 @@
 .header {
     position: fixed;
     width: 100%;
-    top: 0;
+    height: 0;
     z-index: 3;
+}
+
+.header_sticky {
+    height: 83px;
+    position: sticky;
 }
 
 .header_base {
@@ -40,6 +45,11 @@
     align-items: center;
     padding: 20px;
     transition: ease-in .2s;
+}
+
+.header_cart-icon-size {
+    color: whitesmoke;
+    text-align: center;
 }
 
 .header_mobile-menu {
@@ -94,6 +104,10 @@
     margin: 0 15px;
 }
 
+window {
+    pointer-events: none;
+}
+
 .header a {
     color: white;
     text-decoration: none;
@@ -106,6 +120,10 @@
 @media (max-width: 998px) {
     .header_burger-icon {
         display: block;
+    }
+    
+    .header_cart-icon {
+        margin: 0;
     }
 
     .header_nav {

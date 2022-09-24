@@ -2,6 +2,14 @@
     max-width: 50%;
     width: 100%;
   }
+
+  .imageAndText_preheading {
+    margin: auto 0 10px 0;
+  }
+
+  .imageAndText-title {
+    margin: 0 0 auto 0;
+  }
   
   .imageAndText-image {
     width: 100%;
@@ -15,13 +23,13 @@
   
   .imageAndText-text {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     width: 100%;
   }
 
 @media screen and (max-width: 989px) {
 .imageAndText {
-    padding: 40px 0;
+    padding: 25px 0;
 }
 }
 
@@ -39,7 +47,11 @@
     }
 
     .imageAndText-image-wrapper {
-        margin: 0 0 40px auto;
+        margin: 0 0 25px auto;
         order: 1;
+    }
+
+    .imageAndText-title {
+      margin-bottom: 20px;
     }
 }
