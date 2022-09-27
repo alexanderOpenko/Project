@@ -146,13 +146,19 @@ h1 {
   font-size: 32px;
 }
 
+h2 {
+  font-weight: 400;
+}
+
 h4 {
   font-size: 18px;
 }
 
 h1,
-h5,
+h3,
+h2,
 h4,
+h5,
 p {
   margin: 0;
 }
@@ -638,10 +644,46 @@ img.prodImage {
   margin: 0 10px;
 }
 
+/* info */
+.contacts_info {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  max-width: 700px
+}
+
+.info_message {
+ display: flex;
+ display: flex;
+ margin-bottom: 20px;
+}
+
+.info_column-title {
+  margin-bottom: 17px;
+}
+
+.info_message svg {
+  max-width: 20px;
+  width: 100%;
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 998px) {
+  .contacts_info {
+    flex-direction: column;
+  }
+
+  .info_column {
+    margin-bottom: 30px;
+  }
+
   .about_title, .about_desription {
     margin: 0 auto 20px auto;
     max-width: 700px;
+  }
+
+  .about_collections-title {
+    font-size: 70px;
   }
 
   .about_img-offside {

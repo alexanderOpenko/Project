@@ -2,6 +2,7 @@ import React from "react"
 import { useState } from "react"
 import AboutStore from "./sections/aboutStore"
 import Collections from "./sections/collections"
+import Contacts from "./sections/Contacts"
 import OurSponsors from "./sections/ourSponsors"
 
 const About = () => {
@@ -39,6 +40,10 @@ const About = () => {
                 <div className={activeAboutItem !== 'Our sponsors' ? 'hidden' : ''}>
                     <OurSponsors />
                 </div>
+
+                <div className={activeAboutItem !== 'Contacts' ? 'hidden' : ''}>
+                    <Contacts /> 
+                </div>
                 <div></div>
             </div>
         </div>
@@ -46,6 +51,6 @@ const About = () => {
     )
 }
 
-const navList = ['About store', 'Collections', 'Our sponsors', 'Contacts']
+const navList = ['About store', 'Collections', 'Contacts', 'Our sponsors']
 
 export default About
