@@ -5,7 +5,7 @@
     max-width: 315px;
     height: 100vh;
     z-index: 3;
-    background-color: #f0eee7;
+    background-color: whitesmoke;
 }
 
 .cart__close {
@@ -136,4 +136,10 @@
     width: 115px;
     display: flex;
     justify-content: center;
+}
+
+@media screen and (max-width: 768px) { 
+    .cart {
+        max-width: 100%;
+    }
 }

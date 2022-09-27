@@ -9,6 +9,7 @@ import Admin from "./Components/Admin/Admin"
 import Product from "./Components/Product/Product";
 import FrontPage from './Components/FrontPage/FrontPage'
 import { getCartItems } from './Redux-reducers/cartReducer'
+import About from './Components/About'
 
 class App extends React.Component {
     componentDidMount() {
@@ -26,7 +27,7 @@ class App extends React.Component {
 
                     <Route path={'/collection/:collection/:id'} render={(props) => <Product store={this.props.store} {...props} />} />
                     <Route path={'/collection/:collection'} render={(props) => <Collection store={this.props.store} {...props} />} />
-
+                    <Route path={'/About'} render={() => <About />} />
                     <Route path={'/admin'} render={(props) => <Admin {...props} />} />
                 </Switch>
 

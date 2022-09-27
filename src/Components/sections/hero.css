@@ -54,18 +54,19 @@
     width: 40%;
 }
 
-.hero-text .btn {
+.hero-text_button {
     margin: 0 auto;
     display: block;
-    background: transparent;
+    color: whitesmoke;
+    background: black;
     padding: 18px 15px;
     max-width: 200px;
     width: 100%;
 }
 
-.hero-text .btn:hover {
-    background-color: black;
-    color: white;
+.hero-text_button.btn:hover {
+    background: whitesmoke;
+    color: black
 }
 
 .hero-text_wrapper {
@@ -99,9 +100,18 @@
 }
 
 @media screen and (max-width: 989px) {
-    .hero-text .btn {
+    .hero-text_button.btn {
         background-color: white;
     }
+
+    .hero-text_button.btn {
+        color: black;
+    }
+
+    .hero-text_button.btn:hover { 
+        background: #000000;
+        color:#fff;
+      }
 
     .hero-text {
         width: 100%;
@@ -114,7 +124,7 @@
         padding: 20% 20px 0;
     }
 
-    .hero-text .btn {
+    .hero-text_button.btn {
         padding: 12px 15px;
         max-width: 167px;
     }

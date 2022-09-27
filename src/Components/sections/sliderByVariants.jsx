@@ -1,10 +1,11 @@
 import React from 'react'
 import Slider from "react-slick";
-import { useEffect } from 'react';
 import { assignSliderItemsWithVariants } from '../../Redux-reducers/slider_by_variants';
 import { connect } from 'react-redux';
 import icons from '../../Assets/icons';
 import { NavLink } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 class FrontPageSlider extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class FrontPageSlider extends React.Component {
     }
 
     componentDidMount() {
+        AOS.init()
         this.props.assignSliderItemsWithVariants(this.props.collectionPath)
     }
 
@@ -50,7 +52,10 @@ class FrontPageSlider extends React.Component {
             ]
         }
 
-        return (<div className='frontPage_slider'>
+        return (<div className='frontPage_slider'
+            data-aos="fade-up"
+            data-aos-duration="1200"
+        >
             <h1 className='frontPage_slider-title body1'>
                 Scroll & explore
             </h1>
@@ -65,7 +70,7 @@ class FrontPageSlider extends React.Component {
                             <h4>{el.prod_name}</h4>
                         </NavLink>
                     </div>
-                })}
+                })} 
             </Slider>
 
             <div className="frontPage_slider-arrow-nav">

@@ -6,24 +6,15 @@ export const productSizeError = (sizeErrorText = 'Please select size') => {
 }
 
 const ProductForm = (props) => {
-    const [sizeSelectState, setSizeSelectState] = useState('')
     const [defaultColorOption, setDefaultColorOption] = useState('')
-    // const [sizeOption, setSizeOption] = useState('')
 
     useEffect(() => {
-
         if (props.product.params) {
             if (props.sizeIndex !== undefined) {
                 props.change('sizeRequire', true)
             }
 
             setDefaultColor()
-
-            document.addEventListener('click', (e) => {
-                if (e.target.className !== 'product__size-select') {
-                    setSizeSelectState('')
-                }
-            })
         }
 
         setSizeOptionsStatus()
@@ -33,8 +24,7 @@ const ProductForm = (props) => {
     const setDefaultColor = () => {
         if (!defaultColorOption) {
             const colorOpt = 'opt' + (props.colorIndex + 1)
-
-            setDefaultColorOption(props.firstVariant[colorOpt])
+            setDefaultColorOption(props.product.firstVariant[colorOpt])
         }
     }
 
@@ -45,21 +35,21 @@ const ProductForm = (props) => {
             el.removeAttribute('disabled')
         })
 
-            const colorOpt = 'opt' + (props.colorIndex + 1)
-            const sizeOpt = 'opt' + (props.sizeIndex + 1)
-            const mods = props.product.modifications.filter(mod => {
-                return mod[colorOpt] === defaultColorOption
-            })
+        const colorOpt = 'opt' + (props.colorIndex + 1)
+        const sizeOpt = 'opt' + (props.sizeIndex + 1)
+        const mods = props.product.modifications.filter(mod => {
+            return mod[colorOpt] === defaultColorOption
+        })
 
-            mods.forEach(mod => {
-                sizeInputs.forEach(el => {
+        mods.forEach(mod => {
+            sizeInputs.forEach(el => {
 
-                    if ((mod[sizeOpt] === el.value) && (mod.qty == 0)) {
-                        el.classList.add('inactiveOption')
-                        el.setAttribute('disabled', 'disabled')
-                    }
-                })
+                if ((mod[sizeOpt] === el.value) && (mod.qty == 0)) {
+                    el.classList.add('inactiveOption')
+                    el.setAttribute('disabled', 'disabled')
+                }
             })
+        })
     }
 
     const variantChange = (e) => {
@@ -94,7 +84,7 @@ const ProductForm = (props) => {
         props.change('variant_id', selectedVariant.mod_id)
 
         document.querySelector('.product__size-placeholder').innerHTML = sizeValue
-        setSizeSelectState('')
+        props.setSizeSelectState('')
     }
 
     return <>
@@ -137,11 +127,11 @@ const ProductForm = (props) => {
 
                 <div className='product__size-options'>
                     <div className='product__size-select-wrapper'>
-                        <div className={'product__size-select' + sizeSelectState}>
+                        <div className={'product__size-select' + props.sizeSelectState}>
                             <div className="product__size-placeholder"
                                 onClick={(e) => {
                                     e.stopPropagation()
-                                    setSizeSelectState(' product__size-select-active')
+                                    props.setSizeSelectState(' product__size-select-active')
                                 }}
                             >
                                 Sizes

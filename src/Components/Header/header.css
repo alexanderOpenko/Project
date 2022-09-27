@@ -34,11 +34,6 @@
     z-index: 3;
 }
 
-.header_sticky {
-    height: 83px;
-    position: sticky;
-}
-
 .header_base {
     display: flex;
     justify-content: space-between;
@@ -87,6 +82,7 @@
     display: block;
     z-index: 1;
     border: 2px solid white;
+    background: black;
     padding: 10px 15px;
     letter-spacing: 5px;
     font-weight: 700;
@@ -104,6 +100,14 @@
     margin: 0 15px;
 }
 
+.link-item.body3 {
+    font-weight: 500;
+}
+
+.link-item:hover {
+    color: lightgray
+}
+
 window {
     pointer-events: none;
 }
@@ -115,6 +119,14 @@ window {
 
 .header_cart-icon {
     margin-left: 15px;
+}
+
+.header_cart-icon:hover .header_cart-icon-size{
+    color: orange;
+}
+
+.header_cart-icon:hover svg path {
+    fill: orange
 }
 
 @media (max-width: 998px) {

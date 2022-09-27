@@ -8,13 +8,11 @@ class Product extends React.Component {
 
     componentDidMount() {
         const prodId = this.props.match.params.id
-        const varId = this.props.location.aboutProps ? 
-        this.props.location.aboutProps.variant_id :
-        false
+        const varId = this.props.location.aboutProps ? this.props.location.aboutProps.variant_id : false
 
         this.props.productRequest(prodId, varId)
     }
-
+ 
     componentWillMount() {
         this.props.updateProductPageContent({})
     }
@@ -24,7 +22,6 @@ class Product extends React.Component {
             {
                 (Object.keys(this.props.product).length ?
                     <ProductContent
-                    firstVariant={this.props.firstVariant}
                     prodImages={this.props.prodImages}
                     store={this.props.store}
                     product={this.props.product}
@@ -39,7 +36,6 @@ class Product extends React.Component {
 let mapStateToProps = (state) => {
     return ({
         product: state.productReducer.product,
-        firstVariant: state.productReducer.firstVariant,
         prodImages: state.productReducer.images
     })
 }

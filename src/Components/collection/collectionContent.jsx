@@ -12,23 +12,20 @@ class CollectionContent extends React.Component {
     }
 
     showFilter = () => {
-        this.state.showFilter ? this.setState({ showFilter: false }) :
-            this.setState({ showFilter: true })
+        this.state.showFilter ? this.setState({ showFilter: false }) : this.setState({ showFilter: true })
     }
 
     render() {
-        return <div className='pageContent'>
-
-            <div data-content="content" className='content'>
-
+        return <>
+        <div data-content="content" className='collection_content'>
                 <button onClick={this.showFilter} className='filter_btn btn'>
                     Filter
                 </button>
 
-                <div className={'no-result ' + (this.props.elementsObject.length && ' hidden')}>
+                {/* <div className={'no-result ' + (this.props.elementsObject.length && ' hidden')}>
                     <img src={require('../../Assets/no-result-found.png')} />
                     <h2>No result found</h2>
-                </div>
+                </div> */}
 
                 <MapCollectionContent
                     store={this.props.store}
@@ -47,7 +44,7 @@ class CollectionContent extends React.Component {
                     collectionPath={this.props.collectionPath}
                 />
             </div>
-        </div>
+        </>
     }
 }
 

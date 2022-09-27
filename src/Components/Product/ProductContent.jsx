@@ -1,27 +1,37 @@
-import React from "react"
-import {connect} from 'react-redux'
+import React, { useState } from "react"
+import { connect } from 'react-redux'
 import ProductForm from "./ProductForm";
-import {updateCart} from "../../Redux-reducers/cartReducer";
-import {setVariantImages} from "../../Redux-reducers/ProductReducer";
-import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
+import { updateCart } from "../../Redux-reducers/cartReducer";
+import { setVariantImages } from "../../Redux-reducers/ProductReducer";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const ProductContent = (props) => {
+    const [sizeSelectState, setSizeSelectState] = useState('')
+
     const productSubmit = (e) => {
-       props.updateCart(e)
+        props.updateCart(e)
     }
 
-    return <div className='product'>
+    function clickCheck(e) {
+        if (e.target.className !== 'product__size-select') {
+            setSizeSelectState('')
+        }
+    }
+
+    return <div className='product'
+        onClick={clickCheck}
+    >
         <div className='product__wrapper'>
             <div className='product__media'>
-                {props.prodImages.map(el => {
-                        return <div className='product__image'>
-                            <TransformWrapper>
-                                <TransformComponent>
-                                    <img src={el}/>
-                                </TransformComponent>
-                            </TransformWrapper>
-                        </div>
-                    }
+                {props.prodImages.map((el, i) => {
+                    return <div key={i} className='product__image'>
+                        <TransformWrapper>
+                            <TransformComponent>
+                                <img src={el} />
+                            </TransformComponent>
+                        </TransformWrapper>
+                    </div>
+                }
                 )
                 }
             </div>
@@ -38,8 +48,9 @@ const ProductContent = (props) => {
                     changeVariantImages={props.setVariantImages}
                     onSubmit={productSubmit}
                     id={props.id}
+                    sizeSelectState={sizeSelectState}
+                    setSizeSelectState={setSizeSelectState}
                     product={props.product}
-                    firstVariant={props.firstVariant}
                     colorIndex={props.product.params && props.product.params.indexOf('color')}
                     sizeIndex={props.product.params && props.product.params.indexOf('size')}
                 />
@@ -52,4 +63,4 @@ const mapStateToProps = () => {
 
 }
 
-export default connect(mapStateToProps(), {updateCart})(ProductContent)
+export default connect(mapStateToProps(), { setVariantImages, updateCart })(ProductContent)

@@ -1,12 +1,10 @@
 import request from "../API/api";
 
 const UPDATE_PRODUCT_PAGE = 'UPDATE_PRODUCT_PAGE'
-const SET_FIRST_PRODUCT_VARIANT = 'SET_FIRST_PRODUCT_VARIANT'
 const SET_VARIANT_IMAGES = 'SET_VARIANT_IMAGES'
 
 let defaultState = {
     product: [],
-    firstVariant: {},
     images: []
 }
 
@@ -15,10 +13,6 @@ const ProductReducer = (state = defaultState, action) => {
         case UPDATE_PRODUCT_PAGE:
             return {
                 ...state, product: action.product
-            }
-        case SET_FIRST_PRODUCT_VARIANT:
-            return {
-                ...state, firstVariant: action.variant
             }
         case SET_VARIANT_IMAGES:
             return {
@@ -31,7 +25,6 @@ const ProductReducer = (state = defaultState, action) => {
 
 export default ProductReducer;
 export const updateProductPageContent = (product) => ({ type: 'UPDATE_PRODUCT_PAGE', product })
-const firstAvailableVariant = (variant) => ({ type: 'SET_FIRST_PRODUCT_VARIANT', variant })
 export const setVariantImages = (images) => ({ type: 'SET_VARIANT_IMAGES', images })
 
 export const productRequest = (prodId, varId = null) => (dispatch) => {
@@ -54,10 +47,9 @@ export const productRequest = (prodId, varId = null) => (dispatch) => {
                 var images = prod[0].images
             }
 
-            dispatch(setVariantImages(images))
-            if (firstVariant) {
-            dispatch(firstAvailableVariant(firstVariant))
-            }
+            prod[0].firstVariant = firstVariant
+            
             dispatch(updateProductPageContent(prod[0]))
+            dispatch(setVariantImages(images))
         })
 }

@@ -30,7 +30,7 @@ export function getCollection (collectionPath) {
 }
 
 export const getCollectionAndFilterParams = (collectionPath) => (dispatch) => {
-    getCollection(collectionPath).then(collection => {
+    return getCollection(collectionPath).then(collection => {
         dispatch(collectionCreator(collection))
         dispatch(setParameters(collection))
     })

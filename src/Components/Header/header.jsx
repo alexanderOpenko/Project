@@ -15,7 +15,7 @@ const Header = (props) => {
     const navlincs = ['T-shirts', 'Jeans', 'Hoodies', 'About']
 
     useEffect(() => {
-        const activeHeaderStickyClass = ' active_header_background header_sticky'
+        const activeHeaderStickyClass = ' active_header_background'
 
         if (window.location.hash !== '#/') {
             setActiveHeaderBackground(activeHeaderStickyClass)
@@ -87,8 +87,8 @@ const Header = (props) => {
             <div className="header_nav">
                 {navlincs.map((el, i) => {
                     return <div key={i} className="header_nav-item">
-                        <NavLink to={'/collection/' + el}>
-                            <div className="body3">
+                        <NavLink to={(el != 'About' ? '/collection/' : '/') + el}>
+                            <div className="link-item body3">
                                 {el}
                             </div>
                         </NavLink>
@@ -113,7 +113,9 @@ const Header = (props) => {
                         return <div key={i} className="header_mobile-nav-item"
                             onClick={() => setMobileMenuState('')}
                         >
-                            <NavLink to={'/collection/' + el}>{el}</NavLink>
+                            <NavLink to={(el != 'About' ? '/collection/' : '/') + el}>
+                                {el}
+                            </NavLink>
                         </div>
                     })}
                 </div>

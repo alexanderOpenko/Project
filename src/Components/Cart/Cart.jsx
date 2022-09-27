@@ -17,7 +17,7 @@ const Cart = (props) => {
     return <div className={props.cart ? 'cart' : 'hidden'}>
         <div className='cart__header'>
             <div className="cart__title">
-                Cart
+                Cart{props.itemsLength > 0 && ': ' + props.itemsLength}
             </div>
             <div className="cart__close" onClick={() => {
                 props.showBasketAction(false)
@@ -128,7 +128,8 @@ const mapStateToProps = (state) => {
         {
             cart: state.cart.show,
             items: state.cart.items,
-            totalPrice: state.cart.totalPrice
+            totalPrice: state.cart.totalPrice,
+            itemsLength: state.cart.itemsLength
         }
     )
 }

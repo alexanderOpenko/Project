@@ -45,7 +45,6 @@ export const getCartItems = () => (dispatch) => {
 }
 
 export const updateCart = (e) => (dispatch) => {
-    console.log(e, 'e');
     const action = e.action || 'increase'
 
     if (!e.product_size && e.sizeRequire) {
@@ -66,6 +65,7 @@ export const updateCart = (e) => (dispatch) => {
             if (data.code !== 5) {
                 dispatch(updateCartItemsAction(data.body.cart_items))
                 dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
+                dispatch(updateCartItemsCount(data.body.items_length))
                 dispatch(showBasketAction(true))
                 document.querySelector('body').classList.add('body_lock')
             } else {

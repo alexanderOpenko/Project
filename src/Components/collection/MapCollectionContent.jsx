@@ -12,16 +12,6 @@ const MapCollectionContent = (props) => {
     return <>       
         <div className='collection'>
             {props.elementsObject.map((elem, i) => {
-                if (elem.params) {
-                    if (elem.params.includes('color')) {
-                        var colorOptionsIndex = elem.params.indexOf('color')
-                    }
-
-                    if (elem.params.includes('size')) {
-                        var sizeOptionsIndex = elem.params.indexOf('size')
-                    }
-                }
-
                 var firstVariant = ''
 
                 if (elem.modifications.length) {
@@ -35,6 +25,19 @@ const MapCollectionContent = (props) => {
                     var main_photo = firstVariant.mod_images[0]
                     var price = firstVariant.price
                 }
+                
+                if (elem.params) {
+                    if (elem.params.includes('color')) {
+                        var colorOptionsIndex = elem.params.indexOf('color')
+                        var colorOpt = 'opt' + (colorOptionsIndex + 1)
+                    }
+
+                    if (elem.params.includes('size')) {
+                        var sizeOptionsIndex = elem.params.indexOf('size')
+                    }
+                }
+
+                const firstVariantColor = firstVariant[colorOpt]
 
                 return <div key={i} className='collectionElement' data-element='sale-element'>
                     {
@@ -47,7 +50,7 @@ const MapCollectionContent = (props) => {
                                 prod={elem}
                                 price={price}
                                 varTitle={firstVariantTitle}
-                                firstVariant={firstVariant}
+                                firstVariantColor={firstVariantColor}
                                 collectionPath={props.collectionPath}
                             />
                             :

@@ -1,35 +1,57 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCollectionAndFilterParams } from '../../Redux-reducers/contentReducer'
+import { getCollectionAndFilterParams, collectionCreator } from '../../Redux-reducers/contentReducer'
 import CollectionContent from './collectionContent'
 
 class Collection extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isLoadedClass:  ''
+        }
 
-    collectionRequest = () => {
-        const collectionPath = this.props.match.params.collection
-        this.props.getCollectionAndFilterParams(collectionPath)
+        this.preloader = React.createRef()
     }
 
-    componentDidMount() {
+    collectionRequest = () => {
+        this.setState({
+            isLoadedClass: ''
+        }, () => { 
+        const collectionPath = this.props.match.params.collection
+        this.props.getCollectionAndFilterParams(collectionPath).then(
+           () => this.setState({
+            isLoadedClass: 'loaded '
+        })
+        )
+    })   
+    }
+
+    componentDidMount() {;
         this.collectionRequest()
     }
 
     componentDidUpdate(prevProps) {
+        console.log(prevProps.match.params.collection, this.props.match.params.collection);
+        
         if (prevProps.match.params.collection !== this.props.match.params.collection) {
             this.collectionRequest()
         }
     }
 
     render() {
-        return <CollectionContent
-            collectionRequest={this.collectionRequest}
-            parameters={this.props.parameters}
-            store={this.props.store}
-            elementsObject={this.props.elementsObject}
-            filterType={'jeans'}
-            url={'/sale/saleJeans/'}
-            collectionPath={this.props.match.params.collection}
-        />
+        return <div className={this.state.isLoadedClass + 'pageContent'}>
+            <div className="preloader" ref={this.preloader}>
+                <img src={require('../../Assets/Preloader.gif')} />
+            </div>
+
+            <CollectionContent
+                collectionRequest={this.collectionRequest}
+                parameters={this.props.parameters}
+                store={this.props.store}
+                elementsObject={this.props.elementsObject}
+                collectionPath={this.props.match.params.collection}
+            />
+        </div>
     }
 }
 
@@ -40,5 +62,5 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps, { getCollectionAndFilterParams })(Collection)
+export default connect(mapStateToProps, { getCollectionAndFilterParams, collectionCreator })(Collection)
 

@@ -96,9 +96,17 @@
     display: block;
 }
 
+.productOptions {
+    margin-top: 7px;
+}
+
 .optionColorField {
     cursor: pointer;
     margin-right: 15px;
+}
+
+.optionColorField:last-child {
+    margin: 0
 }
 
 .sizeFields {
@@ -144,20 +152,12 @@
 .collectionElement {
     position: relative;
     width: calc(25% - 15px);
-    padding: 0 10px;
+    padding-right: 20px;
     margin-bottom: 20px;
-}
-
-.collectionElement:first-child {
-    padding-left: 0;
 }
 
 .collectionElement:nth-child(4n) {
     padding-right: 0;
-}
-
-.collectionElement:nth-child(5n) {
-    padding-left: 0;
 }
 
 .collectionElement img {
@@ -178,15 +178,7 @@
         width: calc(50% - 10px);
     }
 
-    .collectionElement:nth-child(4n) {
-        padding-right: 10px;
-    }
-
     .collectionElement:nth-child(2n) {
         padding-right: 0;
-    }
-
-    .collectionElement:nth-child(3n) {
-        padding-left: 0;
     }
 }

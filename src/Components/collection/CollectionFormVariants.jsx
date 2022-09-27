@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
+import LazyLoad from 'react-lazyload'
 
 const CollectionFormVariants = (props) => {
     const product = props.prod
@@ -8,6 +9,8 @@ const CollectionFormVariants = (props) => {
     const [defaultColorOption, setDefaultColorOption] = useState('')
     const [sizeInputValue, setSizeInputValue] = useState('')
     const [varId, setVarId] = useState(false)
+    // const [imageInvisible, makeImageInvisible] = useState('')
+    const [preloaderVisibility, setPreloaderVisibility] = useState('')
 
     const variantChange = (e) => {
         const thisProduct = document.getElementById(`${product.id}`)
@@ -17,7 +20,16 @@ const CollectionFormVariants = (props) => {
         const firstVariantByChangedColorOption = product.modifications.find(el => { return el[colorOpt] === value })
         setVarId(firstVariantByChangedColorOption.mod_id)
         const variantImage = firstVariantByChangedColorOption.mod_images[0]
-        setVariantImage(variantImage)
+        // makeImageInvisible('invisible')
+        setPreloaderVisibility('')
+        setTimeout(() => {
+            setTimeout(() => {
+                setPreloaderVisibility(' invisible')
+                // makeImageInvisible('')
+            }, 1500)
+            setVariantImage(variantImage)
+        }, 300)
+
         setDefaultColorOption(value)
         setSizeOptionsStatus(value)
         setSizeInputValue('')
@@ -28,7 +40,7 @@ const CollectionFormVariants = (props) => {
 
     const setSizeOptionsStatus = (color) => {
         const thisProduct = document.getElementById(`${product.id}`)
-        
+
         const sizeInputs = thisProduct.querySelectorAll('.sizeInput')
         sizeInputs.forEach(el => {
             el.classList.remove('inactiveOption')
@@ -52,11 +64,15 @@ const CollectionFormVariants = (props) => {
     }
 
     useEffect(() => {
-        setVariantImage(props.main_photo)
-        const colorOpt = 'opt' + (props.colorIndex + 1)
-        setDefaultColorOption(props.firstVariant[colorOpt])
-        setSizeOptionsStatus(props.firstVariant[colorOpt])
+        setPreloaderVisibility('')
+        setTimeout(() => {
+            console.log('fade');
+            setPreloaderVisibility(' invisible')
+        }, 2000)
 
+        setVariantImage(props.main_photo)
+        setDefaultColorOption(props.firstVariantColor)
+        setSizeOptionsStatus(props.firstVariantColor)
     }, [product.id])
 
     const sizeButtonAction = (e) => {
@@ -106,8 +122,17 @@ const CollectionFormVariants = (props) => {
             }
         }}>
         </NavLink>
+
         <div className='ImageWrapper'>
-            <img src={variantImage} />
+            <div className={"preloaderWrapper" + preloaderVisibility}>
+                <img className='product_imgPreloader' src={require('../../Assets/Preloader.gif')} />
+            </div>
+
+            <LazyLoad>
+                <img src={variantImage}
+                //  className={imageInvisible} 
+                 />
+            </LazyLoad>
 
             <div className="productSizesAndSubmit">
                 {props.sizeIndex >= 0 ?

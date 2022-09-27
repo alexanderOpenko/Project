@@ -20,7 +20,7 @@
 
 /*product form*/
 .product {
-    padding: 50px 25px;
+    padding: 133px 25px 50px 25px;
 }
 
 .product__form {
@@ -108,4 +108,19 @@
 .product__submit {
     margin-top: 20px;
     width: 100%;
+}
+
+@media screen and (max-width: 989px)  {
+    .product__wrapper {
+    flex-direction: column;
+    }
+
+    .product__form {
+        padding: 0;
+        margin: 0 0 40px 0
+    }
+
+    .product__media {
+        order: 1
+    }
 }

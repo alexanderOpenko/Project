@@ -4,14 +4,12 @@
   position: relative;
 }
 
-.content {
-  padding: 40px 20px 0 20px;
-  text-align: center;
+.collection_content {
+  padding: 123px 20px 0 20px;
 }
 
 .filter_btn {
   width: 100px;
-  border-radius: 8px;
   margin: 0 0 20px auto;
   display: block;
 }
