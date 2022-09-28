@@ -1,5 +1,5 @@
 export default async function request ({path, params = {}, method, dataForm = null}) {
-    let url = `http://localhost:8888/${path}?`
+    let url = `https://streeterstore.000webhostapp.com/${path}?`
 //http://localhost:8888/
 //https://streeterstore.000webhostapp.com/
     if (Object.keys(params).length) {

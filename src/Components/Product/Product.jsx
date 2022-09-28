@@ -12,7 +12,7 @@ class Product extends React.Component {
         this.props.productRequest(prodId, varId)
     }
  
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.updateProductPageContent({})
     }
 

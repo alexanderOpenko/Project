@@ -1,8 +1,36 @@
 .product__image {
+    position: relative;
     width: 100%;
     max-width: 500px;
     cursor: cell;
     margin-bottom: 15px;
+}
+
+.zoom_action {
+    border: 3px solid darkorange;
+    color: darkorange;
+    font-size: 20px;
+    font-weight: 100;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    z-index: 1;
+    background: transparent;
+    margin: 0 20px;
+}
+
+.zoom_action:hover {
+    background: transparent;
+}
+
+.zoom_buttons {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 .product__image:last-child {

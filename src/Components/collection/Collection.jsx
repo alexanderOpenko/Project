@@ -7,7 +7,7 @@ class Collection extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoadedClass:  ''
+            isLoadedClass: ''
         }
 
         this.preloader = React.createRef()

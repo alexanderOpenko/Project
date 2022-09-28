@@ -25,10 +25,20 @@ const ProductContent = (props) => {
             <div className='product__media'>
                 {props.prodImages.map((el, i) => {
                     return <div key={i} className='product__image'>
-                        <TransformWrapper>
-                            <TransformComponent>
-                                <img src={el} />
-                            </TransformComponent>
+                        <TransformWrapper
+                            wheel={{ disabled: true }}
+                        >
+                            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                                <>
+                                    <div className="zoom_buttons">
+                                        <button className = 'zoom_action btn' onClick={() => zoomIn()}>+</button>
+                                        <button className = 'zoom_action btn' onClick={() => zoomOut()}>-</button>
+                                    </div>
+                                    <TransformComponent>
+                                        <img src={el} />
+                                    </TransformComponent>
+                                </>
+                            )}
                         </TransformWrapper>
                     </div>
                 }
