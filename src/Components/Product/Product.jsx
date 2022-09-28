@@ -5,7 +5,6 @@ import {productRequest, updateProductPageContent} from "../../Redux-reducers/Pro
 import ProductContent from "./ProductContent";
 
 class Product extends React.Component {
-
     componentDidMount() {
         const prodId = this.props.match.params.id
         const varId = this.props.location.aboutProps ? this.props.location.aboutProps.variant_id : false

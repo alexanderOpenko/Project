@@ -73,14 +73,15 @@ body {
 }
 
 .preloader {
-    padding: 0 20px;
-    position: absolute;
-    background: white;
-    z-index: 3;
-    top: 83px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  min-height: 100vh;
+  padding: 0 20px;
+  position: absolute;
+  background: white;
+  z-index: 3;
+  top: 83px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .preloader img {
@@ -94,7 +95,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute!important;
+  position: absolute !important;
   top: 0;
   right: 0;
   left: 0;
@@ -546,15 +547,16 @@ img.prodImage {
 }
 
 .about {
-  padding: 123px 20px 0 20px;
+  padding: 123px 20px 40px 20px;
   background: #fafafa;
   display: flex;
   flex-direction: row;
+  min-height: 41vh;
 }
 
 .about_title,
 .about_desription {
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
 }
 
 .about_store-text {
@@ -570,14 +572,15 @@ img.prodImage {
   margin: 0 0 auto 0;
 }
 
-.about_store-image,
-.about_collections-image {
+.about_store-image {
   margin-bottom: 50px;
   max-width: 700px;
 }
 
 .about_collections-image {
+  position: relative;
   margin: 0 auto 50px auto;
+  max-width: 700px;
 }
 
 .about_store-image2 {
@@ -611,8 +614,10 @@ img.prodImage {
   text-align: center;
 }
 
-.about_collections-image {
-  position: relative;
+.about_collections .about_desription {
+  text-align: left;
+  max-width: 700px;
+  margin: 0 auto 20px auto;
 }
 
 .about_nav-list-item:hover {
@@ -653,9 +658,29 @@ img.prodImage {
 }
 
 .info_message {
- display: flex;
- display: flex;
- margin-bottom: 20px;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.info_message:hover svg path {
+  fill: darkorange;
+}
+
+.info_message-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.info_column .info_column-wrapper {
+  margin-bottom: 20px;
+}
+
+.info_column .info_column-wrapper:last-child {
+  margin: 0;
 }
 
 .info_column-title {
@@ -670,33 +695,38 @@ img.prodImage {
 
 @media screen and (max-width: 998px) {
   .contacts_info {
+    margin: 0;
     flex-direction: column;
   }
 
   .info_column {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
-  .about_title, .about_desription {
-    margin: 0 auto 20px auto;
-    max-width: 700px;
+  .info_column:last-child {
+    margin: 0;
+  }
+
+  .about_title,
+  .about_collections
+  .about_desription {
+    margin: 0 0 20px 0;
   }
 
   .about_collections-title {
     font-size: 70px;
   }
 
+  .about_collections-image {
+    margin: 0 0 25px 0
+  }
+
   .about_img-offside {
     flex-direction: column;
-    align-items: center;
   }
 
   .about_store-image2 {
     margin: 40px 0 0 0;
-  }
-
-  .about_store-image {
-    margin: 0 auto 50px auto;
   }
 
   .about {
@@ -719,7 +749,7 @@ img.prodImage {
 
   .about_navigation {
     max-width: 700px;
-    margin: 0 auto 5px auto;
+    margin-bottom: 5px;
     width: 100%;
   }
 }

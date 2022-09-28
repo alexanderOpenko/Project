@@ -27,13 +27,11 @@ class App extends React.Component {
 
                     <Route path={'/collection/:collection/:id'} render={(props) => <Product store={this.props.store} {...props} />} />
                     <Route path={'/collection/:collection'} render={(props) => <Collection store={this.props.store} {...props} />} />
-                    <Route path={'/About'} render={() => <About />} />
+                    <Route path={'/About'} render={(props) => <About  store={this.props.store} {...props}/>} />
                     <Route path={'/admin'} render={(props) => <Admin {...props} />} />
                 </Switch>
-
-                <div className='footer'>
-                    <Footer />
-                </div>
+                
+                <Footer store={this.props.store}/>
             </div>
         )
     }

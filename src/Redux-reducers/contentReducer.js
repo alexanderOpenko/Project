@@ -2,10 +2,12 @@ import request from "../API/api"
 
 const UPDATE_COLLECTION_CONTENT = 'UPDATE_COLLECTION_CONTENT'
 const ADD_FILTER_PARAMETERS = 'ADD_FILTER_PARAMETERS'
+const SET_ACTIVE_TAB = 'SET_ACTIVE_TAB'
 
 let defaultState = {
     collectionContent: [],
-    collectionFilterParameters: []
+    collectionFilterParameters: [],
+    activeTab: 'About store'
 }
 
 const contentReducer = (state = defaultState, action) => {
@@ -16,6 +18,9 @@ const contentReducer = (state = defaultState, action) => {
         case ADD_FILTER_PARAMETERS: return {
             ...state, collectionFilterParameters: action.parameters
         }
+        case SET_ACTIVE_TAB: return {
+            ...state, activeTab: action.tab
+        }
         default: return state;
     }
 }
@@ -24,6 +29,7 @@ export default contentReducer;
 
 export const collectionCreator = (content) => ({ type: 'UPDATE_COLLECTION_CONTENT', content })
 export const addCollectionFilterParameters = (parameters) => ({ type: 'ADD_FILTER_PARAMETERS', parameters })
+export const setAboutPageActiveTab = (tab) => ({ type: 'SET_ACTIVE_TAB', tab })
 
 export function getCollection (collectionPath) {
     return request({ path: 'collection', params: { 'collection': collectionPath }, method: 'GET' })

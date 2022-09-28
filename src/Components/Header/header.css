@@ -88,6 +88,7 @@
     font-weight: 700;
     text-transform: uppercase;
     font-family: Questrial, sans-serif;
+    cursor: pointer;
 }
 
 .header_nav {

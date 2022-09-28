@@ -4,7 +4,6 @@ import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from "redux-thunk";
 import cartReducer from './cartReducer';
 import ProductReducer from './ProductReducer';
-import navigationReducer from "./navigationReducer";
 import filterReducer from './FilterContent';
 import variantsSlider from './slider_by_variants';
 
@@ -14,7 +13,6 @@ const reducer = combineReducers ({
     contentReducer: contentReducer,
     filterReducer: filterReducer,
     cart: cartReducer,
-    navigation: navigationReducer,
     form: formReducer
 });
 

@@ -18,7 +18,7 @@ const Hero = () => {
         window.scrollTo({ top: heroHeight - 60, behavior: "smooth" })
     }
 
-    return (<div className='hero' data-aos="fade" data-aos-duration="2000">
+    return (<div className='hero' data-aos="fade" data-aos-duration="500">
         <div className='hero-img'>
             <img src={require('../../Assets/person_jacket.jpeg')} alt="" />
         </div>

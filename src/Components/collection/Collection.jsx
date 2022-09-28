@@ -14,6 +14,7 @@ class Collection extends React.Component {
     }
 
     collectionRequest = () => {
+        window.scrollTo(0, 0)
         this.setState({
             isLoadedClass: ''
         }, () => { 
@@ -30,9 +31,7 @@ class Collection extends React.Component {
         this.collectionRequest()
     }
 
-    componentDidUpdate(prevProps) {
-        console.log(prevProps.match.params.collection, this.props.match.params.collection);
-        
+    componentDidUpdate(prevProps) {        
         if (prevProps.match.params.collection !== this.props.match.params.collection) {
             this.collectionRequest()
         }

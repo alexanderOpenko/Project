@@ -1,15 +1,20 @@
 import React from "react"
-import { useState } from "react"
+import { useEffect } from "react"
+import { connect } from "react-redux"
+import { setAboutPageActiveTab } from "../Redux-reducers/contentReducer"
 import AboutStore from "./sections/aboutStore"
 import Collections from "./sections/collections"
 import Contacts from "./sections/Contacts"
 import OurSponsors from "./sections/ourSponsors"
 
-const About = () => {
-    const [activeAboutItem, setActiveAboutItem] = useState('About store')
+const About = (props) => {
+    useEffect (() => {
+        window.scrollTo(0, 0)
+    })
 
     const aboutNavToggle = (el) => {
-        setActiveAboutItem(el)
+        console.log(props, 'props');
+        props.store.dispatch(setAboutPageActiveTab(el))
     }
 
     return (<>
@@ -20,7 +25,7 @@ const About = () => {
                         return <div key={i}
                             className='about_nav-list-item'
                             onClick={() => aboutNavToggle(el)}
-                            style={{color:activeAboutItem === el ? 'darkorange' : ''}}
+                            style={{color: props.activeTab === el ? 'darkorange' : ''}}
                         >
                             {el}
                         </div>
@@ -29,19 +34,19 @@ const About = () => {
             </div>
 
             <div className="about-content">
-                <div className={activeAboutItem !== 'About store' ? 'hidden' : ''}>
+                <div className={props.activeTab !== 'About store' ? 'hidden' : ''}>
                     <AboutStore />
                 </div>
 
-                <div className={activeAboutItem !== 'Collections' ? 'hidden' : ''}>
+                <div className={props.activeTab !== 'Collections' ? 'hidden' : ''}>
                     <Collections />
                 </div>
 
-                <div className={activeAboutItem !== 'Our sponsors' ? 'hidden' : ''}>
+                <div className={props.activeTab !== 'Our sponsors' ? 'hidden' : ''}>
                     <OurSponsors />
                 </div>
 
-                <div className={activeAboutItem !== 'Contacts' ? 'hidden' : ''}>
+                <div className={props.activeTab !== 'Contacts' ? 'hidden' : ''}>
                     <Contacts /> 
                 </div>
                 <div></div>
@@ -53,4 +58,10 @@ const About = () => {
 
 const navList = ['About store', 'Collections', 'Contacts', 'Our sponsors']
 
-export default About
+const mapStateToProps = (state) => {
+    return({
+        activeTab: state.contentReducer.activeTab
+    })
+}
+
+export default connect(mapStateToProps, {})(About)
