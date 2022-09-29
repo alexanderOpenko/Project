@@ -46,7 +46,8 @@ class FrontPageSlider extends React.Component {
                 {
                     breakpoint: 425,
                     settings: {
-                        slidesToShow: 1,
+                        slidesToShow: 1.35,
+                        infinite: false,
                     }
                 }
             ]

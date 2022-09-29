@@ -712,8 +712,7 @@ img.prodImage {
   }
 
   .about_title,
-  .about_collections
-  .about_desription {
+  .about_collections .about_desription {
     margin: 0 0 20px 0;
   }
 
@@ -779,11 +778,21 @@ img.prodImage {
 }
 
 @media screen and (max-width: 768px) {
+  .small_hidden_large_visible {
+    display: none !important;
+  }
+
   h1 {
     font-size: 23px;
   }
 
   h5 {
     font-size: 11px
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .small_hidden_large_visible {
+    display: block !important;
   }
 }

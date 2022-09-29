@@ -23,7 +23,7 @@ const Hero = () => {
             <img src={require('../../Assets/person_jacket.jpeg')} alt="" />
         </div>
 
-        <div className='medium_hidden_large_visible'>
+        <div className='small_hidden_large_visible'>
             <button onClick={scrollToSection} className='hero-scrol_arrow stripBtn'>
                 {arrowIcon}
             </button>
