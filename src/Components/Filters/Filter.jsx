@@ -1,55 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './filter.css'
-import { filterContent, setFilterStateAction } from '../../Redux-reducers/FilterContent'
+import { filterContent } from '../../Redux-reducers/FilterContent'
 import { connect } from 'react-redux'
 
 class Filter extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isEnableFilter: false,
-      formData: {}
-    }
-
-    this.filterForm = React.createRef()
-  }
-
-  resetFilter = () => {
-    this.props.collectionRequest()
-    this.props.setFilterStateAction(false)
-
-    this.setState({
-      isEnableFilter: false,
-      formData: {}
-    })
-  }
-
-  setEnableFilterStatus = () => {
-    const form = this.filterForm.current
-    const formData = new FormData(form)
-    const data = []
-
-    for (const key of formData) {
-      data.push(key)
-      break
-    }
-
-    if (data.length) {
-      this.setState({
-        isEnableFilter: true,
-        formData: formData
-      })
-    } else {
-      this.setState({
-        isEnableFilter: false,
-        formData: {}
-      })
-    }
-  }
-
   toFilter = () => {
-    if (!this.state.isEnableFilter) {
+    if (!this.props.isEnableFilterBtn) {
       return
     }
 
@@ -58,17 +14,18 @@ class Filter extends React.Component {
       params: {}
     }
 
-    for (const key of this.state.formData.keys()) {
-      const values = this.state.formData.getAll(key)
+    for (const key of this.props.formData.keys()) {
+      const values = this.props.formData.getAll(key)
       parsedFormData.params[key] = values
     }
 
     this.props.filterContent(parsedFormData)
+    this.props.showFilter()
   }
 
   render() {
     return <>
-      <form className='filter' ref={this.filterForm} id='filter__form'>
+      <form className='filter' ref={this.props.filterForm} id='filter__form'>
         <div className='filter__head'>
           <span>Filter</span>
 
@@ -87,7 +44,7 @@ class Filter extends React.Component {
               </h2>
 
               <div className={'filter__options filter__options-' + el.title}
-                onClick={() => setTimeout(this.setEnableFilterStatus, 100)}
+                onClick={() => setTimeout(this.props.setEnableFilterBtnStatus, 100)}
               >
                 {
                   el.options.map((opt, i) => {
@@ -111,11 +68,11 @@ class Filter extends React.Component {
                       >
                         {el.title !== 'color' ? opt : false}
                       </span>
-                        <div className="rotateArrow">
-                        </div>
-                        <div className="titleColor_info">
-                          {opt}
-                        </div>                     
+                      <div className="rotateArrow">
+                      </div>
+                      <div className="titleColor_info">
+                        {opt}
+                      </div>
                     </label>
                   })
                 }
@@ -125,12 +82,12 @@ class Filter extends React.Component {
           }
         </div>
 
-        <button type='button' disabled={!this.state.isEnableFilter} className='filter__submit' onClick={this.toFilter}>
+        <button type='button' disabled={!this.props.isEnableFilterBtn} className='filter__submit' onClick={this.toFilter}>
           Apply
         </button>
 
         <button type='reset' disabled={!this.props.isFiltered} className='filter__reset stripBtn'
-          onClick={() => setTimeout(this.resetFilter, 0)}
+          onClick={() => setTimeout(this.props.resetFilter, 0)}
         >
           Reset
         </button>
@@ -139,11 +96,8 @@ class Filter extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
-  return ({
-    isFiltered: state.filterReducer.isFiltered
-  })
+const mapStateToProps = () => {
+  return ({})
 }
 
-
-export default connect(mapStateToProps, { filterContent, setFilterStateAction })(Filter);
+export default connect(mapStateToProps, { filterContent })(Filter);

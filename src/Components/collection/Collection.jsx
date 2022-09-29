@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getCollectionAndFilterParams, collectionCreator } from '../../Redux-reducers/contentReducer'
+import { setFilterStateAction, setFilterWarning } from '../../Redux-reducers/FilterContent'
 import CollectionContent from './collectionContent'
 
 class Collection extends React.Component {
@@ -11,29 +12,42 @@ class Collection extends React.Component {
         }
 
         this.preloader = React.createRef()
+        this.filterForm = React.createRef()
+    }
+
+    filterResetHandler = () => {
+        this.filterForm.current.reset()
+        this.collectionRequest()
+        this.props.setFilterStateAction(false)
+        if (this.props.noFilterResult) {
+            this.props.setFilterWarning(false)
+        }
     }
 
     collectionRequest = () => {
         window.scrollTo(0, 0)
+
         this.setState({
             isLoadedClass: ''
-        }, () => { 
-        const collectionPath = this.props.match.params.collection
-        this.props.getCollectionAndFilterParams(collectionPath).then(
-           () => this.setState({
-            isLoadedClass: 'loaded '
+        }, () => {
+            const collectionPath = this.props.match.params.collection
+
+            this.props.getCollectionAndFilterParams(collectionPath).then(() => this.setState({
+                isLoadedClass: 'loaded '
+            })
+            )
         })
-        )
-    })   
     }
 
-    componentDidMount() {;
+    componentDidMount() {
         this.collectionRequest()
+        this.filterResetHandler()
     }
 
-    componentDidUpdate(prevProps) {        
+    componentDidUpdate(prevProps) {
         if (prevProps.match.params.collection !== this.props.match.params.collection) {
             this.collectionRequest()
+            this.filterResetHandler()
         }
     }
 
@@ -44,6 +58,9 @@ class Collection extends React.Component {
             </div>
 
             <CollectionContent
+                filterForm={this.filterForm}
+                filterResetHandler={this.filterResetHandler}
+                noFilterResult={this.props.noFilterResult}
                 collectionRequest={this.collectionRequest}
                 parameters={this.props.parameters}
                 store={this.props.store}
@@ -57,9 +74,16 @@ class Collection extends React.Component {
 const mapStateToProps = (state) => {
     return ({
         elementsObject: state.contentReducer.collectionContent,
-        parameters: state.contentReducer.collectionFilterParameters
+        parameters: state.contentReducer.collectionFilterParameters,
+        noFilterResult: state.filterReducer.noFilterResult
     })
 }
 
-export default connect(mapStateToProps, { getCollectionAndFilterParams, collectionCreator })(Collection)
+export default connect(mapStateToProps, {
+    getCollectionAndFilterParams,
+    collectionCreator,
+    setFilterStateAction,
+    setFilterWarning
+})
+    (Collection)
 

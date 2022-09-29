@@ -205,12 +205,16 @@ img {
   width: 100%;
 }
 
-.no-result {
-  max-width: 500px;
-  margin: 0 auto;
+.collection_no-filter-results {
+  max-width: 300px;
+  margin: 0 auto 40px auto;
 }
 
-.no-result img {
+.collection_no-filter-results h3 {
+  margin-top: 10px;
+}
+
+.collection_no-filter-results img {
   width: 100%;
 }
 

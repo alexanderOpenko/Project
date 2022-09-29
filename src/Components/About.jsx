@@ -13,7 +13,6 @@ const About = (props) => {
     })
 
     const aboutNavToggle = (el) => {
-        console.log(props, 'props');
         props.store.dispatch(setAboutPageActiveTab(el))
     }
 

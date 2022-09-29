@@ -1,25 +1,33 @@
 import { collectionCreator, getCollection } from "./contentReducer"
 
 const UPDATE_FILTER_STATE = 'UPDATE_FILTER_STATE'
+const NO_FILTER_RESULT = 'NO_FILTER_RESULT'
 
 let defaultState = {
-    isFiltered: false
+    isFiltered: false,
+    noFilterResult: false
 }
 
 const filterReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case UPDATE_FILTER_STATE: return {
-            ...state, isFiltered: action.isFiltered
-        }
+        case UPDATE_FILTER_STATE:
+            return {
+                ...state, isFiltered: action.isFiltered
+            }
+        case NO_FILTER_RESULT:
+            return {
+                ...state, noFilterResult: action.noFilterResult 
+            }
         default: return state
     }
 }
 
 export const setFilterStateAction = (isFiltered) => ({type: 'UPDATE_FILTER_STATE', isFiltered})
+export const setFilterWarning = (noFilterResult) => ({type: 'NO_FILTER_RESULT', noFilterResult})
 
 export default filterReducer
 
-export const filterContent = (props) =>  (dispatch) => {
+export const filterContent = (props) => (dispatch) => {
     const filteredVariants = []
     const filteredProducts = []
     var collection = []
@@ -32,15 +40,19 @@ export const filterContent = (props) =>  (dispatch) => {
         paramsValues.push(params[key])
     }
 
-   getCollection(props.collectionPath).then((res) => {
+    getCollection(props.collectionPath).then((res) => {
         collection = res
         getVariantsByFilterOptions()
         getProductOfVariants()
-        dispatch(collectionCreator(filteredProducts))
         dispatch(setFilterStateAction(true))
+        if  (!filteredProducts.length) {
+            dispatch(setFilterWarning(true))
+        }
+
+        dispatch(collectionCreator(filteredProducts))       
     })
 
-    function getVariantsByFilterOptions () {
+    function getVariantsByFilterOptions() {
         for (const product of collection) {
             loopV: for (let v = 0; v < product.modifications.length; v++) {
                 const variant = product.modifications[v]

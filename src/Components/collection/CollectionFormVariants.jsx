@@ -66,7 +66,6 @@ const CollectionFormVariants = (props) => {
     useEffect(() => {
         setPreloaderVisibility('')
         setTimeout(() => {
-            console.log('fade');
             setPreloaderVisibility(' invisible')
         }, 2000)
 
