@@ -1,0 +1,42 @@
+.frontpage-content {
+    padding: 20px 20px 40px 20px;
+}
+
+/* slider */
+.frontPage_slider-title {
+    margin-bottom: 20px;
+}
+
+.frontPage_slider {
+    margin: 40px auto 60px auto;
+    max-width: 900px;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 767px) { 
+    .frontPage_slider {
+        margin: 40px auto 40px auto;
+}
+}
+
+.slick-slide {
+    margin-right: 5px;
+}
+
+.slick-track {
+    display: flex;
+}
+
+.frontPage_slider-element-image {
+    border-radius: 5px;
+    width: 100%;
+    cursor: grab;
+}
+
+.left_arrow {
+    transform: rotate(180deg);
+}
+
+.frontPage_slider-element h4 {
+    margin: 15px 0 0 5px;
+}

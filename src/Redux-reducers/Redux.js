@@ -2,13 +2,17 @@ import{applyMiddleware,combineReducers, createStore} from 'redux'
 import contentReducer from './contentReducer'
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from "redux-thunk";
-import basketReducer from './basketReduser';
-import PageReducer from './PageReducer';
+import cartReducer from './cartReducer';
+import ProductReducer from './ProductReducer';
+import filterReducer from './FilterContent';
+import variantsSlider from './slider_by_variants';
 
-let reducer = combineReducers ({
-    PageReducer: PageReducer,
+const reducer = combineReducers ({
+    variantsSlider: variantsSlider,
+    productReducer: ProductReducer,
     contentReducer: contentReducer,
-    basket: basketReducer,
+    filterReducer: filterReducer,
+    cart: cartReducer,
     form: formReducer
 });
 

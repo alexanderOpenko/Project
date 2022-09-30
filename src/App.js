@@ -1,54 +1,40 @@
 import React from 'react'
-import {Route, Switch} from 'react-router-dom';
-import './App.css';
-import FrontPage from './Components/FrontPage/FrontPage';
-import Header from './Components/Header/header';
-import Navbar from './Components/Navbar/Navbar';
-import News, {newItemsPhoto} from './Components/News/News';
-import Jeans from './Components/Jeans/JeansContainer';
-import Hoody, {hoodyPhoto} from './Components/Hoody/hoody';
-import PageContainer from './Components/Page/PageContainer';
-import Footer from './Components/footer/footer';
-import {jeansPhoto} from './Components/FrontPage/FrontPageSale/FrontPageSale';
-import Tshirts, {tshirtPhoto} from './Components/Tshirts/Tshirts';
-import Clothes, {clothesPhotoArray} from './Components/clothes/clothes'
-import Accessories, {accessoriesPhoto} from './Components/Accessories/Accessories'
+import { Route, Switch } from 'react-router-dom'
+import './App.css'
+import Header from './Components/Header/header'
+import Cart from "./Components/Cart/Cart"
+import Footer from './Components/footer/footer'
+import Collection from "./Components/collection/Collection"
+import Admin from "./Components/Admin/Admin"
+import Product from "./Components/Product/Product";
+import FrontPage from './Components/FrontPage/FrontPage'
+import { getCartItems } from './Redux-reducers/cartReducer'
+import About from './Components/About'
 
-const App = (props) => {
-  document.body.style.cssText = `font-family: "Graphik Cond Web"; overflow-x: hidden`
-  {
-    return (
+class App extends React.Component {
+    componentDidMount() {
+        this.props.store.dispatch(getCartItems())
+    }
 
-      <div className='wrapper-content'>
+    render() {
+        return (
+            <div className='wrapper-content'>
+                <Header store={this.props.store} />
+                <Cart />
 
-        <Header/>
+                <Switch>
+                    <Route exact path='/' render={() => <FrontPage />} />
 
-        <div className='frontpage-content'>
-          <Navbar/>
-          <Switch>
-            <Route exact path='/' render={() => <FrontPage/>}/>
-
-            <Route path={'/sale/saleJeans/:id'} render={(props) => (<PageContainer photos={jeansPhoto} {...props}/>)}/>
-            <Route path={'/newItems/:id'} render={(props) => (<PageContainer photos={newItemsPhoto} {...props}/>)}/>
-            <Route path={'/hoody/:id'} render={(props) => (<PageContainer photos={hoodyPhoto} {...props}/>)}/>
-            <Route path={'/tshirt/:id'} render={(props) => (<PageContainer photos={tshirtPhoto} {...props}/>)}/>
-            <Route path={'/clothes/:id'} render={(props) => (<PageContainer photos={clothesPhotoArray} {...props}/>)}/>
-            <Route path={'/Accessories/:id'}
-                   render={(props) => (<PageContainer photos={accessoriesPhoto} {...props}/>)}/>
-            <Route path='/jeans' render={() => <Jeans/>}/>
-            <Route path='/clothes' render={() => <Clothes/>}/>
-            <Route path='/new' render={() => <News/>}/>
-            <Route path='/hoody' render={() => <Hoody/>}/>
-            <Route path='/tshirt' render={() => <Tshirts/>}/>
-            <Route path='/Accessories' render={() => <Accessories/>}/>
-          </Switch>
-
-        </div>
-        <div className='footer'>
-          <Footer/>
-        </div>
-      </div>
-    )
-  }
+                    <Route path={'/collection/:collection/:id'} render={(props) => <Product store={this.props.store} {...props} />} />
+                    <Route path={'/collection/:collection'} render={(props) => <Collection store={this.props.store} {...props} />} />
+                    <Route path={'/About'} render={(props) => <About  store={this.props.store} {...props}/>} />
+                    <Route path={'/admin'} render={(props) => <Admin {...props} />} />
+                </Switch>
+                
+                <Footer store={this.props.store}/>
+            </div>
+        )
+    }
 }
-export default App;
+
+export default App

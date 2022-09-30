@@ -1,0 +1,184 @@
+.collection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.collectionElement a {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.ImageWrapper {
+    text-decoration: none;
+    color: black;
+    position: relative;
+}
+
+.productName {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.productPrice {
+    font-weight: 700;
+}
+
+.productColorOptions_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.productSizesAndSubmit {
+    display: flex;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 10px 15px 10px;
+    position: absolute;
+}
+
+.productCartSubmit {
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 10px 15px 10px;
+    position: absolute;
+}
+
+.productSizeOptions {
+    z-index: 3;
+    background-color: white;
+    width: 50%;
+}
+
+.sizeFieldsTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 21px;
+}
+
+.productCartSubmitButton {
+    position: absolute;
+    background-color: #232323;
+    color: white;
+    height: 23px;
+    right: 10px;
+    left: 49%;
+    bottom: 15px;
+}
+
+.productCartSubmit .productCartSubmitButton {
+    left: 10px;
+}
+
+.productColorOptions_wrapper, .submit {
+    z-index: 2;
+    position: relative;
+}
+
+.titleColor_border {
+    padding: 1px;
+    border: 1px solid silver;
+}
+
+.titleColor {
+    position: relative;
+}
+
+.titleColor:hover .titleColor_info, .titleColor:hover .rotateArrow  {
+    display: block;
+}
+
+.productOptions {
+    margin-top: 7px;
+}
+
+.optionColorField {
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.optionColorField:last-child {
+    margin: 0
+}
+
+.sizeFields {
+    border: 1px solid;
+    overflow: hidden;
+}
+
+.optionSizeField {
+    display: block;
+    height: 0;
+    opacity: 0;
+    transition: height 400ms, opacity .1s ease-in;
+    cursor: pointer;
+}
+
+.optionSizeField:hover {
+    background-color: silver;
+}
+
+.sizeFieldsTitle {
+    transition: height 500ms, opacity .2s ease-in;
+}
+
+.productSizeOptions.activeSizeOptions .sizeFieldsTitle {
+    opacity: 0;
+    height: 0;
+}
+
+.productSizeOptions.activeSizeOptions .optionSizeField {
+    height: 22px;
+    opacity: 1;
+}
+
+.titleColor_background {
+    width: 13px;
+    height: 13px;
+}
+
+.optionColorField input[type=radio]:checked + .titleColor .titleColor_border {
+    border: 1px solid orange;
+}
+
+.collectionElement {
+    position: relative;
+    width: calc(25% - 15px);
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+.collectionElement:nth-child(4n) {
+    padding-right: 0;
+}
+
+.collectionElement img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.collectionElement div {
+  text-align: center;
+}
+
+.inactiveOption + div {
+    color: silver;
+}
+
+@media (max-width: 998px) {
+    .collectionElement {
+        width: calc(50% - 10px);
+    }
+
+    .collectionElement:nth-child(2n) {
+        padding-right: 0;
+    }
+}
