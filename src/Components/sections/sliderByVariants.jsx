@@ -20,6 +20,12 @@ class FrontPageSlider extends React.Component {
         AOS.init()
         this.props.assignSliderItemsWithVariants(this.props.collectionPath)
     }
+ 
+    init = () => {
+        setTimeout( () => {
+            document.querySelector('.slick-track').style.transform = 'translate3d(0px, 0px, 0px)'}, 
+            1000)
+    }
 
     next = () => {
         this.sliderRef.current.slickNext();
@@ -31,8 +37,8 @@ class FrontPageSlider extends React.Component {
 
     render() {
         const settings = {
-            arrows: false,
             infinite: true,
+            arrows: false,
             speed: 500,
             slidesToShow: 3,
             slidesToScroll: 1,
@@ -46,8 +52,8 @@ class FrontPageSlider extends React.Component {
                 {
                     breakpoint: 425,
                     settings: {
-                        slidesToShow: 1.35,
                         infinite: false,
+                        slidesToShow: 1.35,
                     }
                 }
             ]
@@ -63,6 +69,7 @@ class FrontPageSlider extends React.Component {
 
             <Slider {...settings}
                 ref={this.sliderRef}
+                onInit={this.init}
             >
                 {this.props.variantsSlides.map((el, i) => {
                     return <div key={i} className='frontPage_slider-element'>
