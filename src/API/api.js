@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default async function request ({path, params = {}, method, dataForm = null}) {
-    const baseUrl = 'https://alexanderopenko.github.io/'
+    const baseUrl = 'https://streeterstore.000webhostapp.com'
     let getParams = `/${path}?`
 
     if (Object.keys(params).length) {

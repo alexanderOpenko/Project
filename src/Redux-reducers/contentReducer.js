@@ -37,7 +37,6 @@ export function getCollection (collectionPath) {
 
 export const getCollectionAndFilterParams = (collectionPath) => (dispatch) => {
     return getCollection(collectionPath).then(collection => {
-        console.log(collection, 'collection');
         dispatch(collectionCreator(collection))
         dispatch(setParameters(collection))
     })
