@@ -1,64 +1,28 @@
 import React from 'react'
-import Slider from "react-slick";
 import { assignSliderItemsWithVariants } from '../../Redux-reducers/slider_by_variants';
 import { connect } from 'react-redux';
 import icons from '../../Assets/icons';
+import 'swiper/css'
 import { NavLink } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper'
 
 class FrontPageSlider extends React.Component {
     constructor(props) {
         super(props)
 
-        this.sliderArrow = icons('slider_arrow')
-
-        this.sliderRef = React.createRef()
+        this.previous = React.createRef()
+        this.next = React.createRef()
     }
 
     componentDidMount() {
         AOS.init()
         this.props.assignSliderItemsWithVariants(this.props.collectionPath)
     }
- 
-    init = () => {
-        setTimeout( () => {
-            document.querySelector('.slick-track').style.transform = 'translate3d(0px, 0px, 0px)'}, 
-            1000)
-    }
-
-    next = () => {
-        this.sliderRef.current.slickNext();
-    }
-
-    previous = () => {
-        this.sliderRef.current.slickPrev();
-    }
 
     render() {
-        const settings = {
-            infinite: true,
-            arrows: false,
-            speed: 500,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 767,
-                    settings: {
-                        slidesToShow: 2,
-                    }
-                },
-                {
-                    breakpoint: 425,
-                    settings: {
-                        infinite: false,
-                        slidesToShow: 1.35,
-                    }
-                }
-            ]
-        }
-
         return (<div className='frontPage_slider'
             data-aos="fade-up"
             data-aos-duration="1200"
@@ -67,26 +31,41 @@ class FrontPageSlider extends React.Component {
                 Scroll & explore
             </h1>
 
-            <Slider {...settings}
-                ref={this.sliderRef}
-                onInit={this.init}
-            >
+            <Swiper 
+             slidesPerView={1.4} 
+             spaceBetween={5}
+             modules = {[Navigation]}
+             navigation = {{
+                prevEl: this.previous.current,
+                nextEl: this.next.current
+             }}
+
+             breakpoints={{
+                767: { 
+                    slidesPerView: 3
+                },
+                425: {
+                    slidesPerView: 2
+                }
+             }}
+             >
                 {this.props.variantsSlides.map((el, i) => {
-                    return <div key={i} className='frontPage_slider-element'>
-                        <img className='frontPage_slider-element-image' src={el.mod_images[0]} alt="" />
-                        <NavLink to={{ pathname: `/collection/${this.props.collectionPath}/${el.prod_id}` }}>
-                            <h4>{el.prod_name}</h4>
-                        </NavLink>
-                    </div>
-                })} 
-            </Slider>
+                    return <SwiperSlide className='frontPage_slider-element'>
+                            <NavLink to={{ pathname: `/collection/${this.props.collectionPath}/${el.prod_id}` }}>
+
+                            <img className='frontPage_slider-element-image' src={el.mod_images[0]} alt="" />
+                                <h4>{el.prod_name}</h4>
+                            </NavLink>
+                    </SwiperSlide>          
+                })}
+            </Swiper>
 
             <div className="frontPage_slider-arrow-nav">
-                <button className="stripBtn slider_arrow left_arrow" onClick={this.previous}>
-                    {this.sliderArrow}
+                <button ref={this.previous} className="stripBtn slider_arrow left_arrow">
+                    {icons('slider_arrow')}
                 </button>
-                <button className="stripBtn slider_arrow rigt_arrow" onClick={this.next}>
-                    {this.sliderArrow}
+                <button ref={this.next} className="stripBtn slider_arrow rigt_arrow">
+                    {icons('slider_arrow')}
                 </button>
             </div>
         </div>

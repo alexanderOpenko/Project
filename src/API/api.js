@@ -1,19 +1,32 @@
+import axios from 'axios'
+
 export default async function request ({path, params = {}, method, dataForm = null}) {
-    let url = `https://streeterstore.000webhostapp.com/${path}?`
+    const baseUrl = 'https://alexanderopenko.github.io/'
+    let getParams = `/${path}?`
 
     if (Object.keys(params).length) {
         for (let key in params) {
-            url = url + `${key}=${params[key]}&`
+            getParams = getParams + `${key}=${params[key]}&`
         }
     }
 
-    const response = await fetch(url, {
-        method: method,
-        credentials: 'include',
-        body: dataForm
+    const instance = axios.create({
+        baseURL: baseUrl,
+        credentirals: 'include',
+        withCredentials: true,    
     })
-    
-    return await response.json()
+
+    if (method === 'POST') {
+        return instance.post(path, dataForm, {headers: { 
+            "Content-Type": "multipart/form-data" 
+        }}).then((response) => {
+            return response.data
+        })
+    } else {
+        return instance.get(getParams).then((response) => {
+            return response.data
+        })
+    } 
 }
 
 

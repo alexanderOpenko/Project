@@ -13,17 +13,7 @@
     overflow: hidden;
 }
 
-@media screen and (max-width: 767px) { 
-    .frontPage_slider {
-        margin: 40px auto 40px auto;
-}
-}
-
-.slick-slide {
-    margin-right: 5px;
-}
-
-.slick-track {
+.swiper-wrapper {
     display: flex;
 }
 
@@ -39,4 +29,10 @@
 
 .frontPage_slider-element h4 {
     margin: 15px 0 0 5px;
+}
+
+@media screen and (max-width: 767px) {
+    .frontPage_slider {
+        margin: 40px auto 40px auto;
+    }
 }
