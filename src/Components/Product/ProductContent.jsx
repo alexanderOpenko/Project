@@ -7,14 +7,33 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const ProductContent = (props) => {
     const [sizeSelectState, setSizeSelectState] = useState('')
+    let [zoomScaleIndex, setZoomScaleIndex] = useState(0)
+
+    const zoomSettings = {
+        wheel: {disabled: true},
+        panning: {disabled: true}
+    }
 
     const productSubmit = (e) => {
         props.updateCart(e)
     }
 
-    function clickCheck(e) {
+    const clickCheck = (e) => {
         if (e.target.className !== 'product__size-select') {
             setSizeSelectState('')
+        }
+    }
+
+    const zoomHandler = (zoom) => {
+        zoom()
+
+        if (zoomScaleIndex !== 5) {
+            setZoomScaleIndex(zoomScaleIndex++)
+            zoomSettings.panning.disabled = false
+        } 
+        
+        if (zoomScaleIndex === 0) {
+            zoomSettings.panning.disabled = true
         }
     }
 
@@ -26,14 +45,13 @@ const ProductContent = (props) => {
                 {props.prodImages.map((el, i) => {
                     return <div key={i} className='product__image'>
                         <TransformWrapper
-                            wheel = {{disabled: true}}
-                            panning = {{disabled: true}}
+                            {...zoomSettings}
                         >
                             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                                 <>
                                     <div className="zoom_buttons">
-                                        <button className='zoom_action btn' onClick={() => zoomIn()}>+</button>
-                                        <button className='zoom_action btn' onClick={() => zoomOut()}>-</button>
+                                        <button className='zoom_action btn' onClick={() => zoomHandler(zoomIn)}>+</button>
+                                        <button className='zoom_action btn' onClick={() => zoomHandler(zoomOut)}>-</button>
                                     </div>
                                     <TransformComponent>
                                         <img src={el} />

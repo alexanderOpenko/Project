@@ -2,30 +2,27 @@ import axios from 'axios'
 
 export default async function request ({path, params = {}, method, dataForm = null}) {
     const baseUrl = 'https://streeterstore.000webhostapp.com'
-    let getParams = `/${path}?`
-
-    if (Object.keys(params).length) {
-        for (let key in params) {
-            getParams = getParams + `${key}=${params[key]}&`
-        }
-    }
-
+    
     const instance = axios.create({
         baseURL: baseUrl,
         credentirals: 'include',
-        withCredentials: true,    
+        withCredentials: true,   
     })
 
     if (method === 'POST') {
-        return instance.post(path, dataForm, {headers: { 
-            "Content-Type": "multipart/form-data" 
-        }}).then((response) => {
-            return response.data
-        })
+        const response = await instance.post(path, dataForm, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })      
+
+        return response.data
     } else {
-        return instance.get(getParams).then((response) => {
-            return response.data
+        const response_1 = await instance.get(path, { 
+            params 
         })
+        
+        return response_1.data
     } 
 }
 
