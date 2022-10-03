@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { connect } from 'react-redux'
 import ProductForm from "./ProductForm";
 import { updateCart } from "../../Redux-reducers/cartReducer";
@@ -7,12 +7,16 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const ProductContent = (props) => {
     const [sizeSelectState, setSizeSelectState] = useState('')
-    let [zoomScaleIndex, setZoomScaleIndex] = useState(0)
+    const [zoomScaleIndex, setZoomScaleIndex] = useState(0)
+    const [panning, setPanning] = useState()
 
-    const zoomSettings = {
-        wheel: {disabled: true},
-        panning: {disabled: true}
-    }
+    useEffect(() => {
+        if (zoomScaleIndex > 0) {
+            setPanning({ disabled: false })
+        } else if (zoomScaleIndex === 0) {
+            setPanning({ disabled: true })
+        }
+    }, [zoomScaleIndex])
 
     const productSubmit = (e) => {
         props.updateCart(e)
@@ -24,16 +28,19 @@ const ProductContent = (props) => {
         }
     }
 
-    const zoomHandler = (zoom) => {
+    const zoomInHandler = (zoom) => {
         zoom()
 
         if (zoomScaleIndex !== 5) {
-            setZoomScaleIndex(zoomScaleIndex++)
-            zoomSettings.panning.disabled = false
-        } 
-        
-        if (zoomScaleIndex === 0) {
-            zoomSettings.panning.disabled = true
+            setZoomScaleIndex(zoomScaleIndex + 1)
+        }
+    }
+
+    const zoomOutHandler = (zoom) => {
+        zoom()
+
+        if (zoomScaleIndex > 0) {
+            setZoomScaleIndex(zoomScaleIndex - 1)
         }
     }
 
@@ -45,13 +52,14 @@ const ProductContent = (props) => {
                 {props.prodImages.map((el, i) => {
                     return <div key={i} className='product__image'>
                         <TransformWrapper
-                            {...zoomSettings}
+                            wheel={{ disabled: true }}
+                            panning={panning}
                         >
                             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                                 <>
                                     <div className="zoom_buttons">
-                                        <button className='zoom_action btn' onClick={() => zoomHandler(zoomIn)}>+</button>
-                                        <button className='zoom_action btn' onClick={() => zoomHandler(zoomOut)}>-</button>
+                                        <button className='zoom_action btn' onClick={() => zoomInHandler(zoomIn)}>+</button>
+                                        <button className='zoom_action btn' onClick={() => zoomOutHandler(zoomOut)}>-</button>
                                     </div>
                                     <TransformComponent>
                                         <img src={el} />
