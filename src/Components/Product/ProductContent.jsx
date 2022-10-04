@@ -7,16 +7,6 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const ProductContent = (props) => {
     const [sizeSelectState, setSizeSelectState] = useState('')
-    const [zoomScaleIndex, setZoomScaleIndex] = useState(0)
-    const [panning, setPanning] = useState()
-
-    useEffect(() => {
-        if (zoomScaleIndex > 0) {
-            setPanning({ disabled: false })
-        } else if (zoomScaleIndex === 0) {
-            setPanning({ disabled: true })
-        }
-    }, [zoomScaleIndex])
 
     const productSubmit = (e) => {
         props.updateCart(e)
@@ -28,22 +18,6 @@ const ProductContent = (props) => {
         }
     }
 
-    const zoomInHandler = (zoom) => {
-        zoom()
-
-        if (zoomScaleIndex !== 5) {
-            setZoomScaleIndex(zoomScaleIndex + 1)
-        }
-    }
-
-    const zoomOutHandler = (zoom) => {
-        zoom()
-
-        if (zoomScaleIndex > 0) {
-            setZoomScaleIndex(zoomScaleIndex - 1)
-        }
-    }
-
     return <div className='product'
         onClick={clickCheck}
     >
@@ -51,25 +25,9 @@ const ProductContent = (props) => {
             <div className='product__media'>
                 {props.prodImages.map((el, i) => {
                     return <div key={i} className='product__image'>
-                        <TransformWrapper
-                            wheel={{ disabled: true }}
-                            panning={panning}
-                        >
-                            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                                <>
-                                    <div className="zoom_buttons">
-                                        <button className='zoom_action btn' onClick={() => zoomInHandler(zoomIn)}>+</button>
-                                        <button className='zoom_action btn' onClick={() => zoomOutHandler(zoomOut)}>-</button>
-                                    </div>
-                                    <TransformComponent>
-                                        <img src={el} />
-                                    </TransformComponent>
-                                </>
-                            )}
-                        </TransformWrapper>
+                        <ProductImage el={el}/>
                     </div>
-                }
-                )
+                })
                 }
             </div>
 
@@ -94,6 +52,52 @@ const ProductContent = (props) => {
             </div>
         </div>
     </div>
+}
+
+const ProductImage = (props) => {
+    const [zoomScaleIndex, setZoomScaleIndex] = useState(0)
+    const [panning, setPanning] = useState()
+
+    useEffect(() => {
+        if (zoomScaleIndex > 0) {
+            setPanning({ disabled: false })
+        } else if (zoomScaleIndex === 0) {
+            setPanning({ disabled: true })
+        }
+    }, [zoomScaleIndex])
+
+    const zoomInHandler = (zoom) => {
+        zoom()
+
+        if (zoomScaleIndex !== 5) {
+            setZoomScaleIndex(zoomScaleIndex + 1)
+        }
+    }
+
+    const zoomOutHandler = (zoom) => {
+        zoom()
+
+        if (zoomScaleIndex > 0) {
+            setZoomScaleIndex(zoomScaleIndex - 1)
+        }
+    }
+
+    return <TransformWrapper
+        wheel={{ disabled: true }}
+        panning={panning}
+    >
+        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+            <>
+                <div className="zoom_buttons">
+                    <button className='zoom_action btn' onClick={() => zoomInHandler(zoomIn)}>+</button>
+                    <button className='zoom_action btn' onClick={() => zoomOutHandler(zoomOut)}>-</button>
+                </div>
+                <TransformComponent>
+                    <img src={props.el} />
+                </TransformComponent>
+            </>
+        )}
+    </TransformWrapper>
 }
 
 const mapStateToProps = () => {

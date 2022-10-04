@@ -2,10 +2,9 @@ import axios from 'axios'
 
 export default async function request ({path, params = {}, method, dataForm = null}) {
     const baseUrl = 'https://streeterstore.000webhostapp.com'
-    
+
     const instance = axios.create({
         baseURL: baseUrl,
-        credentirals: 'include',
         withCredentials: true,   
     })
 
@@ -18,11 +17,11 @@ export default async function request ({path, params = {}, method, dataForm = nu
 
         return response.data
     } else {
-        const response_1 = await instance.get(path, { 
+        const response = await instance.get(path, { 
             params 
         })
         
-        return response_1.data
+        return response.data
     } 
 }
 

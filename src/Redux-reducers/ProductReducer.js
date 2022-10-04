@@ -28,7 +28,7 @@ export const updateProductPageContent = (product) => ({ type: 'UPDATE_PRODUCT_PA
 export const setVariantImages = (images) => ({ type: 'SET_VARIANT_IMAGES', images })
 
 export const productRequest = (prodId, varId = null) => (dispatch) => {
-    request({ path: 'collection', params: { 'product_id': prodId }, method: 'GET' })
+    return request({ path: 'collection', params: { 'product_id': prodId }, method: 'GET' })
         .then(prod => {
             if (prod[0].modifications.length) {
                 var firstVariant = prod[0].modifications.find(el => {
