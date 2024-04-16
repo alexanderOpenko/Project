@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default async function request ({path, params = {}, method, dataForm = null}) {
-    const baseUrl = 'https://streeterstore.000webhostapp.com'
+    const baseUrl = 'https://apistreeter.000webhostapp.com/'
 
     const instance = axios.create({
         baseURL: baseUrl,
