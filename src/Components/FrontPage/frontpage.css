@@ -19,8 +19,11 @@
 
 .frontPage_slider-element-image {
     border-radius: 5px;
-    width: 100%;
     cursor: grab;
+    max-height: 300px;
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
 }
 
 .left_arrow {

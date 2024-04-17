@@ -34,6 +34,7 @@ class FrontPageSlider extends React.Component {
             <Swiper 
              slidesPerView={1.4} 
              spaceBetween={5}
+             loop={true}
              modules = {[Navigation]}
              navigation = {{
                 prevEl: this.previous.current,
