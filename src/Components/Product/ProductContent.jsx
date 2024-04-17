@@ -6,6 +6,7 @@ import { setVariantImages } from "../../Redux-reducers/ProductReducer";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const ProductContent = (props) => {
+    console.log(props, 'props');
     const [sizeSelectState, setSizeSelectState] = useState('')
 
     const productSubmit = (e) => {
@@ -23,7 +24,7 @@ const ProductContent = (props) => {
     >
         <div className='product__wrapper'>
             <div className='product__media'>
-                {props.prodImages.map((el, i) => {
+                {!!props.prodImages && props.prodImages.map((el, i) => {
                     return <div key={i} className='product__image'>
                         <ProductImage el={el}/>
                     </div>

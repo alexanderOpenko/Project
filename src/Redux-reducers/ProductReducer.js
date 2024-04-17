@@ -30,8 +30,10 @@ export const setVariantImages = (images) => ({ type: 'SET_VARIANT_IMAGES', image
 export const productRequest = (prodId, varId = null) => (dispatch) => {
     return request({ path: 'collection', params: { 'product_id': prodId }, method: 'GET' })
         .then(prod => {
+            console.log(prod, 'prod');
+            var firstVariant
             if (prod[0].modifications.length) {
-                var firstVariant = prod[0].modifications.find(el => {
+                firstVariant = prod[0].modifications.find(el => {
                     if (varId) {
                         return el.mod_id == varId
                     } else {
@@ -46,7 +48,7 @@ export const productRequest = (prodId, varId = null) => (dispatch) => {
             } else {
                 var images = prod[0].images
             }
-
+console.log(firstVariant, 'firstVariant');
             prod[0].firstVariant = firstVariant
             
             dispatch(updateProductPageContent(prod[0]))

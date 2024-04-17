@@ -18,6 +18,11 @@
   background-color: rgba(70, 74, 29, 0.8)
 }
 
+.cart__item-opts-color--green,
+.green {
+  background-color: green
+}
+
 .cart__item-opts-color--white,
 .white {
   background-color: white;
@@ -41,6 +46,11 @@
 .cart__item-opts-color--yellow,
 .yellow {
   background-color: yellow;
+}
+
+.cart__item-opts-color--orange,
+.orange {
+  background-color: orange;
 }
 
 .cart__item-opts-color--silver,
@@ -757,6 +767,14 @@ img.prodImage {
     margin-bottom: 5px;
     width: 100%;
   }
+}
+
+.ImageWrapper {
+  display: flex;
+  max-height: 300px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (max-width: 998px) {

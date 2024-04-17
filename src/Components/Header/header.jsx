@@ -12,7 +12,7 @@ const Header = (props) => {
     const cartIcon = icons('cart')
     const burgerIcon = icons('burger-menu')
     const closeIcon = icons('close')
-    const navlincs = ['T-shirts', 'Jeans', 'Hoodies', 'About']
+    const navlincs = ['T-shirts', 'Jeans', 'Jackets',  'Hoodies', 'About']
 
     useEffect(() => {
         const activeHeaderStickyClass = ' active_header_background'

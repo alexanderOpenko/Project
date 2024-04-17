@@ -26,7 +26,7 @@ const CollectionFormVariants = (props) => {
             setTimeout(() => {
                 setPreloaderVisibility(' invisible')
                 // makeImageInvisible('')
-            }, 1500)
+            }, 500)
             setVariantImage(variantImage)
         }, 300)
 
@@ -67,7 +67,7 @@ const CollectionFormVariants = (props) => {
         setPreloaderVisibility('')
         setTimeout(() => {
             setPreloaderVisibility(' invisible')
-        }, 2000)
+        }, 500)
 
         setVariantImage(props.main_photo)
         setDefaultColorOption(props.firstVariantColor)
@@ -110,7 +110,7 @@ const CollectionFormVariants = (props) => {
         props.submit(formData)
     }
 
-    return <form id={product.id} onSubmit={submitProdCartForm}>
+    return <form id={product.id} onSubmit={submitProdCartForm} style={{height: '88%'}}>
         <input className='hidden-input' readOnly name={'product_id'} value={product.id} />
         <input className='hidden-input' readOnly name={'variant_id'} />
 

@@ -35,7 +35,7 @@ const Cart = (props) => {
         </div>
 
         <div className="cart__content">
-            {props.items.map((el, i) => {
+            {props?.items?.map((el, i) => {
                 const warningIcon = icons('warning')
                 const warning = (el.warning ? Object.keys(el.warning)[0] : null)
                 const warningValue = (warning ? el.warning[warning] : '')

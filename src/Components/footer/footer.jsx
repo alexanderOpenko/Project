@@ -99,6 +99,7 @@ const footerColumns = [
         { title: 'Menu' },
         { message: 'T-SHIRTS', link: '/collection/T-shirts' },
         { message: 'JEANS', link: '/collection/Jeans' },
+        { message: 'Jackets', link: '/collection/Jackets' },
         { message: 'HOODIES', link: '/collection/Hoodies' },
     ],
     [

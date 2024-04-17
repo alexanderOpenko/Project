@@ -12,7 +12,7 @@ const CollectionFormProduct = (props) => {
 
         setTimeout(() => {
             setPreloaderVisibility(' invisible')
-        }, 2000)
+        }, 500)
     }, [props])
 
     const submitProdCartForm = (e) => {

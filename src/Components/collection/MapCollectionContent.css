@@ -160,8 +160,13 @@
     padding-right: 0;
 }
 
+.lazyload-wrapper {
+    height: 100%;
+}
+
 .collectionElement img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 

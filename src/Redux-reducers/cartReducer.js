@@ -37,9 +37,9 @@ export const getCartItems = () => (dispatch) => {
     request({ path: 'cart', method: 'GET' })
         .then((data) => {
             if (data.code !== 0) {
-                dispatch(updateCartItemsAction(data.body.cart_items))
-                dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
-                dispatch(updateCartItemsCount(data.body.items_length))
+                dispatch(updateCartItemsAction(data.body?.cart_items))
+                dispatch(updateCartItemsTotalPriceAction(data.body?.total_price))
+                dispatch(updateCartItemsCount(data.body?.items_length))
             }
         })
 }
@@ -63,9 +63,9 @@ export const updateCart = (e) => (dispatch) => {
     request({ path: 'cart', method: 'POST', dataForm: formData })
         .then((data) => {
             if (data.code !== 5) {
-                dispatch(updateCartItemsAction(data.body.cart_items))
-                dispatch(updateCartItemsTotalPriceAction(data.body.total_price))
-                dispatch(updateCartItemsCount(data.body.items_length))
+                dispatch(updateCartItemsAction(data.body?.cart_items))
+                dispatch(updateCartItemsTotalPriceAction(data.body?.total_price))
+                dispatch(updateCartItemsCount(data.body?.items_length))
                 dispatch(showBasketAction(true))
                 document.querySelector('body').classList.add('body_lock')
             } else {

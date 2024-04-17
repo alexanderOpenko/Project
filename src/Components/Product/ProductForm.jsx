@@ -7,7 +7,7 @@ export const productSizeError = (sizeErrorText = 'Please select size') => {
 
 const ProductForm = (props) => {
     const [defaultColorOption, setDefaultColorOption] = useState('')
-
+console.log(props, 'propsFprm');
     useEffect(() => {
         if (props.product.params) {
             if (props.sizeIndex !== undefined) {

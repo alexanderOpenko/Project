@@ -45,7 +45,7 @@ export const getCollectionAndFilterParams = (collectionPath) => (dispatch) => {
 const setParameters = (collection) => (dispatch) => {
     const parameters = []
 
-    collection.forEach(prod => {
+    collection?.forEach(prod => {
         if (!prod.params) {
             return
         }

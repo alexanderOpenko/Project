@@ -24,7 +24,7 @@ export const assignSliderItemsWithVariants = (collectionPath) => (dispatch) => {
         .then(collection => {
             const variantsPerSlider = []
 
-            collection.forEach(el => {
+            !!collection && collection.forEach(el => {
                 const firstAvailableVariant = el.modifications.find(mod => {
                     return mod.qty > 0
                 })

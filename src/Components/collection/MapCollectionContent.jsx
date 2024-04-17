@@ -9,9 +9,9 @@ const MapCollectionContent = (props) => {
         props.store.dispatch(updateCart(data))
     }
 
-    return <>       
+return <>       
         <div className='collection'>
-            {props.elementsObject.map((elem, i) => {
+            {!!props.elementsObject && props.elementsObject.map((elem, i) => {
                 var firstVariant = ''
 
                 if (elem.modifications.length) {
@@ -20,7 +20,7 @@ const MapCollectionContent = (props) => {
                     })
 
                     firstVariant = firstAvailableVariant || elem.modifications[0]
-
+console.log(firstVariant, 'firstVariant');
                     var firstVariantTitle = firstVariant.mod_title
                     var main_photo = firstVariant.mod_images[0]
                     var price = firstVariant.price

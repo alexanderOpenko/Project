@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export default async function request ({path, params = {}, method, dataForm = null}) {
+    console.log('reguest');
     const baseUrl = 'https://apistreeter.000webhostapp.com/'
 
     const instance = axios.create({
@@ -20,7 +21,7 @@ export default async function request ({path, params = {}, method, dataForm = nu
         const response = await instance.get(path, { 
             params 
         })
-        
+        console.log(response, 'response');
         return response.data
     } 
 }
