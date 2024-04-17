@@ -8,7 +8,7 @@ const FrontPage = () => {
   return(<>
     <Hero />
     <div className='frontpage-content'>
-    <FrontPageSlider collectionPath={'t-shirts'}/>
+    <FrontPageSlider collectionPath={'Jackets'}/>
     <ImageWithText />
     </div>
     </>
